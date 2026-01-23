@@ -1,40 +1,8 @@
 import React from 'react';
 import LeaderCard from '../components/LeaderCard';
+import leaders from '../data/leaders.json';
 
 const About = () => {
-    const leaders = [
-        {
-            name: "Alex Morgan",
-            role: "President",
-            bio: "Alex is a senior majoring in Computer Science and Finance. He leads the club's overall strategy and partnerships.",
-            image: null, // Placeholder will form
-            socialLinks: {
-                linkedin: "#",
-                github: "#"
-            }
-        },
-        {
-            name: "Sarah Chen",
-            role: "Head of Research",
-            bio: "Sarah specializes in algorithmic trading and machine learning. She oversees all research projects and workshops.",
-            image: null,
-            socialLinks: {
-                linkedin: "#",
-                portfolio: "#"
-            }
-        },
-        {
-            name: "David Kim",
-            role: "Tech Lead",
-            bio: "David is responsible for the club's technical infrastructure and data pipelines. He loves Rust and Python.",
-            image: null,
-            socialLinks: {
-                github: "#",
-                linkedin: "#"
-            }
-        },
-        // Add more leaders as needed
-    ];
 
     return (
         <div className="min-h-screen bg-gray-950 pt-24 pb-12">

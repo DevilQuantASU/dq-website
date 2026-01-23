@@ -1,0 +1,52 @@
+[
+    {
+        "name": "Cedric Claessens",
+        "role": "Founder & President",
+        "bio": "Cedric is studying Computer Science and Mathematics. ",
+        "image": null,
+        "socialLinks": {
+            "linkedin": "#",
+            "github": "#"
+        }
+    },
+    {
+        "name": "Ryan Kimberley",
+        "role": "Head of Research",
+        "bio": "Sarah specializes in algorithmic trading and machine learning. She oversees all research projects and workshops.",
+        "image": null,
+        "socialLinks": {
+            "linkedin": "#",
+            "portfolio": "#"
+        }
+    },
+    {
+        "name": "David Kim",
+        "role": "Tech Lead",
+        "bio": "David is responsible for the club's technical infrastructure and data pipelines. He loves Rust and Python.",
+        "image": null,
+        "socialLinks": {
+            "github": "#",
+            "linkedin": "#"
+        }
+    },
+    {
+        "name": "David Kim",
+        "role": "Tech Lead",
+        "bio": "David is responsible for the club's technical infrastructure and data pipelines. He loves Rust and Python.",
+        "image": null,
+        "socialLinks": {
+            "github": "#",
+            "linkedin": "#"
+        }
+    },
+    {
+        "name": "David Kim",
+        "role": "Tech Lead",
+        "bio": "David is responsible for the club's technical infrastructure and data pipelines. He loves Rust and Python.",
+        "image": null,
+        "socialLinks": {
+            "github": "#",
+            "linkedin": "#"
+        }
+    }
+]
