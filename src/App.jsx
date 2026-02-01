@@ -4,6 +4,9 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import About from './pages/About';
+import Discord from './pages/redirects/Discord';
+import SunDevilCentral from './pages/redirects/SunDevilCentral';
+import LinkedIn from './pages/redirects/LinkedIn';
 
 function AppContent() {
   return (
@@ -13,6 +16,9 @@ function AppContent() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+          <Route path="/discord" element={<Discord />} />
+          <Route path="/sundevilcentral" element={<SunDevilCentral />} />
+          <Route path="/linkedin" element={<LinkedIn />} />
         </Routes>
       </div>
       <Footer />
