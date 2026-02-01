@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import videoBg from '../assets/background_video.mp4';
 
 const Hero = () => {
@@ -25,8 +26,8 @@ const Hero = () => {
 
             <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-20">
                 <h1 className="text-4xl tracking-tight font-extrabold text-white sm:text-5xl md:text-6xl lg:text-7xl">
-                    <span className="block drop-shadow-md">Data-Driven</span>
-                    <span className="block text-indigo-400 mt-2 drop-shadow-md">Insights</span>
+                    <span className="drop-shadow-md">Devil</span>
+                    <span className="text-indigo-400 drop-shadow-md">Quant</span>
                 </h1>
                 <p className="mt-6 text-lg text-gray-200 sm:text-xl md:text-2xl max-w-2xl mx-auto leading-relaxed drop-shadow-sm">
                     DevilQuant leverages advanced quantitative analysis to uncover market opportunities. We bridge the gap between academic research and practical trading strategies.
@@ -34,19 +35,21 @@ const Hero = () => {
                 <div className="mt-10 max-w-sm mx-auto sm:max-w-none sm:flex sm:justify-center gap-4">
                     <div className="rounded-md shadow">
                         <a
-                            href="#"
+                            href="https://discord.com/invite/WJbhDmumXp"
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg transition-all hover:scale-105 duration-200 shadow-lg shadow-indigo-500/30"
                         >
-                            Get Started
+                            Join Discord
                         </a>
                     </div>
                     <div className="mt-3 sm:mt-0">
-                        <a
-                            href="#"
+                        <Link
+                            to="/about"
                             className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-white/10 hover:bg-white/20 backdrop-blur-sm md:py-4 md:text-lg transition-all hover:scale-105 duration-200 border-white/20"
                         >
-                            Learn More
-                        </a>
+                            About Us
+                        </Link>
                     </div>
                 </div>
             </div>
