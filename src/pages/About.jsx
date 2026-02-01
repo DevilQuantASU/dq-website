@@ -4,6 +4,21 @@ import leaders from '../data/leaders.json';
 
 const About = () => {
 
+
+    // Import all headshots
+    const headshots = import.meta.glob('../assets/Headshots/*.{png,jpg,jpeg,svg}', { eager: true });
+
+    // Helper to get image URL
+    const getHeadshotUrl = (imageName) => {
+        if (!imageName) return null;
+        if (imageName.startsWith('http')) return imageName;
+
+        // Try to find the image in the imported headshots
+        // The keys are relative paths like '../assets/Headshots/cedric.png'
+        const matchingPath = Object.keys(headshots).find(path => path.includes(imageName));
+        return matchingPath ? headshots[matchingPath].default : null;
+    };
+
     return (
         <div className="min-h-screen bg-gray-950 pt-24 pb-12">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -54,6 +69,7 @@ const About = () => {
                             <LeaderCard
                                 key={index}
                                 {...leader}
+                                image={getHeadshotUrl(leader.image)}
                             />
                         ))}
                     </div>

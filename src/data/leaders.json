@@ -2,51 +2,48 @@
     {
         "name": "Cedric Claessens",
         "role": "Founder & President",
-        "bio": "Cedric is studying Computer Science and Mathematics. ",
-        "image": null,
+        "bio": "Cedric is studying Computer Science and Mathematics. He is going to ServiceNow in summer 2026.",
+        "image": "cedric.png",
         "socialLinks": {
-            "linkedin": "#",
-            "github": "#"
+            "linkedin": "https://linkedin.com/in/cedric-cl",
+            "github": "https://github.com/1nsomnes",
+            "portfolio": "https://cedricclaessens.com"
         }
     },
     {
         "name": "Ryan Kimberley",
         "role": "Head of Research",
-        "bio": "Sarah specializes in algorithmic trading and machine learning. She oversees all research projects and workshops.",
+        "bio": "Ryan is a seniorstudying Computer Science. He is going to AWS full time in fall 2026.",
         "image": null,
         "socialLinks": {
-            "linkedin": "#",
-            "portfolio": "#"
+            "linkedin": "https://www.linkedin.com/in/ryan-ki/"
         }
     },
     {
-        "name": "David Kim",
-        "role": "Tech Lead",
-        "bio": "David is responsible for the club's technical infrastructure and data pipelines. He loves Rust and Python.",
+        "name": "Vaibhav Urs",
+        "role": "Head of Finance",
+        "bio": "Vaibhav is a junior studying Computer Science and a Music minor. He is going to Microsoft in summer 2026.",
         "image": null,
         "socialLinks": {
-            "github": "#",
-            "linkedin": "#"
+            "linkedin": "https://www.linkedin.com/in/vaibhavurs/"
         }
     },
     {
-        "name": "David Kim",
-        "role": "Tech Lead",
-        "bio": "David is responsible for the club's technical infrastructure and data pipelines. He loves Rust and Python.",
+        "name": "Dario D'addamio",
+        "role": "Head of Design",
+        "bio": "Dario is a junior studying Computer Science. He is going to Wells Fargo in summer 2026.",
         "image": null,
         "socialLinks": {
-            "github": "#",
-            "linkedin": "#"
+            "linkedin": "https://linkedin.com/in/dariodaddamio"
         }
     },
     {
-        "name": "David Kim",
-        "role": "Tech Lead",
-        "bio": "David is responsible for the club's technical infrastructure and data pipelines. He loves Rust and Python.",
+        "name": "Thomas Tse",
+        "role": "Head of Operations",
+        "bio": "Thomas is a sophomore studying Computer Science and Mathematics.",
         "image": null,
         "socialLinks": {
-            "github": "#",
-            "linkedin": "#"
+            "linkedin": "https://www.linkedin.com/in/thomasyht/"
         }
     }
 ]
