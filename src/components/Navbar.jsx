@@ -49,9 +49,9 @@ const Navbar = () => {
                         <Link to="/about" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">
                             About Us
                         </Link>
-                        <a href="#" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                        <Link to="/about#contact" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">
                             Contact
-                        </a>
+                        </Link>
                     </div>
                     <div className="md:hidden">
                         <button
@@ -89,12 +89,12 @@ const Navbar = () => {
                         >
                             About Us
                         </Link>
-                        <a
-                            href="#"
+                        <Link
+                            to="/about#contact"
                             className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                         >
                             Contact
-                        </a>
+                        </Link>
                     </div>
                 </div>
             )}

@@ -1,8 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import LeaderCard from '../components/LeaderCard';
 import leaders from '../data/leaders.json';
 
 const About = () => {
+    const location = useLocation();
+
+    useEffect(() => {
+        if (location.hash) {
+            const element = document.querySelector(location.hash);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    }, [location]);
 
 
     // Import all headshots
@@ -75,7 +86,7 @@ const About = () => {
                     </div>
                 </div>
                 {/* Contact Section */}
-                <div className="mt-20">
+                <div className="mt-20" id="contact">
                     <div className="relative rounded-2xl bg-gray-900 border border-gray-800 overflow-hidden px-6 py-10 sm:px-12 sm:py-16 text-center shadow-2xl">
                         {/* Decorative background glow */}
                         <div className="absolute top-0 left-1/2 w-full -translate-x-1/2 h-full -z-10 bg-gradient-to-b from-indigo-500/10 to-transparent opacity-50 blur-3xl"></div>
