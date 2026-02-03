@@ -2,7 +2,7 @@
     {
         "name": "Cedric Claessens",
         "role": "Founder & President",
-        "bio": "Cedric is studying Computer Science and Mathematics. He is going to ServiceNow in summer 2026.",
+        "bio": "Cedric is studying Computer Science and Mathematics. He is going to ServiceNow in Summer 2026.",
         "image": "cedric.png",
         "socialLinks": {
             "linkedin": "https://linkedin.com/in/cedric-cl",
@@ -13,7 +13,7 @@
     {
         "name": "Ryan Kimberley",
         "role": "Head of Research",
-        "bio": "Ryan is a senior studying Computer Science. He is going to AWS full time in fall 2026.",
+        "bio": "Ryan is a senior studying Computer Science. He is going to AWS full-time in Fall 2026.",
         "image": null,
         "socialLinks": {
             "linkedin": "https://www.linkedin.com/in/ryan-ki/"
@@ -22,16 +22,16 @@
     {
         "name": "Vaibhav Urs",
         "role": "Head of Finance",
-        "bio": "Vaibhav is a junior studying Computer Science and a Music minor. He is going to Microsoft in summer 2026.",
+        "bio": "Vaibhav is a junior studying Computer Science with a minor in Music. He is going to Microsoft in Summer 2026.",
         "image": "https://media.licdn.com/dms/image/v2/D5603AQF0cJsRj1y98A/profile-displayphoto-scale_200_200/B56ZlUeJYCIsAY-/0/1758058813288?e=1771459200&v=beta&t=9C37_LQ7n2rqakGvGglhRanzzE6KMaKgDgEJ2z75nP8",
         "socialLinks": {
             "linkedin": "https://www.linkedin.com/in/vaibhavurs/"
         }
     },
     {
-        "name": "Dario D'addamio",
+        "name": "Dario D'Addamio",
         "role": "Head of Design",
-        "bio": "Dario is a junior studying Computer Science. He is going to Wells Fargo in summer 2026.",
+        "bio": "Dario is a junior studying Computer Science. He is going to Wells Fargo in Summer 2026.",
         "image": null,
         "socialLinks": {
             "linkedin": "https://linkedin.com/in/dariodaddamio"
