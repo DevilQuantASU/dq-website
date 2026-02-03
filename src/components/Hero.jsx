@@ -30,7 +30,8 @@ const Hero = () => {
                     <span className="text-indigo-400 drop-shadow-md">Quant</span>
                 </h1>
                 <p className="mt-6 text-lg text-gray-200 sm:text-xl md:text-2xl max-w-2xl mx-auto leading-relaxed drop-shadow-sm">
-                    DevilQuant leverages advanced quantitative analysis to uncover market opportunities. We bridge the gap between academic research and practical trading strategies.
+                    DevilQuant is the first quantitative finance club at ASU. We are a community of students who are building real projects,
+                    networking, participating in competitions, and working with industry professionals.
                 </p>
                 <div className="mt-10 max-w-sm mx-auto sm:max-w-none sm:flex sm:justify-center gap-4">
                     <div className="rounded-md shadow">
