@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
-import guides from '../data/guides/index.js';
+import { guideCategories, allGuides } from '../data/guides/index.js';
 
 const Resources = () => {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -8,8 +8,8 @@ const Resources = () => {
     const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
     // Resolve active guide from query param, fallback to first guide
-    const activeSlug = searchParams.get('guide') || guides[0]?.slug;
-    const activeGuide = guides.find((g) => g.slug === activeSlug) || guides[0];
+    const activeSlug = searchParams.get('guide') || allGuides[0]?.slug;
+    const activeGuide = allGuides.find((g) => g.slug === activeSlug) || allGuides[0];
 
     // Close mobile sidebar on guide change
     useEffect(() => {
@@ -33,40 +33,50 @@ const Resources = () => {
     };
 
     const sidebarContent = (
-        <nav className="p-6 pt-4">
-            {/* Sidebar heading */}
-            <div className="flex items-center gap-2 mb-6">
-                <svg className="w-5 h-5 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                </svg>
-                <h2 className="text-sm font-semibold text-gray-300 tracking-wider uppercase">
-                    Guides
-                </h2>
-            </div>
+        <nav className="p-6 pt-4 space-y-8">
+            {guideCategories.map((category) => (
+                <div key={category.slug}>
+                    {/* Category heading */}
+                    <div className="flex items-center gap-2 mb-4">
+                        {category.slug === 'projects' ? (
+                            <svg className="w-5 h-5 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                            </svg>
+                        ) : (
+                            <svg className="w-5 h-5 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                            </svg>
+                        )}
+                        <h2 className="text-sm font-semibold text-gray-300 tracking-wider uppercase">
+                            {category.name}
+                        </h2>
+                    </div>
 
-            {/* Guide list */}
-            <ul className="space-y-1">
-                {guides.map((guide) => {
-                    const isActive = guide.slug === activeSlug;
-                    return (
-                        <li key={guide.slug}>
-                            <button
-                                id={`guide-link-${guide.slug}`}
-                                onClick={() => handleGuideClick(guide.slug)}
-                                className={`
-                                    w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 block
-                                    ${isActive
-                                        ? 'bg-indigo-500/15 text-indigo-400 border border-indigo-500/30'
-                                        : 'text-gray-400 hover:text-gray-200 hover:bg-gray-800/60 border border-transparent'
-                                    }
-                                `}
-                            >
-                                {guide.title}
-                            </button>
-                        </li>
-                    );
-                })}
-            </ul>
+                    {/* Guide list */}
+                    <ul className="space-y-1">
+                        {category.guides.map((guide) => {
+                            const isActive = guide.slug === activeSlug;
+                            return (
+                                <li key={guide.slug}>
+                                    <button
+                                        id={`guide-link-${guide.slug}`}
+                                        onClick={() => handleGuideClick(guide.slug)}
+                                        className={`
+                                            w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 block
+                                            ${isActive
+                                                ? 'bg-indigo-500/15 text-indigo-400 border border-indigo-500/30'
+                                                : 'text-gray-400 hover:text-gray-200 hover:bg-gray-800/60 border border-transparent'
+                                            }
+                                        `}
+                                    >
+                                        {guide.title}
+                                    </button>
+                                </li>
+                            );
+                        })}
+                    </ul>
+                </div>
+            ))}
         </nav>
     );
 

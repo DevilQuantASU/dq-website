@@ -1,20 +1,32 @@
-// Guide registry — import all guides and export as an ordered array.
-// To add a new guide, import it and add it to the `guides` array.
-//
-// Architecture note: This currently loads guides from local JS files.
-// To switch to server-fetched guides in the future, replace this module
-// with an async loader (e.g., fetch('/api/guides')) and update the
-// Resources page to await the data. The guide shape stays the same:
-//   { slug, title, description, sections: [{ id, title, content }] }
+import gettingStartedWithQuant from './general/getting-started-with-quant.js';
+import landingAnInternship from './general/landing-an-internship.js';
+import campusResources from './general/campus-resources.js';
 
-import gettingStartedWithQuant from './getting-started-with-quant.js';
-import landingAnInternship from './landing-an-internship.js';
-import campusResources from './campus-resources.js';
+import pythonStockFetcher from './projects/python-stock-fetcher.js';
+import smaTradingBot from './projects/sma-trading-bot.js';
+import portfolioTracker from './projects/portfolio-tracker.js';
 
-const guides = [
-  gettingStartedWithQuant,
-  landingAnInternship,
-  campusResources,
+export const guideCategories = [
+  {
+    name: "General Guides",
+    slug: "general",
+    guides: [
+      gettingStartedWithQuant,
+      landingAnInternship,
+      campusResources,
+    ]
+  },
+  {
+    name: "Projects",
+    slug: "projects",
+    guides: [
+      pythonStockFetcher,
+      smaTradingBot,
+      portfolioTracker,
+    ]
+  }
 ];
 
-export default guides;
+// Helper to get a flat list of guides for easy URL lookup
+export const allGuides = guideCategories.flatMap(cat => cat.guides);
+
