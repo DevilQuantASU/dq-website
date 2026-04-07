@@ -49,6 +49,9 @@ const Navbar = () => {
                         <Link to="/about" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">
                             About Us
                         </Link>
+                        <Link to="/resources" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                            Resources
+                        </Link>
                         <Link to="/about#contact" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">
                             Contact
                         </Link>
@@ -88,6 +91,12 @@ const Navbar = () => {
                             className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                         >
                             About Us
+                        </Link>
+                        <Link
+                            to="/resources"
+                            className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                        >
+                            Resources
                         </Link>
                         <Link
                             to="/about#contact"

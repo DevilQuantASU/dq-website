@@ -52,13 +52,18 @@ const Footer = () => {
                             </h3>
                             <ul className="mt-4 space-y-4">
                                 <li>
-                                    <a href="https://www.quantconnect.com" target="_blank" rel="noopener noreferrer" className="text-base text-gray-400 hover:text-white transition-colors">
-                                        QuantConnect
+                                    <a href="/resources?guide=getting-started-with-quant" className="text-base text-gray-400 hover:text-white transition-colors">
+                                        Getting Started
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="https://quantable.io" target="_blank" rel="noopener noreferrer" className="text-base text-gray-400 hover:text-white transition-colors">
-                                        Quantable
+                                    <a href="/resources?guide=landing-an-internship" className="text-base text-gray-400 hover:text-white transition-colors">
+                                        Internships
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/resources?guide=campus-resources" className="text-base text-gray-400 hover:text-white transition-colors">
+                                        Campus Resources
                                     </a>
                                 </li>
                             </ul>

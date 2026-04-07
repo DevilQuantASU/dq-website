@@ -7,6 +7,7 @@ import About from './pages/About';
 import Discord from './pages/redirects/Discord';
 import SunDevilCentral from './pages/redirects/SunDevilCentral';
 import LinkedIn from './pages/redirects/LinkedIn';
+import Resources from './pages/Resources';
 
 function AppContent() {
   return (
@@ -16,6 +17,7 @@ function AppContent() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+          <Route path="/resources" element={<Resources />} />
           <Route path="/discord" element={<Discord />} />
           <Route path="/sundevilcentral" element={<SunDevilCentral />} />
           <Route path="/linkedin" element={<LinkedIn />} />
