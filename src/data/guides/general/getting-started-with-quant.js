@@ -1,7 +1,7 @@
 const guide = {
   slug: "getting-started-with-quant",
   title: "Getting Started with Quant",
-  description: "A beginner's roadmap to quantitative finance — from essential math to your first strategy.",
+  description: "A beginner's roadmap to quantitative finance from essential math to your first strategy.",
   sections: [
     {
       id: "what-is-quant-finance",
@@ -14,7 +14,7 @@ const guide = {
           <li><strong>Risk Management</strong> — modeling portfolio risk, VaR, stress testing</li>
           <li><strong>Financial Engineering</strong> — pricing derivatives, structuring products</li>
         </ul>
-        <p>At DevilQuant, we focus primarily on quantitative trading and research, but the skills you build here transfer everywhere.</p>
+        <p>DevilQuant is a community of hard-working individuals interested in breaking into tech, quantitative finance, and other high-octane, highly technical fields.</p>
       `,
     },
     {
@@ -92,6 +92,16 @@ const guide = {
       `,
     },
     {
+      id: "the-little-green-book",
+      title: "The Little Green Book",
+      content: `
+        <p>If there is one absolute must-have resource for breaking into the industry, it is <strong>"A Practical Guide to Quantitative Finance Interviews"</strong> by Xinfeng Zhou (often affectionately referred to as the <em>"Little Green Book"</em>).</p>
+        <div class="guide-callout guide-callout-info">
+          This book is arguably the most important resource for quantitative interviews. It covers the specific style of probability, calculus, linear algebra, and brainteaser questions that you will actually face during the interview process.
+        </div>
+      `,
+    },
+    {
       id: "practice-platforms",
       title: "Practice Platforms",
       content: `
@@ -127,10 +137,6 @@ const guide = {
             </tr>
           </tbody>
         </table>
-
-        <div class="guide-callout guide-callout-info">
-          At DevilQuant, we use <strong>QuantConnect</strong> for our competitions and research projects. It's the best place to start building real strategies.
-        </div>
       `,
     },
   ],

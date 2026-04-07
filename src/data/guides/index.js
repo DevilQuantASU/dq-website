@@ -1,10 +1,12 @@
 import gettingStartedWithQuant from './general/getting-started-with-quant.js';
 import landingAnInternship from './general/landing-an-internship.js';
-import campusResources from './general/campus-resources.js';
+import landingAQuantInternship from './general/landing-a-quant-internship.js';
 
 import pythonStockFetcher from './projects/python-stock-fetcher.js';
 import smaTradingBot from './projects/sma-trading-bot.js';
 import portfolioTracker from './projects/portfolio-tracker.js';
+import gettingStartedWithProjects from './projects/getting-started-with-projects.js';
+import monteCarloSimulator from './projects/monte-carlo-simulator.js';
 
 export const guideCategories = [
   {
@@ -12,17 +14,19 @@ export const guideCategories = [
     slug: "general",
     guides: [
       gettingStartedWithQuant,
-      landingAnInternship,
-      campusResources,
+      // landingAnInternship,  // Hidden — kept in codebase but not displayed
+      landingAQuantInternship,
     ]
   },
   {
     name: "Projects",
     slug: "projects",
     guides: [
-      pythonStockFetcher,
-      smaTradingBot,
-      portfolioTracker,
+      gettingStartedWithProjects,
+      monteCarloSimulator,
+      // pythonStockFetcher,
+      // smaTradingBot,
+      // portfolioTracker,
     ]
   }
 ];

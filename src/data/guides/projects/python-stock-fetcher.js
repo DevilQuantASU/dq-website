@@ -1,94 +1,50 @@
 const guide = {
   slug: "python-stock-fetcher",
-  title: "Python Stock Data Fetcher",
-  description: "A beginner-friendly project to fetch and analyze real-time market data using Python.",
+  title: "Automated Market Data Pipeline",
+  description: "Evolve from writing basic one-off scripts to architecting an automated, resilient market data pipeline.",
   sections: [
     {
       id: "project-overview",
       title: "Project Overview",
       content: `
-        <p>Before you can build complex trading algorithms, you need to understand how to get and manipulate financial data. This project introduces you to Python, API requests, and data analysis using the Pandas library.</p>
-        <p><strong>Goal:</strong> Build a script that fetches the last 30 days of stock data for a given ticker symbol (e.g., AAPL) and plots the closing price.</p>
+        <p>A simple Python script using <code>yfinance</code> to print historical data is a great first step, but it won't impress a top-tier quant firm. Real trading algorithms require high-quality, normalized, and consistently updated data architecture.</p>
+        <p><strong>The Objective:</strong> Build an automated pipeline that schedules, fetches, normalizes, and efficiently stores large amounts of market data directly into a robust database.</p>
       `,
     },
     {
-      id: "what-you-need",
-      title: "What You'll Need",
+      id: "data-sourcing",
+      title: "Data Sourcing & Ingestion",
       content: `
+        <p>While Yahoo Finance is acceptable for testing, you should move toward institutional-grade API providers. Consider integrating APIs like <strong>Alpaca</strong> or <strong>Polygon.io</strong>, which provide incredibly rich tick-level data, level-II order book data, and historical options chains.</p>
+        <div class="guide-callout guide-callout-info">
+          <strong>Architectural Concept:</strong> Instead of fetching data "on-demand" whenever you run a script, set up an asynchronous ingestion layer. Use libraries like <code>asyncio</code> to concurrently hit WebSocket streams or REST endpoints without blocking your main application loop.
+        </div>
+      `,
+    },
+    {
+      id: "efficient-storage",
+      title: "Efficient Storage Mechanisms",
+      content: `
+        <p>Storing millions of rows of financial data in uncompressed CSV files will quickly bottleneck your backtesting capabilities. The storage layer of your pipeline should be optimized for time-series analysis.</p>
         <ul>
-          <li><strong>Python 3</strong> installed on your machine.</li>
-          <li>A code editor like VS Code or a Jupyter Notebook setup.</li>
-          <li>Basic knowledge of variables, functions, and installing packages.</li>
+          <li><strong>Parquet Files:</strong> Consider converting your Pandas DataFrames into Apache Parquet format. It relies on column-oriented storage, vastly compressing file sizes and speeding up read/write latency.</li>
+          <li><strong>Time-Series Databases:</strong> For a more robust project, stand up an instance of <strong>TimescaleDB</strong> (a PostgreSQL extension) or <strong>InfluxDB</strong>. These allow you to query massive chunks of historical data extremely efficiently.</li>
         </ul>
       `,
     },
     {
-      id: "getting-the-data",
-      title: "Getting the Data",
+      id: "automation",
+      title: "Automation & Scheduling",
       content: `
-        <p>We'll use the popular <code>yfinance</code> package, which pulls historical market data from Yahoo Finance without requiring an API key.</p>
+        <p>Your pipeline should run without manual intervention. At a minimum, set up a <strong>cron job</strong> on a Linux server (or Raspberry Pi) to trigger your ingestion scripts daily after market close.</p>
+        <p>If you want to push the complexity further, look into orchestration tools like <strong>Apache Airflow</strong> or <strong>Prefect</strong>. These tools allow you to model your pipeline as a Directed Acyclic Graph (DAG), ensuring data is fetched, cleaned, transformed, and loaded in a strictly controlled, fault-tolerant sequence.</p>
         
-        <div class="guide-callout guide-callout-info">
-          <strong>Step 1:</strong> Install the required packages via your terminal or command prompt:
-          <br/><br/>
-          <code>pip install yfinance pandas matplotlib</code>
-        </div>
-        
-        <p>Next, write a simple script to pull data for Apple (AAPL):</p>
-        
-        <pre><code class="language-python">import yfinance as yf
-import pandas as pd
-
-# Define the ticker symbol
-ticker_symbol = 'AAPL'
-
-# Get data on this ticker
-ticker_data = yf.Ticker(ticker_symbol)
-
-# Get the historical prices for this ticker
-history_df = ticker_data.history(period='1mo')
-
-print(history_df.head())
+        <pre><code class="language-python"># Example concept of a pipeline step (not an Airflow DAG, just the logic)
+async def pipeline_step(ticker):
+    raw_data = await fetch_data_from_polygon(ticker)
+    cleaned_df = normalize_missing_ticks(raw_data)
+    write_to_timescaledb(cleaned_df)
 </code></pre>
-        <p>This snippet queries the API and returns a Pandas DataFrame containing the Open, High, Low, Close, and Volume for each day.</p>
-      `,
-    },
-    {
-      id: "plotting-the-data",
-      title: "Plotting the Data",
-      content: `
-        <p>Data is easier to understand visually. Let's add a basic plot using <code>matplotlib</code> to show the stock's closing price over time.</p>
-        
-        <pre><code class="language-python">import matplotlib.pyplot as plt
-
-# Filter to just the 'Close' column
-history_df['Close'].plot(title=f'{ticker_symbol} Closing Price - Last 1 Month')
-
-# Add labels
-plt.xlabel('Date')
-plt.ylabel('Closing Price (USD)')
-plt.grid(True)
-
-# Show the plot
-plt.show()
-</code></pre>
-      `,
-    },
-    {
-      id: "next-steps",
-      title: "Next Steps to Improve Your Resume",
-      content: `
-        <p>Once you get this script working, you can expand it into a real project worthy of your resume!</p>
-        
-        <div class="guide-callout guide-callout-good">
-          <strong>Resume Builders:</strong>
-          <ul>
-            <li>Modify the script to accept user input for the ticker symbol and date range.</li>
-            <li>Calculate and plot the <strong>Daily Return Percentage</strong> to visualize the stock's volatility.</li>
-            <li>Export the fetched DataFrame to a CSV or Excel file using <code>history_df.to_csv('data.csv')</code>.</li>
-            <li>Wrap the code in a simple command-line interface (CLI) using Python's <code>argparse</code> module.</li>
-          </ul>
-        </div>
       `,
     }
   ],

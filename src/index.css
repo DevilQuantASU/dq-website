@@ -81,6 +81,38 @@
   background-color: rgba(31, 41, 55, 0.4); /* gray-800/40 */
 }
 
+/* Code blocks */
+.guide-section-content pre {
+  background-color: rgba(17, 24, 39, 0.9);
+  border: 1px solid rgba(75, 85, 99, 0.5);
+  border-radius: 0.75rem;
+  padding: 1.25rem 1.5rem;
+  margin: 1rem 0 1.5rem 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.guide-section-content pre code {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+  font-size: 0.825rem;
+  line-height: 1.7;
+  color: #e2e8f0;
+  background: none;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+}
+
+.guide-section-content code {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  font-size: 0.8rem;
+  background-color: rgba(99, 102, 241, 0.12);
+  color: #a5b4fc;
+  padding: 0.15rem 0.45rem;
+  border-radius: 0.3rem;
+  border: 1px solid rgba(99, 102, 241, 0.2);
+}
+
 /* Callout boxes */
 .guide-callout {
   border-radius: 0.75rem;

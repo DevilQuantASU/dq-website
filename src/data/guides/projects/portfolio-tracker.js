@@ -1,77 +1,62 @@
 const guide = {
   slug: "portfolio-tracker-app",
-  title: "Personal Portfolio Tracker",
-  description: "Build a web application or CLI tool that tracks the real-time value of simulated stock holdings.",
+  title: "Real-Time Portfolio Risk Dashboard",
+  description: "Transition from a basic PnL calculator to an institutional-grade risk monitoring dashboard.",
   sections: [
     {
       id: "project-overview",
       title: "Project Overview",
       content: `
-        <p>This project bridges the gap between software engineering and finance. Instead of just analyzing past data, you'll build an application that tracks a simulated portfolio of stocks and updates their value based on live (or slightly delayed) market prices.</p>
-        <p><strong>Goal:</strong> Create a tool where a user can "buy" shares of a stock, and the system tracks their total portfolio value and PnL (Profit and Loss).</p>
+        <p>A web app that simply multiplies your holdings by delayed API prices is a standard SWE project, but it lacks the depth required for quantitative finance. Quant firms care about risk management just as much as return.</p>
+        <p><strong>The Objective:</strong> Build a highly responsive dashboard that streams live market data, dynamically re-calculates portfolio exposure, and models risk metrics in real time.</p>
       `,
     },
     {
       id: "architecture",
-      title: "System Architecture",
+      title: "Streaming Architecture",
       content: `
-        <p>You can build this as a Node.js web app, a simple React frontend, or a Python Command Line Interface (CLI). Regardless of the platform, the core components are the same:</p>
+        <p>REST APIs are poorly suited for high-frequency price updates because they require constant polling. A real-time dashboard needs a robust backend architecture.</p>
         <ul>
-          <li><strong>Data Storage (Database & State):</strong> A place to store the user's holdings (e.g., "10 shares of MSFT at $300 avg cost"). A simple JSON file or SQLite database works perfectly.</li>
-          <li><strong>Market Data API:</strong> A service to fetch current stock prices. <em>Alpha Vantage</em>, <em>Finnhub</em>, or <em>Yahoo Finance</em> are great free options.</li>
-          <li><strong>The Application Logic:</strong> Code that calculates the current value of the holdings by multiplying the quantity of shares by the live price retrieved from the API.</li>
+          <li><strong>WebSockets:</strong> Establish persistent WebSocket connections to live data providers (like Polygon.io or Binance for crypto) to stream quotes with sub-second latency.</li>
+          <li><strong>State Management:</strong> Use a fast in-memory store like <strong>Redis</strong> to hold the latest bid/ask states across thousands of tickers without repeatedly querying a disk-based database.</li>
+          <li><strong>Event-Driven Frontend:</strong> Modern frameworks like <strong>React</strong> or <strong>Next.js</strong> are perfect for consuming these events and selectively re-rendering UI components without blocking the main thread.</li>
         </ul>
       `,
     },
     {
-      id: "core-pnl-logic",
-      title: "The Core PnL Math",
+      id: "risk-modeling",
+      title: "Real-Time Risk Modeling",
       content: `
-        <p>The core logic of your application will calculate the Unrealized Profit and Loss (PnL).</p>
-        
-        <pre><code class="language-javascript">// Example in JavaScript
-const holdings = [
-  { ticker: "AAPL", quantity: 10, averageCost: 150.00 },
-  { ticker: "TSLA", quantity: 5, averageCost: 200.00 }
-];
-
-async function calculatePortfolioValue() {
-  let totalValue = 0;
-  let totalCost = 0;
-
-  for (const position of holdings) {
-    // Fetch live price from your API of choice
-    const livePrice = await fetchLivePrice(position.ticker); 
-    
-    const positionValue = livePrice * position.quantity;
-    const positionCost = position.averageCost * position.quantity;
-    
-    totalValue += positionValue;
-    totalCost += positionCost;
-    
-    console.log(\`\${position.ticker}: Valued at $\${positionValue.toFixed(2)} (PnL: $\${(positionValue - positionCost).toFixed(2)})\`);
-  }
-
-  console.log(\`Total Portfolio Value: $\${totalValue.toFixed(2)}\`);
-  console.log(\`Total Return: \${(((totalValue - totalCost) / totalCost) * 100).toFixed(2)}%\`);
-}
-</code></pre>
+        <p>Instead of just displaying "Total Value", use the incoming data to calculate the metrics that portfolio managers actively monitor to prevent blowups.</p>
+        <div class="guide-callout guide-callout-warning">
+          <strong>Value at Risk (VaR):</strong> Implement a Monte Carlo or Historical Simulation to calculate the portfolio's VaR. Answer the question: <em>"With a 95% confidence interval, what is the maximum amount this portfolio will lose over the next trading day?"</em>
+        </div>
+        <ul>
+          <li><strong>Beta Exposure:</strong> Dynamically recalculate the portfolio's correlation to the S&P 500 to immediately alert the user if they are taking on too much unhedged systematic risk.</li>
+          <li><strong>Rolling Volatility:</strong> Keep a rolling buffer of tick data to display intraday volatility spikes.</li>
+        </ul>
       `,
     },
     {
-      id: "resume-extensions",
-      title: "Making it Resume-Worthy",
+      id: "ui-ux",
+      title: "Data Visualization",
       content: `
-        <p>This project is highly modular. Here is how you can level it up to impress recruiters:</p>
+        <p>A risk dashboard must convey information instantly. Do not just dump numbers into an HTML table.</p>
+        <p>Use modern charting libraries (like <strong>Recharts</strong>, <strong>D3.js</strong>, or <strong>TradingView Lightweight Charts</strong>) to plot live PnL histograms and heatmaps that visualize sector correlations.</p>
         
-        <div class="guide-callout guide-callout-good">
-          <strong>Project Enhancements:</strong>
-          <ul>
-            <li><strong>Build a UI:</strong> Wrap this logic in a React or Next.js frontend with TailwindCSS to make a beautiful dashboard.</li>
-            <li><strong>Persist Data:</strong> Connect the app to a real database (like PostgreSQL or MongoDB) to support multiple users with secure logins.</li>
-            <li><strong>Sector Allocation Chart:</strong> Add logic to determine the sector of each stock (e.g., Tech, Healthcare) and use a library like Chart.js to display a pie chart of the portfolio's diversification.</li>
-          </ul>
-        </div>
+        <pre><code class="language-javascript">// Conceptual React WebSocket snippet
+useEffect(() => {
+  const ws = new WebSocket('wss://market-data-stream');
+  
+  ws.onmessage = (event) => {
+    const quote = JSON.parse(event.data);
+    updatePortfolioRisk(quote);
+    checkVaRLimits(quote);
+  };
+  
+  return () => ws.close();
+}, []);
+</code></pre>
       `,
     }
   ],
