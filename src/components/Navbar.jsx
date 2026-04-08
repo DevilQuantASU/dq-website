@@ -1,10 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
     const location = useLocation();
+    const navigate = useNavigate();
     const [scrolled, setScrolled] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
+
+    // Navigate to a page and then scroll to a section by ID
+    const navigateToSection = (path, sectionId) => {
+        if (location.pathname === path) {
+            // Already on the page, just scroll
+            const el = document.getElementById(sectionId);
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+        } else {
+            navigate(path);
+            // Wait for the page to render, then scroll
+            setTimeout(() => {
+                const el = document.getElementById(sectionId);
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+        }
+    };
 
     // Check if we are on the home page
     const isHome = location.pathname === '/';
@@ -52,9 +69,9 @@ const Navbar = () => {
                         <Link to="/resources" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">
                             Resources
                         </Link>
-                        <Link to="/about#contact" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                        <button onClick={() => navigateToSection('/about', 'contact')} className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">
                             Contact
-                        </Link>
+                        </button>
                     </div>
                     <div className="md:hidden">
                         <button
@@ -98,12 +115,12 @@ const Navbar = () => {
                         >
                             Resources
                         </Link>
-                        <Link
-                            to="/about#contact"
-                            className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                        <button
+                            onClick={() => navigateToSection('/about', 'contact')}
+                            className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium w-full text-left"
                         >
                             Contact
-                        </Link>
+                        </button>
                     </div>
                 </div>
             )}

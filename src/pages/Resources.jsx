@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { guideCategories, allGuides } from '../data/guides/index.js';
 
@@ -31,6 +31,20 @@ const Resources = () => {
     const handleGuideClick = (slug) => {
         setSearchParams({ guide: slug });
     };
+
+    // Intercept anchor links (href="#...") inside guide content so they
+    // use scrollIntoView instead of changing the browser hash, which
+    // would break HashRouter navigation.
+    const handleAnchorClick = useCallback((e) => {
+        const anchor = e.target.closest('a[href^="#"]');
+        if (!anchor) return;
+        e.preventDefault();
+        const targetId = anchor.getAttribute('href').slice(1);
+        const targetEl = document.getElementById(targetId);
+        if (targetEl) {
+            targetEl.scrollIntoView({ behavior: 'smooth' });
+        }
+    }, []);
 
     const sidebarContent = (
         <nav className="p-6 pt-4 space-y-8">
@@ -173,9 +187,9 @@ const Resources = () => {
                                 </header>
 
                                 {/* Guide sections */}
-                                <div className="guide-content space-y-10">
+                                <div className="guide-content space-y-10" onClick={handleAnchorClick}>
                                     {activeGuide.sections.map((section) => (
-                                        <section key={section.id} id={section.id}>
+                                        <section key={section.id} id={section.id} style={{ scrollMarginTop: '5rem' }}>
                                             <h2 className="text-xl sm:text-2xl font-bold text-white mb-4 flex items-center gap-3">
                                                 <span className="w-1 h-6 bg-indigo-500 rounded-full inline-block" />
                                                 {section.title}
