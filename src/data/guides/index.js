@@ -7,6 +7,9 @@ import smaTradingBot from './projects/sma-trading-bot.js';
 import portfolioTracker from './projects/portfolio-tracker.js';
 import gettingStartedWithProjects from './projects/getting-started-with-projects.js';
 import monteCarloSimulator from './projects/monte-carlo-simulator.js';
+import portfolioOptimizer from './projects/portfolio-optimizer.js';
+import optionsPricingEngine from './projects/options-pricing-engine.js';
+import sentimentTradingSignal from './projects/sentiment-trading-signal.js';
 
 export const guideCategories = [
   {
@@ -24,6 +27,9 @@ export const guideCategories = [
     guides: [
       gettingStartedWithProjects,
       monteCarloSimulator,
+      portfolioOptimizer,
+      optionsPricingEngine,
+      sentimentTradingSignal,
       // pythonStockFetcher,
       // smaTradingBot,
       // portfolioTracker,
