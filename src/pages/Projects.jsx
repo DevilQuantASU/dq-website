@@ -2,15 +2,16 @@ import React from 'react';
 import projects from '../data/projects';
 import { GridPattern } from '../components/magicui/grid-pattern';
 import { DotPattern } from '../components/magicui/dot-pattern';
-import { InteractiveGridPattern } from '../components/magicui/interactive-grid-pattern';
+import { PulseGrid } from '../components/magicui/pulse-grid';
 
 const dottedBorder = '2px dashed rgba(255, 255, 255, 0.25)';
 const tagBorder = '1px solid rgba(255, 255, 255, 0.15)';
 
 const Projects = () => {
   return (
-    <div className="bg-black flex-1 flex flex-col pt-16">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex-1 flex flex-col w-full">
+    <div className="relative bg-black flex-1 flex flex-col pt-16">
+      <PulseGrid className="z-0" />
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex-1 flex flex-col w-full">
         {/* Outer dotted frame — vertical lines span full height */}
         <div className="flex-1 flex flex-col" style={{ borderLeft: dottedBorder, borderRight: dottedBorder }}>
           <div className="my-auto py-8">
@@ -21,18 +22,11 @@ const Projects = () => {
             >
               {/* Always-animating glow dots */}
               <DotPattern
-                width={24}
-                height={24}
-                cr={1.5}
+                width={20}
+                height={20}
+                cr={2.5}
                 glow
-                className="text-neutral-500/40 [mask-image:radial-gradient(400px_circle_at_center,white,transparent)]"
-              />
-              {/* Interactive grid on hover */}
-              <InteractiveGridPattern
-                width={52}
-                height={52}
-                className="border-none stroke-transparent"
-                squaresClassName="fill-transparent hover:fill-white/10 stroke-transparent"
+                className="text-neutral-400/60 [mask-image:radial-gradient(600px_circle_at_center,white,transparent)]"
               />
               <div className="relative z-10 text-center px-6">
                 <h1 className="text-5xl sm:text-6xl font-bold text-white tracking-widest uppercase">
