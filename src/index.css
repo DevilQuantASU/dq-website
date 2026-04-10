@@ -152,6 +152,13 @@
   color: #fecaca; /* red-200 */
 }
 
+/* Animated grid pattern fade */
+@keyframes gridFade {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
 /* Responsive table scrolling on mobile */
 @media (max-width: 640px) {
   .guide-section-content table {
