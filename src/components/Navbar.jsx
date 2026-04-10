@@ -69,6 +69,9 @@ const Navbar = () => {
                         <Link to="/resources" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">
                             Resources
                         </Link>
+                        <Link to="/projects" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                            Projects
+                        </Link>
                         <button onClick={() => navigateToSection('/about', 'contact')} className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">
                             Contact
                         </button>
@@ -114,6 +117,12 @@ const Navbar = () => {
                             className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                         >
                             Resources
+                        </Link>
+                        <Link
+                            to="/projects"
+                            className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                        >
+                            Projects
                         </Link>
                         <button
                             onClick={() => navigateToSection('/about', 'contact')}
