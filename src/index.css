@@ -2,8 +2,9 @@
 
 @layer base {
   body {
-    @apply antialiased text-gray-100 bg-gray-950;
+    @apply antialiased text-gray-100 bg-black;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    letter-spacing: -0.01em;
   }
 }
 
@@ -25,16 +26,16 @@
 }
 
 .guide-section-content a {
-  color: #818cf8; /* indigo-400 */
+  color: #cbd5e1; /* slate-300 */
   text-decoration: underline;
-  text-decoration-color: rgba(129, 140, 248, 0.3);
+  text-decoration-color: rgba(203, 213, 225, 0.3);
   text-underline-offset: 2px;
   transition: all 0.15s ease;
 }
 
 .guide-section-content a:hover {
-  color: #a5b4fc; /* indigo-300 */
-  text-decoration-color: rgba(165, 180, 252, 0.6);
+  color: #e2e8f0; /* slate-200 */
+  text-decoration-color: rgba(226, 232, 240, 0.6);
 }
 
 /* Tables */
@@ -42,7 +43,6 @@
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 1.5rem;
-  border-radius: 0.75rem;
   overflow: hidden;
   border: 1px solid rgba(75, 85, 99, 0.4); /* gray-600/40 */
 }
@@ -85,7 +85,6 @@
 .guide-section-content pre {
   background-color: rgba(17, 24, 39, 0.9);
   border: 1px solid rgba(75, 85, 99, 0.5);
-  border-radius: 0.75rem;
   padding: 1.25rem 1.5rem;
   margin: 1rem 0 1.5rem 0;
   overflow-x: auto;
@@ -100,22 +99,19 @@
   background: none;
   padding: 0;
   border: none;
-  border-radius: 0;
 }
 
 .guide-section-content code {
   font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
   font-size: 0.8rem;
-  background-color: rgba(99, 102, 241, 0.12);
-  color: #a5b4fc;
+  background-color: rgba(255, 255, 255, 0.06);
+  color: #cbd5e1;
   padding: 0.15rem 0.45rem;
-  border-radius: 0.3rem;
-  border: 1px solid rgba(99, 102, 241, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Callout boxes */
 .guide-callout {
-  border-radius: 0.75rem;
   padding: 1rem 1.25rem;
   margin: 1rem 0 1.5rem 0;
   border-left: 3px solid;
@@ -129,9 +125,9 @@
 }
 
 .guide-callout-info {
-  background-color: rgba(99, 102, 241, 0.08); /* indigo tint */
-  border-left-color: #6366f1;
-  color: #c7d2fe; /* indigo-200 */
+  background-color: rgba(148, 163, 184, 0.08); /* slate tint */
+  border-left-color: #94a3b8;
+  color: #cbd5e1; /* slate-300 */
 }
 
 .guide-callout-warning {

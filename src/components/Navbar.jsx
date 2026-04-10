@@ -48,7 +48,7 @@ const Navbar = () => {
     // - If NOT home page: dark background
     const navbarClasses = isHome && !isOpen
         ? "bg-transparent border-none"
-        : "bg-gray-900/90 backdrop-blur-md border-b border-gray-800 shadow-md";
+        : "bg-black/90 backdrop-blur-md border-b border-neutral-800 shadow-md";
 
     return (
         <nav className={`fixed w-full z-50 transition-all duration-300 ${navbarClasses}`}>
@@ -60,26 +60,26 @@ const Navbar = () => {
                         </Link>
                     </div>
                     <div className="hidden md:ml-6 md:flex md:space-x-8">
-                        <Link to="/" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                        <Link to="/" className="text-neutral-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors">
                             Home
                         </Link>
-                        <Link to="/about" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                        <Link to="/about" className="text-neutral-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors">
                             About Us
                         </Link>
-                        <Link to="/resources" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                        <Link to="/resources" className="text-neutral-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors">
                             Resources
                         </Link>
-                        <Link to="/projects" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                        <Link to="/projects" className="text-neutral-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors">
                             Projects
                         </Link>
-                        <button onClick={() => navigateToSection('/about', 'contact')} className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                        <button onClick={() => navigateToSection('/about', 'contact')} className="text-neutral-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors">
                             Contact
                         </button>
                     </div>
                     <div className="md:hidden">
                         <button
                             onClick={() => setIsOpen(!isOpen)}
-                            className="text-gray-300 hover:text-white focus:outline-none p-2"
+                            className="text-neutral-300 hover:text-white focus:outline-none p-2"
                         >
                             <span className="sr-only">Open main menu</span>
                             {!isOpen ? (
@@ -98,35 +98,35 @@ const Navbar = () => {
 
             {/* Mobile menu, show/hide based on menu state */}
             {isOpen && (
-                <div className="md:hidden bg-gray-900/95 backdrop-blur-xl border-b border-gray-800">
+                <div className="md:hidden bg-black/95 backdrop-blur-xl border-b border-neutral-800">
                     <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                         <Link
                             to="/"
-                            className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                            className="text-neutral-300 hover:text-white block px-3 py-2 text-base font-medium"
                         >
                             Home
                         </Link>
                         <Link
                             to="/about"
-                            className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                            className="text-neutral-300 hover:text-white block px-3 py-2 text-base font-medium"
                         >
                             About Us
                         </Link>
                         <Link
                             to="/resources"
-                            className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                            className="text-neutral-300 hover:text-white block px-3 py-2 text-base font-medium"
                         >
                             Resources
                         </Link>
                         <Link
                             to="/projects"
-                            className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                            className="text-neutral-300 hover:text-white block px-3 py-2 text-base font-medium"
                         >
                             Projects
                         </Link>
                         <button
                             onClick={() => navigateToSection('/about', 'contact')}
-                            className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium w-full text-left"
+                            className="text-neutral-300 hover:text-white block px-3 py-2 text-base font-medium w-full text-left"
                         >
                             Contact
                         </button>

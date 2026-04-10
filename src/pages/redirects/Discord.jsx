@@ -7,7 +7,7 @@ const Discord = () => {
     }, []);
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gray-950 text-white">
+        <div className="flex items-center justify-center min-h-screen bg-black text-white">
             <p className="text-xl">Redirecting to Discord...</p>
         </div>
     );
