@@ -1,6 +1,19 @@
 import React from 'react';
 import LeaderCard from '../components/LeaderCard';
 import leaders from '../data/leaders.json';
+import { IconCloud } from '../components/magicui/icon-cloud';
+import { DotPattern } from '../components/magicui/dot-pattern';
+
+const placementLogos = [
+    "./logos/amazon.svg",
+    "./logos/aws.svg",
+    "./logos/capitalone.svg",
+    "./logos/generaldynamics.svg",
+    "./logos/microsoft.svg",
+    "./logos/seagate.svg",
+    "./logos/servicenow.svg",
+    "./logos/wellsfargo.svg",
+];
 
 const About = () => {
 
@@ -54,6 +67,21 @@ const About = () => {
                             Collaborative Research Projects
                         </li>
                     </ul>
+                </div>
+
+                {/* Member Placements Section */}
+                <div className="mb-20 relative overflow-hidden py-10">
+                    <DotPattern
+                        width={20}
+                        height={20}
+                        cr={1.2}
+                        glow
+                        className="text-neutral-500/60 [mask-image:radial-gradient(circle_at_center,white_20%,transparent_70%)]"
+                    />
+                    <h2 className="text-2xl font-bold text-white mb-4 text-center relative z-10">Member Placements</h2>
+                    <div className="flex justify-center relative z-10">
+                        <IconCloud images={placementLogos} />
+                    </div>
                 </div>
 
                 {/* Leadership Section */}
