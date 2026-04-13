@@ -11,6 +11,8 @@ import portfolioOptimizer from './projects/portfolio-optimizer.js';
 import optionsPricingEngine from './projects/options-pricing-engine.js';
 import sentimentTradingSignal from './projects/sentiment-trading-signal.js';
 
+import volunteering from './beyond-quant/volunteering.js';
+
 export const guideCategories = [
   {
     name: "General Guides",
@@ -33,6 +35,13 @@ export const guideCategories = [
       // pythonStockFetcher,
       // smaTradingBot,
       // portfolioTracker,
+    ]
+  },
+  {
+    name: "Beyond Quant",
+    slug: "beyond-quant",
+    guides: [
+      volunteering,
     ]
   }
 ];
