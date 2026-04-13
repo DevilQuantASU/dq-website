@@ -1,27 +1,27 @@
 const projects = [
   {
-    title: "Algorithmic Trading Platform",
-    type: "Engineering",
+    title: "DevilQuant Data Lake",
+    type: "Infrastructure",
     description:
-      "A shared backtesting and paper-trading platform for club members to prototype and evaluate strategies. Supports event-driven and vectorized backtests with built-in risk metrics.",
-    tags: ["Python", "Backtrader", "REST APIs"],
-    image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80",
+      "A data collection pipeline that continuously scrapes and stores prediction market data — prices, volumes, and contract metadata — into a local database. Serves as the club's foundational data layer for research and model development.",
+    tags: ["Python", "SQL", "Web Scraping", "ETL"],
+    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80",
   },
   {
-    title: "Factor Model Research",
-    type: "Research",
+    title: "Sentiment Scraper",
+    type: "Infrastructure",
     description:
-      "Building and backtesting multi-factor equity models using Fama-French and custom factors. Evaluating factor exposures across sectors and testing out-of-sample performance.",
-    tags: ["Python", "Pandas", "Statistics"],
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
+      "A scheduled pipeline that collects headlines and sentiment scores from financial news RSS feeds and Reddit communities on a cron schedule. Stores timestamped sentiment signals for backtesting and real-time analysis.",
+    tags: ["Python", "NLP", "RSS", "Reddit API"],
+    image: "https://images.unsplash.com/photo-1495020689067-958852a7765e?w=800&q=80",
   },
   {
-    title: "Options Volatility Dashboard",
-    type: "Engineering",
+    title: "Odds Comparison Aggregator",
+    type: "Infrastructure",
     description:
-      "A web dashboard for visualizing implied volatility surfaces, term structure, and skew across equity options chains. Pulls live data and renders interactive 3D vol surfaces.",
-    tags: ["React", "D3.js", "Options Data"],
-    image: "https://images.unsplash.com/photo-1642790106117-e829e14a795f?w=800&q=80",
+      "Scrapes odds and lines from multiple sportsbooks and prediction markets, storing historical spread data. Enables members to track line movement, spot pricing inefficiencies, and study market efficiency across platforms.",
+    tags: ["Python", "Web Scraping", "SQL", "Cron"],
+    image: "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=800&q=80",
   },
 ];
 
