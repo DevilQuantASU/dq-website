@@ -11,9 +11,10 @@ const Resources = () => {
     const activeSlug = searchParams.get('guide') || allGuides[0]?.slug;
     const activeGuide = allGuides.find((g) => g.slug === activeSlug) || allGuides[0];
 
-    // Close mobile sidebar on guide change
+    // Close mobile sidebar and scroll to top on guide change
     useEffect(() => {
         setSidebarOpen(false);
+        window.scrollTo(0, 0);
     }, [activeSlug]);
 
     // Prevent body scroll when mobile sidebar is open
