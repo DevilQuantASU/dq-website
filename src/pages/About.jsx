@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import LeaderCard from '../components/LeaderCard';
-import leaders from '../data/leaders.json';
+import leadersByYear from '../data/leaders.json';
+import membersByYear from '../data/members.json';
 import { IconCloud } from '../components/magicui/icon-cloud';
 import { DotPattern } from '../components/magicui/dot-pattern';
 
@@ -15,8 +16,58 @@ const placementLogos = [
     "./logos/wellsfargo.svg",
 ];
 
-const About = () => {
+// Combine years from both data sources
+const allYears = [...new Set([...Object.keys(leadersByYear), ...Object.keys(membersByYear)])].sort((a, b) => b - a);
+const currentYear = new Date().getFullYear().toString();
+const defaultYear = allYears.includes(currentYear) ? currentYear : allYears[0];
 
+const YearDropdown = ({ value, onChange, years }) => {
+    const [open, setOpen] = useState(false);
+    const ref = useRef(null);
+
+    useEffect(() => {
+        const handleClickOutside = (e) => {
+            if (ref.current && !ref.current.contains(e.target)) setOpen(false);
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
+
+    return (
+        <div className="relative" ref={ref}>
+            <button
+                onClick={() => setOpen(!open)}
+                className="bg-neutral-900 border border-neutral-700 text-neutral-300 text-sm px-5 py-2.5 flex items-center gap-3 hover:border-neutral-500 transition-colors cursor-pointer"
+            >
+                {value}
+                <svg className={`w-3 h-3 transition-transform ${open ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+            </button>
+            {open && (
+                <div className="absolute right-0 mt-1 bg-neutral-900 border border-neutral-700 z-20 min-w-full">
+                    {years.map((year) => (
+                        <button
+                            key={year}
+                            onClick={() => { onChange(year); setOpen(false); }}
+                            className={`block w-full text-left px-3 py-2 text-sm transition-colors ${
+                                year === value ? 'text-white bg-neutral-800' : 'text-neutral-400 hover:text-white hover:bg-neutral-800'
+                            }`}
+                        >
+                            {year}
+                        </button>
+                    ))}
+                </div>
+            )}
+        </div>
+    );
+};
+
+const About = () => {
+    const [selectedYear, setSelectedYear] = useState(defaultYear);
+
+    const leaders = leadersByYear[selectedYear] || [];
+    const members = membersByYear[selectedYear] || [];
 
     // Import all headshots
     const headshots = import.meta.glob('../assets/Headshots/*.{png,jpg,jpeg,svg}', { eager: true });
@@ -84,9 +135,12 @@ const About = () => {
                     </div>
                 </div>
 
-                {/* Leadership Section */}
+                {/* Leadership & Members — shared year */}
                 <div>
-                    <h2 className="text-3xl font-bold text-white text-center mb-12">Leadership Team</h2>
+                    <div className="flex items-center justify-between mb-12">
+                        <h2 className="text-3xl font-bold text-white">Leadership Team</h2>
+                        <YearDropdown value={selectedYear} onChange={setSelectedYear} years={allYears} />
+                    </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {leaders.map((leader, index) => (
                             <LeaderCard
@@ -95,6 +149,24 @@ const About = () => {
                                 image={getHeadshotUrl(leader.image)}
                             />
                         ))}
+                    </div>
+
+                    <h2 className="text-3xl font-bold text-white mt-20 mb-8">Members</h2>
+                    <div className="max-h-80 overflow-y-auto border border-neutral-800 p-6">
+                        {members.length > 0 ? (
+                            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-3">
+                                {members.map((member, index) => (
+                                    <span
+                                        key={index}
+                                        className="text-neutral-300 text-sm"
+                                    >
+                                        {member.name}
+                                    </span>
+                                ))}
+                            </div>
+                        ) : (
+                            <p className="py-8 text-neutral-500 text-center text-sm">No members listed for this year.</p>
+                        )}
                     </div>
                 </div>
                 {/* Founders Section */}
