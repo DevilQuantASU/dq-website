@@ -86,38 +86,41 @@ const About = () => {
     return (
         <div className="min-h-screen bg-black pt-24 pb-12">
             <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-                {/* Mission / Intro */}
-                <div className="max-w-3xl mx-auto text-center mb-16">
-                    <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                        About DevilQuant
+                {/* Hero heading */}
+                <div className="mb-20">
+                    <h1 className="text-5xl sm:text-6xl font-bold text-white tracking-widest uppercase mb-6">
+                        About
                     </h1>
-                    <p className="mt-4 text-lg text-neutral-400">
+                    <p className="text-lg text-neutral-400 leading-relaxed max-w-2xl">
                         We are a student-run quantitative finance organization dedicated to bridging the gap between academic theory and practical application in financial markets.
                     </p>
                 </div>
 
-                {/* What We Do Section */}
-                <div className="mb-20">
-                    <h2 className="text-2xl font-bold text-white mb-4">Our Mission</h2>
-                    <p className="text-neutral-400 leading-relaxed mb-8 border-l-2 border-neutral-700 pl-4">
-                        To provide students with hands-on experience in quantitative analysis, algorithmic trading, and financial data science. We aim to foster a collaborative environment where members can research, build, and test their own trading strategies.
-                    </p>
-
-                    <h2 className="text-2xl font-bold text-white mb-4">What We Do</h2>
-                    <ul className="space-y-2 text-neutral-400">
-                        <li className="flex items-center">
-                            <span className="w-1.5 h-1.5 bg-white mr-3 shrink-0"></span>
-                            Algorithmic Trading Competitions
-                        </li>
-                        <li className="flex items-center">
-                            <span className="w-1.5 h-1.5 bg-white mr-3 shrink-0"></span>
-                            Guest Speaker Series from Industry Pros
-                        </li>
-                        <li className="flex items-center">
-                            <span className="w-1.5 h-1.5 bg-white mr-3 shrink-0"></span>
-                            Collaborative Research Projects
-                        </li>
-                    </ul>
+                {/* Mission & What We Do */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20 border-t border-neutral-800 pt-12">
+                    <div className="text-center md:text-left">
+                        <h2 className="text-3xl font-bold text-white mb-4">Our Mission</h2>
+                        <p className="text-neutral-400 leading-relaxed">
+                            To provide students with hands-on experience in quantitative analysis, algorithmic trading, and financial data science. We aim to foster a collaborative environment where members can research, build, and test their own trading strategies.
+                        </p>
+                    </div>
+                    <div className="text-center md:text-right">
+                        <h2 className="text-3xl font-bold text-white mb-4">What We Do</h2>
+                        <ul className="space-y-3 text-neutral-400">
+                            <li className="flex items-center justify-center md:justify-end">
+                                <span className="md:order-2 w-1.5 h-1.5 bg-white mr-3 md:mr-0 md:ml-3 shrink-0"></span>
+                                Algorithmic Trading Competitions
+                            </li>
+                            <li className="flex items-center justify-center md:justify-end">
+                                <span className="md:order-2 w-1.5 h-1.5 bg-white mr-3 md:mr-0 md:ml-3 shrink-0"></span>
+                                Guest Speaker Series from Industry Pros
+                            </li>
+                            <li className="flex items-center justify-center md:justify-end">
+                                <span className="md:order-2 w-1.5 h-1.5 bg-white mr-3 md:mr-0 md:ml-3 shrink-0"></span>
+                                Collaborative Research Projects
+                            </li>
+                        </ul>
+                    </div>
                 </div>
 
                 {/* Member Placements Section */}
@@ -129,7 +132,7 @@ const About = () => {
                         glow
                         className="text-neutral-500/60 [mask-image:radial-gradient(circle_at_center,white_20%,transparent_70%)]"
                     />
-                    <h2 className="text-2xl font-bold text-white mb-4 text-center relative z-10">Member Placements</h2>
+                    <h2 className="text-3xl font-bold text-white mb-4 text-center relative z-10">Member Placements</h2>
                     <div className="flex justify-center relative z-10">
                         <IconCloud images={placementLogos} />
                     </div>
