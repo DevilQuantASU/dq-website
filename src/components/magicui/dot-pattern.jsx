@@ -1,7 +1,6 @@
 "use client"
 
-import React, { useEffect, useId, useRef, useState } from "react"
-import { motion } from "motion/react"
+import React, { useEffect, useId, useMemo, useRef, useState } from "react"
 import { cn } from "../../lib/utils"
 
 export function DotPattern({
@@ -23,8 +22,13 @@ export function DotPattern({
   useEffect(() => {
     const updateDimensions = () => {
       if (containerRef.current) {
-        const { width, height } = containerRef.current.getBoundingClientRect()
-        setDimensions({ width, height })
+        const rect = containerRef.current.getBoundingClientRect()
+        setDimensions((prev) => {
+          const w = Math.round(rect.width)
+          const h = Math.round(rect.height)
+          if (prev.width === w && prev.height === h) return prev
+          return { width: w, height: h }
+        })
       }
     }
 
@@ -33,23 +37,25 @@ export function DotPattern({
     return () => window.removeEventListener("resize", updateDimensions)
   }, [])
 
-  const dots = Array.from(
-    {
-      length:
-        Math.ceil(dimensions.width / width) *
-        Math.ceil(dimensions.height / height),
-    },
-    (_, i) => {
-      const col = i % Math.ceil(dimensions.width / width)
-      const row = Math.floor(i / Math.ceil(dimensions.width / width))
+  const dots = useMemo(() => {
+    const cols = Math.ceil(dimensions.width / width) || 0
+    const rows = Math.ceil(dimensions.height / height) || 0
+    return Array.from({ length: cols * rows }, (_, i) => {
+      const col = i % cols
+      const row = Math.floor(i / cols)
+      const seed = ((col * 127 + row * 311) % 1000) / 1000
+      const seed2 = ((col * 311 + row * 127) % 1000) / 1000
       return {
         x: col * width + cx + x,
         y: row * height + cy + y,
-        delay: Math.random() * 5,
-        duration: Math.random() * 3 + 2,
+        delay: seed * 5,
+        duration: seed2 * 3 + 2,
       }
-    }
-  )
+    })
+  }, [dimensions.width, dimensions.height, width, height, cx, cy, x, y])
+
+  // CSS-safe ID (useId returns colons which are invalid in keyframe names)
+  const cssId = id.replace(/:/g, "_")
 
   return (
     <svg
@@ -67,32 +73,28 @@ export function DotPattern({
           <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
         </radialGradient>
       </defs>
+      {glow && (
+        <style>{`
+          @keyframes ${cssId}-glow {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+          }
+        `}</style>
+      )}
       {dots.map((dot) => (
-        <motion.circle
+        <circle
           key={`${dot.x}-${dot.y}`}
           cx={dot.x}
           cy={dot.y}
           r={cr}
           fill={glow ? `url(#${id}-gradient)` : "currentColor"}
-          initial={glow ? { opacity: 0.4, scale: 1 } : {}}
-          animate={
+          style={
             glow
               ? {
-                  opacity: [0.4, 1, 0.4],
-                  scale: [1, 1.5, 1],
+                  animation: `${cssId}-glow ${dot.duration}s ease-in-out infinite`,
+                  animationDelay: `${dot.delay}s`,
                 }
-              : {}
-          }
-          transition={
-            glow
-              ? {
-                  duration: dot.duration,
-                  repeat: Infinity,
-                  repeatType: "reverse",
-                  delay: dot.delay,
-                  ease: "easeInOut",
-                }
-              : {}
+              : undefined
           }
         />
       ))}
