@@ -1,5 +1,7 @@
 import React from 'react';
-import projects from '../data/projects';
+import allProjects from '../data/projects';
+
+const projects = allProjects.filter((p) => p.visible);
 import { GridPattern } from '../components/magicui/grid-pattern';
 import { DotPattern } from '../components/magicui/dot-pattern';
 import { PulseGrid } from '../components/magicui/pulse-grid';
