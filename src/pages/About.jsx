@@ -67,7 +67,13 @@ const About = () => {
     const [selectedYear, setSelectedYear] = useState(defaultYear);
 
     const leaders = leadersByYear[selectedYear] || [];
-    const members = membersByYear[selectedYear] || [];
+    const members = (membersByYear[selectedYear] || []).slice().sort((a, b) => {
+        const partsA = a.name.split(' ');
+        const partsB = b.name.split(' ');
+        const keyA = partsA.length > 1 ? partsA[partsA.length - 1] : partsA[0];
+        const keyB = partsB.length > 1 ? partsB[partsB.length - 1] : partsB[0];
+        return keyA.localeCompare(keyB);
+    });
 
     // Import all headshots
     const headshots = import.meta.glob('../assets/Headshots/*.{png,jpg,jpeg,svg}', { eager: true });
