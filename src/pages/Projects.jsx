@@ -35,7 +35,7 @@ const Projects = () => {
               </div>
             </div>
 
-            {/* Project cards */}
+            {/* Project cards  */}
             {projects.map((project, i) => (
               <div
                 key={project.title}
@@ -94,6 +94,21 @@ const Projects = () => {
                 </div>
               </div>
             ))}
+
+            {/* Philosophy box */}
+            <div
+              className="bg-neutral-950 min-h-[360px] flex items-center justify-center px-8 sm:px-12"
+              style={{ borderBottom: dottedBorder }}
+            >
+              <div className="text-center max-w-2xl">
+                <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-wide uppercase mb-4">
+                  Build Real Things
+                </h2>
+                <p className="text-neutral-400 leading-relaxed">
+                  Every project at DevilQuant exists to solve a real problem. If it doesn't collect real data, answer a real question, or support real decision-making, we don't make it. The goal is infrastructure that the club actually uses.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
