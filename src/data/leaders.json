@@ -78,5 +78,47 @@
                 "linkedin": "https://www.linkedin.com/in/thomasyht/"
             }
         }
+    ],
+    "2026": [
+        {
+            "name": "Alexander Pacheco",
+            "role": "President",
+            "bio": "Alexander is a graduate studentstudying Computer Science. He is a SWE at Microsoft.",
+            "image": "alex_pfp.png",
+            "socialLinks": {
+                "linkedin": "https://www.linkedin.com/in/alexpach08/",
+                "github": "https://github.com/AlexanderPach",
+                "portfolio": "https://alexanderpacheco.com/"
+            }
+        },
+        {
+            "name": "Jayden Rios",
+            "role": "Vice President, Research",
+            "bio": "Jayden is a sophomore studying Mathematices (Statistics).",
+            "image": null,
+            "socialLinks": {
+                "linkedin": "https://www.linkedin.com/in/jayden-rios-1376193aa/"
+            }
+        },
+        {
+            "name": "Dhruv Rao",
+            "role": "Vice President, Finance",
+            "bio": "Dhruv is a senior studying Data Science. He is going to xyz in [insert date].",
+            "image": "",
+            "socialLinks": {
+                "linkedin": "https://www.linkedin.com/in/dhruvrao29/"
+            }
+        },
+        {
+            "name": "Bradley Ward",
+            "role": "Vice President, Public Relations",
+            "bio": "Bradley is a graduate student studying Artificial Intelligence for Business.",
+            "image": null,
+            "socialLinks": {
+                "linkedin": "https://www.linkedin.com/in/bradley-ward-42039142b/"
+            }
+        }
+
+
     ]
 }
