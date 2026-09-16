@@ -6,7 +6,7 @@ const paths = [
         id: 'developer',
         icon: '</>',
         title: 'Quant Developer',
-        summary: 'Python. C++. Production systems.',
+        summary: 'Building reliable systems with Python and C++.',
         accent: 'indigo',
         stages: [
             {
@@ -24,7 +24,7 @@ const paths = [
                 resources: ['OSTEP: Parts 1 & 2', 'Computer Networking: Chapters 1-5'],
             },
             {
-                title: 'System design for data-intensive applications',
+                title: 'System Design',
                 type: 'Core',
                 description: 'Learn to design systems that move, store, and process large amounts of data. Start with Designing Data-Intensive Applications, 2nd Edition, then use Alex Xu\'s two-part System Design Interview series to practice communicating tradeoffs clearly.',
                 learn: ['Data models, storage, and retrieval', 'Replication, partitioning, and consistency', 'Batch and stream processing', 'Reliability, scalability, and system tradeoffs'],
@@ -57,7 +57,7 @@ const paths = [
         id: 'trader',
         icon: '↗',
         title: 'Quant Trader',
-        summary: 'Probability. Decisions. Risk.',
+        summary: 'Making decisions under uncertainty.',
         accent: 'amber',
         stages: [
             {
@@ -108,7 +108,7 @@ const paths = [
         id: 'researcher',
         icon: 'Σ',
         title: 'Quant Researcher',
-        summary: 'Statistics. Models. Evidence.',
+        summary: 'Turning data into evidence-backed models.',
         accent: 'emerald',
         stages: [
             {
@@ -344,14 +344,13 @@ const Roadmap = () => {
             <div className="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
                 <header className="flex flex-col gap-8 border-b border-neutral-800 pb-10 lg:flex-row lg:items-end lg:justify-between">
                     <div className="max-w-2xl">
-                        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-indigo-300">Your next move</p>
-                        <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">Find your edge.</h1>
-                        <p className="mt-4 text-lg leading-relaxed text-neutral-400">Three paths into quant. A clear next step for each.</p>
+                        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-indigo-300">Your next step</p>
+                        <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">Find your specialty.</h1>
+                        <p className="mt-4 text-lg leading-relaxed text-neutral-400">Choose a Path.</p>
                     </div>
                     <div className="border-l-2 border-amber-400 pl-5 text-sm leading-6 text-neutral-400">
-                        <p>Learn the foundations.</p>
+                        <p>It helps to learn the foundations.</p>
                         <p>Build something you can explain.</p>
-                        <p className="font-semibold text-white">Make your next move.</p>
                     </div>
                 </header>
 
