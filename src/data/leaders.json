@@ -83,7 +83,7 @@
         {
             "name": "Alexander Pacheco",
             "role": "President",
-            "bio": "Alexander is a graduate studentstudying Computer Science. He is a SWE at Microsoft.",
+            "bio": "Alexander is a graduate student studying Computer Science. He is a SWE at Microsoft.",
             "image": "alex_pfp.png",
             "socialLinks": {
                 "linkedin": "https://www.linkedin.com/in/alexpach08/",
@@ -116,6 +116,15 @@
             "image": "bradley.jpeg",
             "socialLinks": {
                 "linkedin": "https://www.linkedin.com/in/bradley-ward-42039142b/"
+            }
+        },
+        {
+            "name": "Bhavana Kannan",
+            "role": "Director of Infrastructure / Development",
+            "bio": "Bhavana is a Junior studying Data Science.",
+            "image": "Bhavana.jpg",
+            "socialLinks": {
+                "linkedin": "https://www.linkedin.com/in/bhavanakannan/"
             }
         }
 
