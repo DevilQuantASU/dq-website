@@ -232,7 +232,7 @@ const isExternalLink = (href) => href.startsWith('http');
 
 const ResourceLink = ({ resource, accentClass }) => {
     const href = resourceLinks[resource] || '/resources';
-    const className = 'group flex items-center justify-between border border-neutral-800 bg-black px-4 py-4 text-left text-sm font-medium text-neutral-200 transition-colors hover:border-neutral-600 hover:bg-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70';
+    const className = 'group flex items-center justify-between border border-neutral-800/90 bg-[#0b0d0f] px-4 py-4 text-left text-sm font-medium text-neutral-200 transition-colors hover:border-neutral-500 hover:bg-neutral-900/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70';
     const content = <><span>{resource}</span><span className={`${accentClass} transition-transform group-hover:translate-x-0.5`}>↗</span></>;
 
     return isExternalLink(href) ? (
@@ -255,7 +255,7 @@ const specializationTopics = [
 ];
 
 const TShapeGraph = ({ accentClass }) => (
-    <div className="mt-8 border border-neutral-800 bg-black p-5 sm:p-6" aria-label="T-shaped specialization graph">
+    <div className="mt-8 border border-neutral-800/90 bg-[#0b0d0f] p-5 sm:p-6" aria-label="T-shaped specialization graph">
         <div className="flex flex-col gap-2 border-b border-neutral-800 pb-5 sm:flex-row sm:items-end sm:justify-between">
             <div>
                 <p className={`text-xs font-semibold uppercase tracking-[0.2em] ${accentClass}`}>The T-shaped profile</p>
@@ -292,7 +292,7 @@ const TShapeGraph = ({ accentClass }) => (
                 </div>
             </div>
         </div>
-        <div className="mt-5 border border-neutral-700 bg-neutral-900/60 p-5 sm:p-6">
+        <div className="mt-5 border border-neutral-800 bg-neutral-900/40 p-5 sm:p-6">
             <h4 className="text-base font-semibold text-white">Try to make the skillset <span className="text-indigo-300">coherent</span>.</h4>
             <p className="mt-2 text-sm text-neutral-400">Different proficiencies should lend well to one another.</p>
             <div className="mt-5 border-l-2 border-indigo-400/70 bg-black/40 p-4">
@@ -339,22 +339,9 @@ const Roadmap = () => {
     };
 
     return (
-        <main className="relative flex-1 overflow-hidden bg-black pt-16">
-            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(99,102,241,0.12),transparent_32rem)]" />
-            <div className="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
-                <header className="flex flex-col gap-8 border-b border-neutral-800 pb-10 lg:flex-row lg:items-end lg:justify-between">
-                    <div className="max-w-2xl">
-                        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-indigo-300">Your next step</p>
-                        <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">Find your specialty.</h1>
-                        <p className="mt-4 text-lg leading-relaxed text-neutral-400">Choose a Path.</p>
-                    </div>
-                    <div className="border-l-2 border-amber-400 pl-5 text-sm leading-6 text-neutral-400">
-                        <p>It helps to learn the foundations.</p>
-                        <p>Build something you can explain.</p>
-                    </div>
-                </header>
-
-                <section className="mt-8 grid gap-4 lg:grid-cols-3" aria-label="Quant paths">
+        <main className="relative flex-1 overflow-hidden bg-[#090a0b] pt-16">
+            <div className="relative mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-16">
+                <section className="grid gap-px border border-neutral-800 bg-neutral-800 lg:grid-cols-3" aria-label="Quant paths">
                     {paths.map((path) => {
                         const isActive = path.id === activePathId;
                         const pathAccent = accentClasses[path.accent];
@@ -363,12 +350,12 @@ const Roadmap = () => {
                                 key={path.id}
                                 type="button"
                                 onClick={() => selectPath(path.id)}
-                                className={`group min-h-36 border p-5 text-left transition-colors ${isActive ? pathAccent.active : 'border-neutral-800 bg-neutral-950 hover:border-neutral-600 hover:bg-neutral-900'}`}
+                                className={`group min-h-40 bg-[#0d0f11] p-5 text-left transition-colors hover:bg-neutral-900 ${isActive ? `${pathAccent.active} bg-[#15181c]` : ''}`}
                                 aria-pressed={isActive}
                             >
                                 <div className="flex items-start justify-between gap-4">
-                                    <span className={`font-mono text-lg ${isActive ? pathAccent.icon : 'text-neutral-400'}`}>{path.icon}</span>
-                                    <span className={`text-[10px] font-semibold uppercase tracking-[0.16em] ${isActive ? pathAccent.text : 'text-neutral-500'}`}>{path.eyebrow}</span>
+                                    <span className={`font-mono text-lg ${isActive ? pathAccent.icon : 'text-neutral-500'}`}>{path.icon}</span>
+                                    <span aria-hidden="true" className={`h-px w-8 ${isActive ? pathAccent.fill : 'bg-neutral-700'}`} />
                                 </div>
                                 <h2 className="mt-5 text-xl font-semibold text-white">{path.title}</h2>
                                 <p className="mt-1 text-sm text-neutral-400">{path.summary}</p>
@@ -377,8 +364,8 @@ const Roadmap = () => {
                     })}
                 </section>
 
-                <section className="mt-12 grid gap-8 lg:grid-cols-[17rem_1fr] lg:gap-12">
-                    <aside>
+                <section className="mt-14 grid gap-10 lg:grid-cols-[17rem_1fr] lg:gap-16">
+                    <aside className="lg:sticky lg:top-24 lg:self-start">
                         <div className="flex items-end justify-between border-b border-neutral-800 pb-3">
                             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-neutral-500">Your roadmap</p>
                             <span className="text-xs text-neutral-500">{activeStage + 1} of {activePath.stages.length} complete</span>
@@ -410,7 +397,7 @@ const Roadmap = () => {
                         </nav>
                     </aside>
 
-                    <article className="border border-neutral-800 bg-neutral-950">
+                    <article className="border border-neutral-800 bg-[#101214] shadow-[0_20px_80px_rgba(0,0,0,0.2)]">
                         <div className="border-b border-neutral-800 p-6 sm:p-8">
                             <div className="flex flex-wrap items-center gap-3 text-xs text-neutral-500">
                                 <span className={`border border-current px-2 py-1 font-semibold ${accent.text}`}>{stage.type}</span>
