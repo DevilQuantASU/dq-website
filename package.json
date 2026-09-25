@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && node -e \"const fs=require('fs'); fs.copyFileSync('dist/index.html','dist/404.html'); fs.mkdirSync('dist/about',{recursive:true}); fs.copyFileSync('dist/index.html','dist/about/index.html');\"",
+    "build": "vite build && node scripts/create-spa-fallbacks.mjs",
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",
