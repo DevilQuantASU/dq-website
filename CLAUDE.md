@@ -16,11 +16,12 @@ DevilQuant (devilquant.com) — the first quantitative finance club at ASU. This
 - `npm run build` — production build, then `scripts/create-spa-fallbacks.mjs` writes `dist/404.html` (a redirect from plain paths to hash URLs)
 - `npm run lint` — ESLint (must pass with 0 errors; CI enforces it)
 - `npm run check-links` — offline internal link check (`scripts/check-links.mjs`): plain `<a href="/...">` to app routes, `?guide=` slugs that are missing/hidden, in-guide `#anchors`, `public/` redirect pages vs `src/data/links.js`, headshot filenames
+- `npm run perf` — build, then Lighthouse CI (mobile, median of 3) on Home and About against `lighthouserc.cjs` budgets; prints a results table. Run it before every commit/PR and report the numbers (set `CHROME_PATH` if no Chrome is found)
 - `npm run deploy` — manual fallback: build + push `dist/` to `gh-pages`
 
 No test framework is configured. Node version: `.nvmrc` (22).
 
-**CI/CD:** `.github/workflows/ci.yml` runs lint, check-links, and build on every PR and push to `main` (no concurrency cancelling). `.github/workflows/deploy.yml` runs after CI passes on a push to `main` and publishes `dist/` to `gh-pages` (same `gh-pages` tool); it can also be run manually. `.github/workflows/links.yml` checks external URLs weekly with lychee (not on PRs, since third-party outages shouldn't block merges). Actions are pinned to Node 24 majors (`checkout@v6`, `setup-node@v6`).
+**CI/CD:** `.github/workflows/ci.yml` runs lint, check-links, and build on every PR and push to `main` (no concurrency cancelling). `.github/workflows/deploy.yml` runs after CI passes on a push to `main` and publishes `dist/` to `gh-pages` (same `gh-pages` tool); it can also be run manually. `.github/workflows/links.yml` checks external URLs weekly with lychee (not on PRs, since third-party outages shouldn't block merges). Actions are pinned to Node 24 majors (`checkout@v6`, `setup-node@v6`). The `performance` job in ci.yml runs Lighthouse CI on every PR and push to `main` and fails when a page breaks a budget; `lighthouserc.cjs` budgets ratchet tighter as pages get faster.
 
 ## Architecture
 

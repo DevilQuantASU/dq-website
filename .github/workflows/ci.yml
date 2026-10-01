@@ -27,3 +27,25 @@ jobs:
       - run: npm run lint
       - run: npm run check-links
       - run: npm run build
+
+  # Lighthouse on every PR and push to main: fails the check when a page breaks a
+  # budget in lighthouserc.cjs, and posts the medians to the run's summary page.
+  performance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: npx --yes @lhci/cli@0.15.1 autorun
+      - if: always()
+        run: node scripts/perf-summary.mjs
+      - if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: lighthouse-reports
+          path: .lighthouseci/
+          retention-days: 14
