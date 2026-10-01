@@ -64,7 +64,10 @@ Before opening a pull request, run the checks locally (CI runs the same ones on 
 npm run lint
 npm run check-links
 npm run build
+npm run perf   # Lighthouse on Home and About against the budgets in lighthouserc.cjs
 ```
+
+`npm run perf` needs Chrome or Edge; if Lighthouse can't find one, set `CHROME_PATH` to the browser's executable. Paste its results table into the pull request description so reviewers can compare against `main`. CI runs the same check on every pull request and push to `main`, fails the `performance` check when a page breaks a budget, and shows the table on the run's summary page.
 
 Use the Node version in `.nvmrc` (Node 22; Vite 7 needs at least 20.19).
 

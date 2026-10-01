@@ -11,6 +11,7 @@
     "build": "vite build && node scripts/create-spa-fallbacks.mjs",
     "lint": "eslint .",
     "check-links": "node scripts/check-links.mjs",
+    "perf": "npm run build && npx --yes @lhci/cli@0.15.1 autorun && node scripts/perf-summary.mjs",
     "preview": "vite preview",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
