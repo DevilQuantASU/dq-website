@@ -85,10 +85,6 @@ const guide = {
           <li><strong>"Options, Futures, and Other Derivatives" by John Hull</strong> — the classic derivatives textbook</li>
           <li><strong>"Python for Finance" by Yves Hilpisch</strong> — great bridge between Python programming and financial analysis</li>
         </ul>
-
-        <div class="guide-callout guide-callout-good">
-          <strong>Free alternative:</strong> <a href="https://www.quantstart.com/articles/" target="_blank" rel="noopener noreferrer">QuantStart articles</a> cover many of the same topics in blog format, completely free.
-        </div>
       `,
     },
     {

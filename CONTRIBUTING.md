@@ -65,7 +65,7 @@ npm run lint
 npm run build
 ```
 
-`npm run build` creates the production files in `dist/`. It also creates `dist/404.html` and `dist/about/index.html` for GitHub Pages routing. The fallback-file step is implemented in `scripts/create-spa-fallbacks.mjs` so it works on Windows, macOS, and Linux without shell-specific commands.
+`npm run build` creates the production files in `dist/`. It also creates `dist/404.html`, which redirects plain paths like `/about` to their hash URLs (`/#/about`) on GitHub Pages. The fallback-file step is implemented in `scripts/create-spa-fallbacks.mjs` so it works on Windows, macOS, and Linux without shell-specific commands.
 
 ## 5. Name Commits
 

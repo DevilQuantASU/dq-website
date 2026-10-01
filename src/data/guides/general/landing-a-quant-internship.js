@@ -207,7 +207,7 @@ const guide = {
         <ul>
           <li><strong>Simplify GitHub List:</strong> The definitive list for internships. Check the <a href="https://github.com/SimplifyJobs/Summer2026-Internships" target="_blank" rel="noopener noreferrer">Simplify GitHub</a> repository constantly.</li>
           <li><strong>LinkedIn Jobs:</strong> Setup alerts on <a href="https://www.linkedin.com/jobs/" target="_blank" rel="noopener noreferrer">LinkedIn</a> for specific quant firm names.</li>
-          <li><strong>DevilQuant Discord Server:</strong> Our community actively tracks applications! Join the <a href="https://discord.gg/devilquant" target="_blank" rel="noopener noreferrer">DevilQuant Discord</a> and once you become a member, you can go to the <code>#job-openings</code> channel to get live updates directly from the Simplify jobs list.</li>
+          <li><strong>DevilQuant Discord Server:</strong> Our community actively tracks applications! Join the <a href="https://discord.com/invite/WJbhDmumXp" target="_blank" rel="noopener noreferrer">DevilQuant Discord</a> and once you become a member, you can go to the <code>#job-openings</code> channel to get live updates directly from the Simplify jobs list.</li>
         </ul>
       `,
     }
