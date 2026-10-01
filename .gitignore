@@ -25,3 +25,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Impeccable working files (screenshots, mocks, build state); briefs and design.json are committed
+.impeccable/review/
+.impeccable/mocks/
+.impeccable/build/
+.impeccable/questions/

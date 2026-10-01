@@ -3,18 +3,16 @@ import { Link } from 'react-router-dom';
 
 const NotFound = () => {
     return (
-        <div className="flex-1 flex items-center justify-center bg-black pt-16 px-4">
-            <div className="text-center py-24">
-                <p className="text-sm font-mono text-neutral-500 uppercase tracking-widest mb-4">404</p>
-                <h1 className="text-4xl sm:text-5xl font-bold text-white tracking-tight mb-6">Page not found</h1>
-                <p className="text-neutral-400 mb-10">The page you're looking for doesn't exist or has moved.</p>
-                <Link
-                    to="/"
-                    className="inline-flex items-center justify-center px-8 py-3 text-base font-medium text-black bg-white hover:bg-neutral-200 transition-colors duration-200"
-                >
-                    Back to Home
-                </Link>
-            </div>
+        <div className="sheet flex-1 flex flex-col justify-center py-[96px]">
+            <h1 className="text-[clamp(40px,8vw,72px)] leading-[1] font-extrabold tracking-[-0.04em] text-chalk">
+                Page not found
+            </h1>
+            <p className="mt-[24px] max-w-[52ch] text-[17px] leading-[28px] text-pencil">
+                Error 404: the page you're looking for doesn't exist or has moved. Head back to the home page to find your way.
+            </p>
+            <Link to="/" className="btn-highlight mt-[24px] w-fit text-[17px]">
+                Back to Home
+            </Link>
         </div>
     );
 };

@@ -24,7 +24,7 @@ No test framework is configured. Node version: `.nvmrc` (22).
 
 ## Architecture
 
-**Stack:** React 19, Vite 7, Tailwind CSS v4 (PostCSS plugin), React Router DOM v7, `motion` for animation. State is local `useState` only.
+**Stack:** React 19, Vite 7, Tailwind CSS v4 (PostCSS plugin), React Router DOM v7. Fonts self-hosted via `@fontsource-variable/lexend` and `@fontsource/kalam` (imported in `src/main.jsx`, not from CSS). State is local `useState` only.
 
 **Entry:** `index.html` → `src/main.jsx` → `src/App.jsx` (all routes are defined here).
 
@@ -58,4 +58,10 @@ Unknown routes render `src/pages/NotFound.jsx` (catch-all `*` route).
 
 ## Style
 
-Dark, monochrome theme: `bg-black` pages, `neutral-900` cards with `neutral-800` borders, white/`neutral-400` text, square corners. Navbar is transparent on home and dark on other pages. The hero has no background media for now (video removed pending a redesign). Background visuals come from `src/components/magicui/` (dot/grid/pulse patterns, icon cloud).
+"The Working Notebook": a dark graph-paper pad (see PRODUCT.md for product truth, DESIGN.md for the full system, and `.impeccable/surfaces/` for the homepage direction contract).
+- Tokens live in `@theme` in `src/index.css` and are used as Tailwind classes: `pad`, `pad-deep`, `rule`, `rule-major`, `chalk` (ink), `pencil` (secondary text), `highlighter` (the only action fill), `redpen` (current page, margin notes); `font-sans` = Lexend, `font-hand` = Kalam.
+- The page ground is graph paper on `body`; content sits in `.sheet` (49 squares wide, centered) so its edges land on grid lines. Spacing is in whole 24px squares.
+- Components: `.btn-highlight` (primary), `.btn-pen` (secondary), `.ink-link` (highlighter-swipe hover). States are ink only: hover = highlighter, current = red-pen mark. Square corners, no shadows or gradients.
+- Motion: only the hero's one-time pen-draw/highlighter sequence; respect `prefers-reduced-motion`.
+- Shared pieces: `Monogram` (inline DQ mark), `PlacementLogos` (data in `src/data/placements.js`), `SocialLinks`.
+- No eyebrow labels above headings, no all-caps labels, no monospace outside code.

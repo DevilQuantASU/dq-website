@@ -1,0 +1,149 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-01T12:00:00Z",
+  "title": "Design System: DevilQuant",
+  "extensions": {
+    "colorMeta": {
+      "pad": { "role": "neutral", "displayName": "Slate Pad", "canonical": "oklch(25.3% 0.014 248.4)", "tonalRamp": ["#070c11", "#1f252b", "#3a4147", "#575e66", "#7a8189", "#9ba2aa", "#c0c8d0", "#e7f0f8"] },
+      "pad-deep": { "role": "neutral", "displayName": "Deep Pad", "canonical": "oklch(22.4% 0.012 248.4)", "tonalRamp": ["#070c10", "#1f252a", "#3b4046", "#585e64", "#7b8187", "#9ca2a9", "#c1c8cf", "#e8eff7"] },
+      "rule": { "role": "neutral", "displayName": "Minor Rule", "canonical": "oklch(31.6% 0.018 241.6)", "tonalRamp": ["#050c12", "#1d252c", "#384148", "#555f67", "#77828a", "#98a3ac", "#bec9d2", "#e5f0fa"] },
+      "rule-major": { "role": "neutral", "displayName": "Major Rule", "canonical": "oklch(37.2% 0.022 240.6)", "tonalRamp": ["#040c14", "#1a262e", "#35414a", "#536069", "#75828c", "#96a4ae", "#bbcad5", "#e2f1fc"] },
+      "chalk": { "role": "neutral", "displayName": "Chalk Ink", "canonical": "oklch(93.7% 0.006 137.8)", "tonalRamp": ["#0a0c09", "#232522", "#3e403d", "#5c5e5b", "#7e817d", "#a0a29f", "#c5c8c4", "#ecefeb"] },
+      "pencil": { "role": "neutral", "displayName": "Pencil Grey", "canonical": "oklch(71.8% 0.017 233.1)", "tonalRamp": ["#050c11", "#1c262b", "#374147", "#555f66", "#778289", "#98a4ab", "#bdc9d1", "#e4f1f8"] },
+      "highlighter": { "role": "primary", "displayName": "Highlighter Yellow", "canonical": "oklch(89.0% 0.161 100.6)", "tonalRamp": ["#1a0500", "#371f00", "#543d00", "#735c00", "#978000", "#b9a200", "#dfc92e", "#fff161"] },
+      "highlighter-bright": { "role": "primary", "displayName": "Fresh Highlighter", "canonical": "oklch(92.5% 0.146 101.2)", "tonalRamp": ["#190600", "#352000", "#523e00", "#705d00", "#948100", "#b5a30d", "#dcca4a", "#fff175"] },
+      "redpen": { "role": "secondary", "displayName": "Red Correction Pen", "canonical": "oklch(67.3% 0.179 30.1)", "tonalRamp": ["#350000", "#5e0000", "#860000", "#ac1d10", "#d64a39", "#fd6e5a", "#ff957f", "#ffc0a9"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "The page name at the top of each sheet (hero DevilQuant; About and Projects at clamp(48px, 10vw, 96px))." },
+      "headline": { "displayName": "Headline", "purpose": "A sheet's closing imperative and the 404 title." },
+      "title": { "displayName": "Title", "purpose": "Section headings on About and Projects; mobile-menu links." },
+      "title-sm": { "displayName": "Title Small", "purpose": "Person names and the wordmark beside the monogram." },
+      "body-lead": { "displayName": "Body Lead", "purpose": "Intro paragraphs in Pencil, 52-64ch." },
+      "body": { "displayName": "Body", "purpose": "Section prose in Pencil, 60ch." },
+      "label": { "displayName": "Label", "purpose": "Nav, footer links, selects, member names. Sentence case." },
+      "annotation": { "displayName": "Annotation", "purpose": "Kalam roles and types in Red Pen under a name or title; footer column heads in Chalk." },
+      "annotation-lg": { "displayName": "Annotation Large", "purpose": "The hero claim under its highlighter marker, the margin note, the tree's 'you'." }
+    },
+    "shadows": [
+      { "name": "pen-line", "value": "inset 0 0 0 1.5px var(--color-chalk)", "purpose": "Not elevation: draws the 1.5px pen outline on secondary buttons, the year select and featured panels." },
+      { "name": "rule-line", "value": "inset 0 0 0 1.5px var(--color-rule-major)", "purpose": "Not elevation: structural outline for scroll boxes (1px for tags)." }
+    ],
+    "motion": [
+      { "name": "pen-draw", "value": "520ms cubic-bezier(0.65, 0, 0.35, 1) 100ms", "purpose": "Hero tree trunk drawn once on load (stroke-dashoffset 1 to 0)." },
+      { "name": "pen-draw-2", "value": "760ms cubic-bezier(0.65, 0, 0.35, 1) 560ms", "purpose": "Hero tree bracket, drawn after the trunk." },
+      { "name": "hl-swipe", "value": "450ms cubic-bezier(0.16, 1, 0.3, 1) 200ms", "purpose": "Highlighter marker under the hero claim, scaleX 0 to 1 from the left." },
+      { "name": "ink-swipe", "value": "220ms cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Link hover: highlighter swipe behind the words." },
+      { "name": "state", "value": "150ms ease-out", "purpose": "Button fill and wash changes, guide link underline." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "sheet", "value": "1224px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Highlighter Button",
+      "kind": "button",
+      "refersTo": "button-highlight",
+      "description": "The one primary action per sheet: a block of highlighter.",
+      "html": "<a class=\"ds-btn-highlight\" href=\"#\">Join the Discord</a>",
+      "css": ".ds-btn-highlight { display: inline-flex; align-items: center; min-height: 48px; padding: 0 24px; background: var(--color-highlighter, #f3dd4a); color: var(--color-pad, #1d2329); font-family: 'Lexend Variable', system-ui, sans-serif; font-size: 17px; font-weight: 600; text-decoration: none; border-radius: 0; transition: background-color 150ms ease-out, transform 150ms ease-out; } .ds-btn-highlight:hover { background: #fbe96c; } .ds-btn-highlight:active { transform: translateY(1px); } .ds-btn-highlight:focus-visible { outline: 2px solid var(--color-highlighter, #f3dd4a); outline-offset: 3px; }"
+    },
+    {
+      "name": "Pen Button",
+      "kind": "button",
+      "refersTo": "button-pen",
+      "description": "Secondary action: a pen-drawn box in chalk.",
+      "html": "<a class=\"ds-btn-pen\" href=\"#\">Sign up on Sun Devil Central</a>",
+      "css": ".ds-btn-pen { display: inline-flex; align-items: center; min-height: 48px; padding: 0 24px; background: transparent; color: var(--color-chalk, #e8ebe7); font-family: 'Lexend Variable', system-ui, sans-serif; font-size: 17px; font-weight: 500; text-decoration: none; border-radius: 0; box-shadow: inset 0 0 0 1.5px var(--color-chalk, #e8ebe7); transition: background-color 150ms ease-out; } .ds-btn-pen:hover { background: rgb(232 235 231 / 0.08); } .ds-btn-pen:focus-visible { outline: 2px solid var(--color-highlighter, #f3dd4a); outline-offset: 3px; }"
+    },
+    {
+      "name": "Ink Link",
+      "kind": "custom",
+      "refersTo": "nav-link",
+      "description": "Text link whose hover and focus state is a highlighter swipe behind the words.",
+      "html": "<div class=\"ds-ink-wrap\"><a class=\"ds-ink-link\" href=\"#\">Resources</a></div>",
+      "css": ".ds-ink-wrap { background: #1d2329; padding: 24px; } .ds-ink-link { position: relative; z-index: 0; color: var(--color-pencil, #9aa6ad); font-family: 'Lexend Variable', system-ui, sans-serif; font-size: 15px; font-weight: 500; text-decoration: none; } .ds-ink-link::before { content: ''; position: absolute; inset: 55% -4px 0 -4px; z-index: -1; background: var(--color-highlighter, #f3dd4a); opacity: 0.45; transform: scaleX(0) skewX(-8deg); transform-origin: left center; transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-ink-link:hover, .ds-ink-link:focus-visible { color: var(--color-chalk, #e8ebe7); } .ds-ink-link:hover::before, .ds-ink-link:focus-visible::before { transform: scaleX(1) skewX(-8deg); } .ds-ink-link:focus-visible { outline: 2px solid var(--color-highlighter, #f3dd4a); outline-offset: 3px; }"
+    },
+    {
+      "name": "Navigation with Red-Pen Current",
+      "kind": "nav",
+      "refersTo": "nav-link-current",
+      "description": "Header links in pencil; the current page is chalk, circled by a hand-drawn red-pen loop.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-link ds-current\" href=\"#\" aria-current=\"page\">Home<svg class=\"ds-pen-loop\" viewBox=\"0 0 100 40\" preserveAspectRatio=\"none\" fill=\"none\" aria-hidden=\"true\"><path d=\"M64 2.5C40 1.8 12 2 5 5C1 7.5 1.5 31 4.5 34.5C9 38.5 46 38 72 37.6C90 37.2 97.5 35.5 98 20C98.5 6 93 3 66 3.4L44 4\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" vector-effect=\"non-scaling-stroke\"/></svg></a><a class=\"ds-nav-link\" href=\"#\">About</a><a class=\"ds-nav-link\" href=\"#\">Resources</a><a class=\"ds-nav-join\" href=\"#\">Join the Discord</a></nav>",
+      "css": ".ds-nav { display: flex; align-items: center; gap: 28px; height: 72px; padding: 0 24px; background: var(--color-pad, #1d2329); border-bottom: 1px solid var(--color-rule-major, #36424b); font-family: 'Lexend Variable', system-ui, sans-serif; } .ds-nav-link { position: relative; font-size: 15px; font-weight: 500; color: var(--color-pencil, #9aa6ad); text-decoration: none; transition: color 150ms ease-out; } .ds-nav-link:hover { color: var(--color-chalk, #e8ebe7); } .ds-nav-link.ds-current { color: var(--color-chalk, #e8ebe7); } .ds-pen-loop { pointer-events: none; position: absolute; left: -14px; top: -8px; width: calc(100% + 28px); height: calc(100% + 16px); color: var(--color-redpen, #f0624f); } .ds-nav-join { display: inline-flex; align-items: center; min-height: 40px; padding: 0 16px; background: var(--color-highlighter, #f3dd4a); color: var(--color-pad, #1d2329); font-size: 15px; font-weight: 600; text-decoration: none; transition: background-color 150ms ease-out; } .ds-nav-join:hover { background: #fbe96c; } .ds-nav a:focus-visible { outline: 2px solid var(--color-highlighter, #f3dd4a); outline-offset: 3px; }"
+    },
+    {
+      "name": "Tag",
+      "kind": "chip",
+      "refersTo": "tag",
+      "description": "Static project tag: a thin ruled box on the pad.",
+      "html": "<ul class=\"ds-tags\"><li class=\"ds-tag\">Python</li><li class=\"ds-tag\">Market data</li></ul>",
+      "css": ".ds-tags { display: flex; flex-wrap: wrap; gap: 12px; list-style: none; margin: 0; padding: 0; } .ds-tag { font-family: 'Lexend Variable', system-ui, sans-serif; font-size: 13px; line-height: 24px; padding: 0 12px; color: var(--color-chalk, #e8ebe7); background: var(--color-pad, #1d2329); box-shadow: inset 0 0 0 1px var(--color-rule-major, #36424b); border-radius: 0; }"
+    },
+    {
+      "name": "Year Select",
+      "kind": "input",
+      "refersTo": "select",
+      "description": "Pen-outlined select with a hand-stroked chevron.",
+      "html": "<label class=\"ds-select-wrap\"><select class=\"ds-select\"><option>2026</option><option>2025</option></select><svg class=\"ds-select-chev\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\" aria-hidden=\"true\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2.5\" d=\"M19 9l-7 7-7-7\"/></svg></label>",
+      "css": ".ds-select-wrap { position: relative; display: inline-flex; align-items: center; } .ds-select { appearance: none; min-height: 48px; padding: 0 40px 0 16px; background: var(--color-pad, #1d2329); color: var(--color-chalk, #e8ebe7); font-family: 'Lexend Variable', system-ui, sans-serif; font-size: 15px; font-weight: 500; border: none; border-radius: 0; box-shadow: inset 0 0 0 1.5px var(--color-chalk, #e8ebe7); cursor: pointer; } .ds-select:focus-visible { outline: 2px solid var(--color-highlighter, #f3dd4a); outline-offset: 3px; } .ds-select-chev { pointer-events: none; position: absolute; right: 14px; width: 12px; height: 12px; color: var(--color-chalk, #e8ebe7); }"
+    },
+    {
+      "name": "Outlined Panel",
+      "kind": "card",
+      "description": "Featured panel (Founders, Projects closing note): a chalk pen box on pad, square corners, no shadow.",
+      "html": "<section class=\"ds-panel\"><h2 class=\"ds-panel-title\">Founders</h2><p class=\"ds-annot\">Est. January 2025</p><p class=\"ds-panel-body\">Founded at Arizona State University to give students a real path into quantitative finance, not just theory.</p></section>",
+      "css": ".ds-panel { padding: 48px; background: var(--color-pad, #1d2329); box-shadow: inset 0 0 0 1.5px var(--color-chalk, #e8ebe7); border-radius: 0; font-family: 'Lexend Variable', system-ui, sans-serif; } .ds-panel-title { margin: 0; font-size: 32px; line-height: 48px; font-weight: 700; letter-spacing: -0.03em; color: var(--color-chalk, #e8ebe7); } .ds-annot { margin: 0; font-family: Kalam, 'Segoe Print', cursive; font-size: 18px; line-height: 24px; color: var(--color-redpen, #f0624f); } .ds-panel-body { margin: 24px 0 0; max-width: 48ch; font-size: 16px; line-height: 26px; color: var(--color-pencil, #9aa6ad); }"
+    },
+    {
+      "name": "Hero Join Tree",
+      "kind": "custom",
+      "description": "Signature: a handwritten 'you' on a pen trunk forking to the highlighter primary and the pen-outlined secondary; drawn once on load.",
+      "html": "<div class=\"ds-tree\"><span class=\"ds-tree-you\">you</span><svg class=\"ds-tree-svg\" width=\"168\" height=\"192\" viewBox=\"0 0 168 192\" fill=\"none\" aria-hidden=\"true\"><path class=\"ds-pen\" pathLength=\"1\" d=\"M2 96C33 94.5 77 97.5 110 96\" stroke=\"currentColor\" stroke-width=\"2.75\" stroke-linecap=\"round\"/><path class=\"ds-pen ds-pen-2\" pathLength=\"1\" d=\"M166 48C148 47 120 48.5 110 49C109.5 80 110.8 118 110 143C122 144.5 148 143.5 166 144\" stroke=\"currentColor\" stroke-width=\"2.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg><ul class=\"ds-tree-ends\"><li><a class=\"ds-tree-primary\" href=\"#\">Join the Discord</a></li><li><a class=\"ds-tree-secondary\" href=\"#\">Sign up on Sun Devil Central</a></li></ul></div>",
+      "css": ".ds-tree { position: relative; display: flex; font-family: 'Lexend Variable', system-ui, sans-serif; } .ds-tree-you { position: absolute; left: 2px; top: 50px; font-family: Kalam, 'Segoe Print', cursive; font-size: 32px; line-height: 1; color: var(--color-chalk, #e8ebe7); } .ds-tree-svg { flex-shrink: 0; color: var(--color-chalk, #e8ebe7); } .ds-tree-ends { list-style: none; margin: 0; padding: 0; } .ds-tree-ends li { height: 96px; display: flex; align-items: center; } .ds-tree-primary { display: inline-flex; align-items: center; min-height: 56px; padding: 0 24px; background: var(--color-highlighter, #f3dd4a); color: var(--color-pad, #1d2329); font-size: 18px; font-weight: 600; text-decoration: none; transition: background-color 150ms ease-out; } .ds-tree-primary:hover { background: #fbe96c; } .ds-tree-secondary { display: inline-flex; align-items: center; min-height: 48px; padding: 0 24px; color: var(--color-chalk, #e8ebe7); font-size: 17px; font-weight: 500; text-decoration: none; box-shadow: inset 0 0 0 1.5px var(--color-chalk, #e8ebe7); transition: background-color 150ms ease-out; } .ds-tree-secondary:hover { background: rgb(232 235 231 / 0.08); } .ds-tree a:focus-visible { outline: 2px solid var(--color-highlighter, #f3dd4a); outline-offset: 3px; } .ds-pen { stroke-dasharray: 1; stroke-dashoffset: 0; } @media (prefers-reduced-motion: no-preference) { .ds-pen { stroke-dashoffset: 1; animation: ds-pen-draw 520ms cubic-bezier(0.65, 0, 0.35, 1) 100ms forwards; } .ds-pen-2 { animation-delay: 560ms; animation-duration: 760ms; } } @keyframes ds-pen-draw { to { stroke-dashoffset: 0; } }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Working Notebook",
+    "overview": "The site is the page friends work a problem on together: a dark slate scratch pad ruled in graph squares, written on in chalk-white ink, marked with a yellow highlighter, and corrected in red pen. Every surface is the same sheet of paper; nothing floats above it. Hierarchy comes from the weight of the ink (heavy constructed Lexend for what the page is, quiet pencil grey for what it says, handwritten Kalam for what someone noted in the margin), not from boxes, fills or depth.\n\nDensity is low and left-aligned. Content sits in a sheet 49 squares wide whose edges land on grid lines, and every layout distance is counted in whole 24px squares, so the grid behind the page and the type on it agree. The page has one bold place, the hero's pen-drawn tree from a handwritten \"you\" to two ways in; everything else is ruled and calm, and each sheet ends on one action.\n\nThe world was chosen against the finance-club default: no ticker charts, candlesticks, or dark hero with a gradient CTA. It stays dark (a brand commitment), and it does not borrow ASU maroon and gold.",
+    "keyCharacteristics": [
+      "Graph-paper ground: 24px minor squares, a major line every 5 squares, centered with the sheet on wide screens.",
+      "Ink-only states: hover is a highlighter swipe, the current place is a red-pen loop.",
+      "Highlighter yellow is the only fill an action may carry.",
+      "Square corners and 1.5px pen lines; the only curves are hand-drawn ink marks.",
+      "Two typefaces with strict jobs: Lexend for the printed page, Kalam for handwriting.",
+      "Motion happens once, in the hero, as pen and highlighter strokes; reduced motion shows the final drawing."
+    ],
+    "rules": [
+      { "name": "The One Fill Rule", "body": "Highlighter yellow is the only solid fill an interactive element may wear. Secondary actions are pen outlines, never a second fill color.", "section": "colors" },
+      { "name": "The Two Inks Rule", "body": "Yellow says act, red says annotated or current. Red is never a button, and yellow is never an annotation.", "section": "colors" },
+      { "name": "The Chalk Logos Rule", "body": "Third-party marks are inked as one color in chalk (`brightness(0) invert(0.93)`), never shown in brand color.", "section": "colors" },
+      { "name": "The Handwriting Has A Reason Rule", "body": "Kalam appears only where a person would have written on the page: a claim being marked, a margin note, a role under a name, a label on a drawing. Never for body copy, buttons or nav.", "section": "typography" },
+      { "name": "The Sentence Case Rule", "body": "No all-caps tracked labels anywhere; Lexend links and headings stay sentence case. Monospace is for code blocks only.", "section": "typography" },
+      { "name": "The Same Sheet Rule", "body": "No drop shadows, offset shadows, blur or glass. An element that needs separation gets a pen line or a rule, never a lift.", "section": "elevation" },
+      { "name": "The Drawn Curve Rule", "body": "If it is constructed, it is square. If it curves, it was drawn by hand in pen or highlighter.", "section": "shapes" }
+    ],
+    "dos": [
+      "Do count every layout distance in 24px squares (12px half-squares only inside a component), and keep the sheet's edges on grid lines.",
+      "Do give each sheet one Highlighter action and end each section on one move.",
+      "Do mark the current place with the red-pen loop and annotate in Kalam Red Pen directly under the thing it describes.",
+      "Do draw outlines as 1.5px pen lines (inset box-shadow or outline) on a Pad fill.",
+      "Do ink third-party logos and icons in a single Chalk or Pencil color.",
+      "Do keep motion to pen-draw and highlighter-swipe strokes, honor `prefers-reduced-motion`, and keep state transitions at 150-220ms."
+    ],
+    "donts": [
+      "Don't fill any action with a color other than Highlighter, and don't use Red Pen for buttons.",
+      "Don't use drop, offset or blurred shadows, or lift elements on hover.",
+      "Don't use gradient fills; the graph-paper ground's hard-stop 1px lines are the only gradient in the system.",
+      "Don't round constructed corners; curves are reserved for hand-drawn ink marks.",
+      "Don't put all-caps tracked labels or small labels above headings, and don't use monospace outside code.",
+      "Don't set body copy, buttons or nav in Kalam.",
+      "Don't use ticker charts, candlesticks, ASU maroon/gold, or a dark hero with a gradient CTA.",
+      "Don't tile content into a grid of boxed cards; separate with rules and whitespace."
+    ]
+  }
+}

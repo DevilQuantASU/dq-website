@@ -32,8 +32,8 @@ Not dead, just blocking bots: LinkedIn profiles (999), Handshake, Glassdoor, Inv
 
 ## UI/UX redesign
 
-- Planned: the hero video and the site's UI components will be replaced using a design skill the maintainer will import later. Until then the hero is plain black (video removed 2026-10-01). Don't start the redesign before that skill exists.
-- The home page is just the hero (`src/components/Hero.jsx`): title, one paragraph, two buttons. Mission, placements, projects, and guides are all on other pages.
+- Done 2026-10-01 (branch `feature/homepage-redesign`, via the impeccable + frontend-design skills): whole-site redesign as "The Working Notebook", a dark graph-paper pad with chalk ink, highlighter actions and red-pen marks. Product truth is in PRODUCT.md, the design system in DESIGN.md, and the homepage direction contract in `.impeccable/surfaces/src-pages-home-jsx.md`. The finish review shipped all 8 material fixes.
+- Open design raises (not defects): red-pen correction marks; section rules that read separately from the grid; an imperative at the end of Projects; annotations on About/Projects headings.
 - Candidate "what we do" content (from `../devil quant rols.png`), quant career tracks:
   - **Quant Trading:** price assets and manage risk in live markets, using probability, mental math, and game theory.
   - **Quant Developer:** write the software that runs trading and research: data pipelines, simulators, and order execution.
