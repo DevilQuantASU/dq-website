@@ -65,7 +65,9 @@ const About = () => {
     // Scroll to a section when navigated here with state.scrollTo (e.g. navbar "Contact")
     useEffect(() => {
         const sectionId = location.state?.scrollTo;
-        if (sectionId) document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+        // Jump rather than animate, so the section is in view as soon as the page
+        // renders; a smooth scroll can stall behind main-thread work on slow devices.
+        if (sectionId) document.getElementById(sectionId)?.scrollIntoView({ behavior: 'auto' });
     }, [location.key, location.state]);
 
     const leaders = leadersByYear[selectedYear] || [];
