@@ -4,16 +4,20 @@ import { guideCategories, allGuides } from '../data/guides/index.js';
 
 const Resources = () => {
     const [searchParams, setSearchParams] = useSearchParams();
-    const [sidebarOpen, setSidebarOpen] = useState(false);
     const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
     // Resolve active guide from query param, fallback to first guide
     const activeSlug = searchParams.get('guide') || allGuides[0]?.slug;
     const activeGuide = allGuides.find((g) => g.slug === activeSlug) || allGuides[0];
 
-    // Close mobile sidebar and scroll to top on guide change
+    // The mobile sidebar is open only for the guide it was opened on,
+    // so switching guides closes it.
+    const [sidebarOpenFor, setSidebarOpenFor] = useState(null);
+    const sidebarOpen = sidebarOpenFor === activeSlug;
+    const setSidebarOpen = (open) => setSidebarOpenFor(open ? activeSlug : null);
+
+    // Scroll to top on guide change
     useEffect(() => {
-        setSidebarOpen(false);
         window.scrollTo(0, 0);
     }, [activeSlug]);
 

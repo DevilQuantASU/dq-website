@@ -1,7 +1,8 @@
 import React from 'react';
-import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import ScrollToTop from './components/ScrollToTop';
 import Home from './pages/Home';
 import About from './pages/About';
 import Discord from './pages/redirects/Discord';
@@ -9,6 +10,7 @@ import SunDevilCentral from './pages/redirects/SunDevilCentral';
 import LinkedIn from './pages/redirects/LinkedIn';
 import Resources from './pages/Resources';
 import Projects from './pages/Projects';
+import NotFound from './pages/NotFound';
 
 function AppContent() {
   return (
@@ -23,14 +25,13 @@ function AppContent() {
           <Route path="/discord" element={<Discord />} />
           <Route path="/sundevilcentral" element={<SunDevilCentral />} />
           <Route path="/linkedin" element={<LinkedIn />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
       <Footer />
     </div>
   );
 }
-
-import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   return (

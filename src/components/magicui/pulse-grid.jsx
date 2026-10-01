@@ -1,5 +1,12 @@
 import React, { useMemo } from 'react';
 
+// Deterministic pseudo-random number in [0, 1) for a given seed. Rendering
+// must be pure, so the pattern is fixed rather than using Math.random().
+const random = (seed) => {
+  const x = Math.sin(seed * 12.9898) * 43758.5453;
+  return x - Math.floor(x);
+};
+
 export function PulseGrid({
   spacing = 80,
   baseOpacity = 0.08,
@@ -11,15 +18,15 @@ export function PulseGrid({
     const hCount = Math.ceil(2000 / spacing);
     const vCount = Math.ceil(2000 / spacing);
 
-    const makeLine = () => ({
-      delay: Math.random() * 6,
-      duration: 3 + Math.random() * 3, // 3-6s per cycle
-      willPulse: Math.random() < pulseChance,
+    const makeLine = (seed) => ({
+      delay: random(seed) * 6,
+      duration: 3 + random(seed + 0.1) * 3, // 3-6s per cycle
+      willPulse: random(seed + 0.2) < pulseChance,
     });
 
     return {
-      horizontal: Array.from({ length: hCount }, makeLine),
-      vertical: Array.from({ length: vCount }, makeLine),
+      horizontal: Array.from({ length: hCount }, (_, i) => makeLine(i + 1)),
+      vertical: Array.from({ length: vCount }, (_, i) => makeLine(i + 1001)),
     };
   }, [spacing, pulseChance]);
 
@@ -46,7 +53,7 @@ export function PulseGrid({
             y2={i * spacing}
             stroke="white"
             strokeWidth="0.5"
-            opacity={line.willPulse ? baseOpacity : baseOpacity}
+            opacity={baseOpacity}
             style={
               line.willPulse
                 ? {
@@ -65,7 +72,7 @@ export function PulseGrid({
             y2="100%"
             stroke="white"
             strokeWidth="0.5"
-            opacity={line.willPulse ? baseOpacity : baseOpacity}
+            opacity={baseOpacity}
             style={
               line.willPulse
                 ? {

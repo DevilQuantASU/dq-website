@@ -1,9 +1,10 @@
 
 import React, { useEffect } from 'react';
+import { LINKEDIN_URL } from '../../data/links';
 
 const LinkedIn = () => {
     useEffect(() => {
-        window.location.href = "https://www.linkedin.com/company/devilquant/";
+        window.location.href = LINKEDIN_URL;
     }, []);
 
     return (

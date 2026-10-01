@@ -1,9 +1,10 @@
 
 import React, { useEffect } from 'react';
+import { DISCORD_URL } from '../../data/links';
 
 const Discord = () => {
     useEffect(() => {
-        window.location.href = "https://discord.com/invite/WJbhDmumXp";
+        window.location.href = DISCORD_URL;
     }, []);
 
     return (

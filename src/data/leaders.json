@@ -4,7 +4,7 @@
             "name": "Cedric Claessens",
             "role": "Founder & President",
             "bio": "Cedric is studying Computer Science and Mathematics.",
-            "image": "cedric.png",
+            "image": "cedric.jpg",
             "socialLinks": {
                 "linkedin": "https://linkedin.com/in/cedric-cl",
                 "github": "https://github.com/1nsomnes",
@@ -35,7 +35,7 @@
             "name": "Cedric Claessens",
             "role": "Founder & President",
             "bio": "Cedric is studying Computer Science and Mathematics. He is going to AWS in Summer 2026.",
-            "image": "cedric.png",
+            "image": "cedric.jpg",
             "socialLinks": {
                 "linkedin": "https://linkedin.com/in/cedric-cl",
                 "github": "https://github.com/1nsomnes",
@@ -82,7 +82,7 @@
             "name": "Alexander Pacheco",
             "role": "President",
             "bio": "Alexander is a graduate student studying Computer Science. He is a SWE at Microsoft.",
-            "image": "alex_pfp.png",
+            "image": "alex_pfp.jpg",
             "socialLinks": {
                 "linkedin": "https://www.linkedin.com/in/alexpach08/",
                 "github": "https://github.com/AlexanderPach",
@@ -92,8 +92,8 @@
         {
             "name": "Jayden Rios",
             "role": "Vice President, Research",
-            "bio": "Jayden is a sophomore studying Mathematices (Statistics).",
-            "image": "jayden.jpeg",
+            "bio": "Jayden is a sophomore studying Mathematics (Statistics).",
+            "image": "jayden.jpg",
             "socialLinks": {
                 "linkedin": "https://www.linkedin.com/in/jayden-rios-1376193aa/"
             }
@@ -102,7 +102,7 @@
             "name": "Dhruv Rao",
             "role": "Vice President, Finance",
             "bio": "Dhruv is a senior studying Data Science.",
-            "image": "",
+            "image": null,
             "socialLinks": {
                 "linkedin": "https://www.linkedin.com/in/dhruvrao29/"
             }
@@ -110,13 +110,11 @@
         {
             "name": "Bhavana Kannan",
             "role": "Director of Infrastructure / Development",
-            "bio": "Bhavana is a Junior studying Data Science.",
+            "bio": "Bhavana is a junior studying Data Science.",
             "image": "Bhavana.jpg",
             "socialLinks": {
                 "linkedin": "https://www.linkedin.com/in/bhavanakannan/"
             }
         }
-
-
     ]
 }
