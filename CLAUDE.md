@@ -59,6 +59,10 @@ Unknown routes render `src/pages/NotFound.jsx` (catch-all `*` route).
 ## Style
 
 "The Working Notebook": a dark graph-paper pad (see PRODUCT.md for product truth, DESIGN.md for the full system, and `.impeccable/surfaces/` for the homepage direction contract).
+
+**The graph-paper grid is intentional.** It is the design's material, not decoration: content and spacing are laid out on its 24px squares. Design skills with a "no decorative grid lines" rule (e.g. `design-taste-frontend`) must not remove or soften it during routine UI work.
+
+**This direction is provisional.** The UI/UX may change completely depending on team feedback. The grid rule above protects the current design from incidental changes, not from a team decision: if the team picks a new direction, replace the look as a redesign and update DESIGN.md, this section, and the direction contract to match. Don't preserve the notebook style against that decision.
 - Tokens live in `@theme` in `src/index.css` and are used as Tailwind classes: `pad`, `pad-deep`, `rule`, `rule-major`, `chalk` (ink), `pencil` (secondary text), `highlighter` (the only action fill), `redpen` (current page, margin notes); `font-sans` = Lexend, `font-hand` = Kalam.
 - The page ground is graph paper on `body`; content sits in `.sheet` (49 squares wide, centered) so its edges land on grid lines. Spacing is in whole 24px squares.
 - Components: `.btn-highlight` (primary), `.btn-pen` (secondary), `.ink-link` (highlighter-swipe hover). States are ink only: hover = highlighter, current = red-pen mark. Square corners, no shadows or gradients.
