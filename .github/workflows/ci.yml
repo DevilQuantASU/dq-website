@@ -1,7 +1,10 @@
 name: CI
 
-# Every PR: lint, internal link check, build.
-# Every push to main (i.e. a merged PR): the same checks, then deploy to GitHub Pages.
+# Every PR and every push to main: lint, internal link check, build.
+# Publishing happens in deploy.yml, after this workflow passes on main.
+#
+# No concurrency group: runs take ~20s, and cancelling duplicates (e.g. when
+# stacked PR branches are pushed together) showed up as failed checks.
 on:
   pull_request:
   push:
@@ -11,16 +14,12 @@ on:
 permissions:
   contents: read
 
-concurrency:
-  group: ci-${{ github.ref }}
-  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
-
 jobs:
   verify:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
           node-version-file: .nvmrc
           cache: npm
@@ -28,32 +27,3 @@ jobs:
       - run: npm run lint
       - run: npm run check-links
       - run: npm run build
-      - uses: actions/upload-artifact@v4
-        with:
-          name: dist
-          path: dist
-          retention-days: 7
-
-  deploy:
-    needs: verify
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write # push to the gh-pages branch
-    concurrency:
-      group: deploy-pages
-      cancel-in-progress: false
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version-file: .nvmrc
-          cache: npm
-      - run: npm ci
-      - uses: actions/download-artifact@v4
-        with:
-          name: dist
-          path: dist
-      # Same tool as `npm run deploy`; publishes dist/ (including CNAME) to gh-pages,
-      # which triggers GitHub's pages-build-deployment workflow.
-      - run: npx gh-pages -d dist -u "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
