@@ -20,7 +20,7 @@ DevilQuant (devilquant.com) — the first quantitative finance club at ASU. This
 
 No test framework is configured. Node version: `.nvmrc` (22).
 
-**CI/CD:** `.github/workflows/ci.yml` runs lint, check-links, and build on every PR, and on push to `main` also deploys `dist/` to `gh-pages` (same `gh-pages` tool). `.github/workflows/links.yml` checks external URLs weekly with lychee (not on PRs, since third-party outages shouldn't block merges).
+**CI/CD:** `.github/workflows/ci.yml` runs lint, check-links, and build on every PR and push to `main` (no concurrency cancelling). `.github/workflows/deploy.yml` runs after CI passes on a push to `main` and publishes `dist/` to `gh-pages` (same `gh-pages` tool); it can also be run manually. `.github/workflows/links.yml` checks external URLs weekly with lychee (not on PRs, since third-party outages shouldn't block merges). Actions are pinned to Node 24 majors (`checkout@v6`, `setup-node@v6`).
 
 ## Architecture
 
