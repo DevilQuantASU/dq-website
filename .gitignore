@@ -28,3 +28,8 @@ dist-ssr
 
 # Lighthouse CI output
 .lighthouseci/
+
+# Claude Code notes are kept local only (outside the repo)
+/CLAUDE.md
+/CLAUDE.local.md
+/PROMPT.md
