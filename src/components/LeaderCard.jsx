@@ -3,7 +3,7 @@ import React from 'react';
 const LeaderCard = ({ name, role, bio, image, socialLinks }) => {
     return (
         <div className="bg-neutral-900 overflow-hidden border border-neutral-800 transition-all hover:border-neutral-600">
-            <div className="aspect-w-1 aspect-h-1 w-full bg-neutral-800 relative">
+            <div className="w-full bg-neutral-800 relative">
                 {image ? (
                     <img src={image} alt={name} className="w-full h-64 object-cover" />
                 ) : (

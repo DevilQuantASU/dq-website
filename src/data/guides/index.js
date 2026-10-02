@@ -1,10 +1,12 @@
+// A hidden guide has both its import and its list entry commented out.
+// Uncomment both to show it again.
 import gettingStartedWithQuant from './general/getting-started-with-quant.js';
-import landingAnInternship from './general/landing-an-internship.js';
+// import landingAnInternship from './general/landing-an-internship.js';
 import landingAQuantInternship from './general/landing-a-quant-internship.js';
 
-import pythonStockFetcher from './projects/python-stock-fetcher.js';
-import smaTradingBot from './projects/sma-trading-bot.js';
-import portfolioTracker from './projects/portfolio-tracker.js';
+// import pythonStockFetcher from './projects/python-stock-fetcher.js';
+// import smaTradingBot from './projects/sma-trading-bot.js';
+// import portfolioTracker from './projects/portfolio-tracker.js';
 import gettingStartedWithProjects from './projects/getting-started-with-projects.js';
 import monteCarloSimulator from './projects/monte-carlo-simulator.js';
 import portfolioOptimizer from './projects/portfolio-optimizer.js';

@@ -1,29 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import videoBg from '../assets/background_video.mp4';
+import { DISCORD_URL } from '../data/links';
 
 const Hero = () => {
     return (
-        <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
-            {/* Video Background */}
-            <div className="absolute inset-0 w-full h-full overflow-hidden">
-                <video
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    className="w-full h-full object-cover"
-                >
-                    <source
-                        src={videoBg}
-                        type="video/mp4"
-                    />
-                    Your browser does not support the video tag.
-                </video>
-                {/* Dark Overlay */}
-                <div className="absolute inset-0 bg-black/70 backdrop-blur-[2px]"></div>
-            </div>
-
+        <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
             <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-20">
                 <h1 className="text-4xl tracking-tight font-bold text-white sm:text-5xl md:text-6xl lg:text-7xl">
                     Devil<span className="text-neutral-400">Quant</span>
@@ -35,7 +16,7 @@ const Hero = () => {
                 <div className="mt-10 max-w-sm mx-auto sm:max-w-none sm:flex sm:justify-center gap-4">
                     <div>
                         <a
-                            href="https://discord.com/invite/WJbhDmumXp"
+                            href={DISCORD_URL}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="w-full flex items-center justify-center px-8 py-3 text-base font-medium text-black bg-white hover:bg-neutral-200 md:py-4 md:text-lg transition-colors duration-200"

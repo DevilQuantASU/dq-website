@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import LeaderCard from '../components/LeaderCard';
 import leadersByYear from '../data/leaders.json';
 import membersByYear from '../data/members.json';
@@ -20,6 +21,27 @@ const placementLogos = [
 const allYears = [...new Set([...Object.keys(leadersByYear), ...Object.keys(membersByYear)])].sort((a, b) => b - a);
 const currentYear = new Date().getFullYear().toString();
 const defaultYear = allYears.includes(currentYear) ? currentYear : allYears[0];
+
+// Founders are leaders whose role mentions "Founder" in any year, listed once each.
+const founders = [...new Map(
+    Object.values(leadersByYear)
+        .flat()
+        .filter((leader) => /founder/i.test(leader.role))
+        .map((leader) => [leader.name, { name: leader.name, ...leader.socialLinks }])
+).values()];
+
+// Headshots in src/assets/Headshots, keyed by filename (e.g. "cedric.jpg").
+const headshots = Object.fromEntries(
+    Object.entries(import.meta.glob('../assets/Headshots/*.{png,jpg,jpeg,webp,svg}', { eager: true, import: 'default' }))
+        .map(([path, url]) => [path.split('/').pop(), url])
+);
+
+// `image` in leaders.json is a Headshots filename, a full URL, or null.
+const getHeadshotUrl = (imageName) => {
+    if (!imageName) return null;
+    if (imageName.startsWith('http')) return imageName;
+    return headshots[imageName] ?? null;
+};
 
 const YearDropdown = ({ value, onChange, years }) => {
     const [open, setOpen] = useState(false);
@@ -65,6 +87,15 @@ const YearDropdown = ({ value, onChange, years }) => {
 
 const About = () => {
     const [selectedYear, setSelectedYear] = useState(defaultYear);
+    const location = useLocation();
+
+    // Scroll to a section when navigated here with state.scrollTo (e.g. navbar "Contact")
+    useEffect(() => {
+        const sectionId = location.state?.scrollTo;
+        // Jump rather than animate: About mounts heavy animated decorations, and a
+        // smooth scroll started now stalls behind them for seconds on slow devices.
+        if (sectionId) document.getElementById(sectionId)?.scrollIntoView({ behavior: 'auto' });
+    }, [location.key, location.state]);
 
     const leaders = leadersByYear[selectedYear] || [];
     const members = (membersByYear[selectedYear] || []).slice().sort((a, b) => {
@@ -74,20 +105,6 @@ const About = () => {
         const keyB = partsB.length > 1 ? partsB[partsB.length - 1] : partsB[0];
         return keyA.localeCompare(keyB);
     });
-
-    // Import all headshots
-    const headshots = import.meta.glob('../assets/Headshots/*.{png,jpg,jpeg,svg}', { eager: true });
-
-    // Helper to get image URL
-    const getHeadshotUrl = (imageName) => {
-        if (!imageName) return null;
-        if (imageName.startsWith('http')) return imageName;
-
-        // Try to find the image in the imported headshots
-        // The keys are relative paths like '../assets/Headshots/cedric.png'
-        const matchingPath = Object.keys(headshots).find(path => path.includes(imageName));
-        return matchingPath ? headshots[matchingPath].default : null;
-    };
 
     return (
         <div className="min-h-screen bg-black pt-24 pb-12">
@@ -151,9 +168,9 @@ const About = () => {
                         <YearDropdown value={selectedYear} onChange={setSelectedYear} years={allYears} />
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {leaders.map((leader, index) => (
+                        {leaders.map((leader) => (
                             <LeaderCard
-                                key={index}
+                                key={leader.name}
                                 {...leader}
                                 image={getHeadshotUrl(leader.image)}
                             />
@@ -164,9 +181,9 @@ const About = () => {
                     <div className="max-h-80 overflow-y-auto border border-neutral-800 p-6">
                         {members.length > 0 ? (
                             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-3">
-                                {members.map((member, index) => (
+                                {members.map((member) => (
                                     <span
-                                        key={index}
+                                        key={member.name}
                                         className="text-neutral-300 text-sm"
                                     >
                                         {member.name}
@@ -192,11 +209,7 @@ const About = () => {
 
                         {/* Right: Founder profiles */}
                         <div className="px-8 py-10 sm:px-12 sm:py-14 flex flex-col justify-center space-y-6">
-                            {[
-                                { name: "Cedric Claessens", linkedin: "https://linkedin.com/in/cedric-cl", github: "https://github.com/1nsomnes", portfolio: "https://cedricclaessens.com" },
-                                { name: "Vaibhav Urs", linkedin: "https://www.linkedin.com/in/vaibhavurs/" },
-                                { name: "Ryan Kimberley", linkedin: "https://www.linkedin.com/in/ryan-ki/" },
-                            ].map((founder) => (
+                            {founders.map((founder) => (
                                 <div key={founder.name} className="flex items-center justify-between">
                                     <span className="text-white font-medium">{founder.name}</span>
                                     <div className="flex items-center gap-3">

@@ -1,9 +1,10 @@
 
 import React, { useEffect } from 'react';
+import { SUNDEVILCENTRAL_URL } from '../../data/links';
 
 const SunDevilCentral = () => {
     useEffect(() => {
-        window.location.href = "https://sundevilcentral.eoss.asu.edu/DevilQuant/club_signup";
+        window.location.href = SUNDEVILCENTRAL_URL;
     }, []);
 
     return (

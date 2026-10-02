@@ -1,47 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    const [scrolled, setScrolled] = useState(false);
-    const [isOpen, setIsOpen] = useState(false);
+    // The mobile menu is open only for the location it was opened on,
+    // so any navigation closes it.
+    const [openedAt, setOpenedAt] = useState(null);
+    const isOpen = openedAt === location.key;
+    const setIsOpen = (open) => setOpenedAt(open ? location.key : null);
 
-    // Navigate to a page and then scroll to a section by ID
+    // The target page scrolls to `scrollTo` once it has rendered.
     const navigateToSection = (path, sectionId) => {
-        if (location.pathname === path) {
-            // Already on the page, just scroll
-            const el = document.getElementById(sectionId);
-            if (el) el.scrollIntoView({ behavior: 'smooth' });
-        } else {
-            navigate(path);
-            // Wait for the page to render, then scroll
-            setTimeout(() => {
-                const el = document.getElementById(sectionId);
-                if (el) el.scrollIntoView({ behavior: 'smooth' });
-            }, 100);
-        }
+        navigate(path, { state: { scrollTo: sectionId } });
     };
 
     // Check if we are on the home page
     const isHome = location.pathname === '/';
-
-    useEffect(() => {
-        const handleScroll = () => {
-            const isScrolled = window.scrollY > 20;
-            if (isScrolled !== scrolled) {
-                setScrolled(isScrolled);
-            }
-        };
-
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, [scrolled]);
-
-    // Close mobile menu when location changes
-    useEffect(() => {
-        setIsOpen(false);
-    }, [location]);
 
     // navbar background logic:
     // - If Home page: ALWAYS transparent, no border

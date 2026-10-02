@@ -1,10 +1,10 @@
-import { useEffect, useRef, useCallback } from "react";
+import { memo, useEffect, useRef, useCallback } from "react";
 
 function easeOutCubic(t) {
   return 1 - Math.pow(1 - t, 3);
 }
 
-export function IconCloud({ images }) {
+function IconCloudBase({ images }) {
   const canvasRef = useRef(null);
   const animationFrameRef = useRef(0);
   const rotationRef = useRef({ x: 0, y: 0 });
@@ -270,3 +270,6 @@ export function IconCloud({ images }) {
     />
   );
 }
+
+// Memoized: re-rendering restarts no work, so skip it when `images` is unchanged.
+export const IconCloud = memo(IconCloudBase);

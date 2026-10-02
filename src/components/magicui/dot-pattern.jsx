@@ -1,9 +1,9 @@
 "use client"
 
-import React, { useEffect, useId, useMemo, useRef, useState } from "react"
+import React, { memo, useEffect, useId, useMemo, useRef, useState } from "react"
 import { cn } from "../../lib/utils"
 
-export function DotPattern({
+function DotPatternBase({
   width = 16,
   height = 16,
   x = 0,
@@ -101,3 +101,7 @@ export function DotPattern({
     </svg>
   )
 }
+
+// Memoized: the pattern can be ~1,000 animated nodes, so skip re-rendering it when
+// the parent page re-renders with the same props (navigation state, year select).
+export const DotPattern = memo(DotPatternBase)
