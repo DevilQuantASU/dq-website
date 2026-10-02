@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { guideCategories, allGuides } from '../data/guides/index.js';
+import PenCircle from '../components/PenCircle';
 
 const Resources = () => {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -58,19 +59,19 @@ const Resources = () => {
                     {/* Category heading */}
                     <div className="flex items-center gap-2 mb-4">
                         {category.slug === 'projects' ? (
-                            <svg className="w-5 h-5 text-neutral-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <svg className="w-5 h-5 text-pencil" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
                             </svg>
                         ) : category.slug === 'beyond-quant' ? (
-                            <svg className="w-5 h-5 text-neutral-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <svg className="w-5 h-5 text-pencil" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                             </svg>
                         ) : (
-                            <svg className="w-5 h-5 text-neutral-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <svg className="w-5 h-5 text-pencil" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                             </svg>
                         )}
-                        <h2 className="text-sm font-semibold text-neutral-300 tracking-wider uppercase">
+                        <h2 className="font-hand text-[19px] leading-[24px] text-chalk">
                             {category.name}
                         </h2>
                     </div>
@@ -85,14 +86,14 @@ const Resources = () => {
                                         id={`guide-link-${guide.slug}`}
                                         onClick={() => handleGuideClick(guide.slug)}
                                         className={`
-                                            w-full text-left px-3 py-2.5 text-sm font-medium transition-all duration-200 block
+                                            w-full text-left px-[20px] py-[12px] text-sm font-medium transition-all duration-200 block
                                             ${isActive
-                                                ? 'bg-white/10 text-white border border-neutral-700'
-                                                : 'text-neutral-400 hover:text-neutral-200 hover:bg-neutral-800/60 border border-transparent'
+                                                ? 'text-chalk font-semibold'
+                                                : 'text-pencil hover:text-chalk hover:bg-chalk/5'
                                             }
                                         `}
                                     >
-                                        {guide.title}
+                                        <span className="relative">{guide.title}{isActive && <PenCircle />}</span>
                                     </button>
                                 </li>
                             );
@@ -104,12 +105,12 @@ const Resources = () => {
     );
 
     return (
-        <div className="bg-black pt-16">
+        <div>
             {/* Mobile sidebar toggle */}
             <button
                 id="resources-sidebar-toggle"
                 onClick={() => setSidebarOpen(true)}
-                className="lg:hidden fixed bottom-6 left-6 z-40 bg-white text-black hover:bg-neutral-200 p-3 transition-colors duration-200"
+                className="lg:hidden fixed bottom-6 left-6 z-40 bg-highlighter text-pad hover:bg-[#fbe96c] p-3 transition-colors duration-200"
                 aria-label="Open guide navigation"
             >
                 <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -120,7 +121,7 @@ const Resources = () => {
             {/* Mobile overlay */}
             {sidebarOpen && (
                 <div
-                    className="lg:hidden fixed inset-0 z-40 bg-black/60 backdrop-blur-sm transition-opacity"
+                    className="lg:hidden fixed inset-0 z-40 bg-pad-deep/75 transition-opacity"
                     onClick={() => setSidebarOpen(false)}
                 />
             )}
@@ -128,7 +129,7 @@ const Resources = () => {
             {/* Mobile sidebar drawer (fixed, only on small screens) */}
             <aside
                 className={`
-                    lg:hidden fixed top-16 left-0 z-50 h-[calc(100vh-4rem)] w-72 bg-black/95 backdrop-blur-xl border-r border-neutral-800
+                    lg:hidden fixed top-[72px] left-0 z-50 h-[calc(100svh-72px)] w-72 bg-pad border-r border-rule-major
                     transform transition-transform duration-300 ease-in-out overflow-y-auto
                     ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
                 `}
@@ -136,7 +137,7 @@ const Resources = () => {
                 <div className="flex justify-end p-4 pb-0">
                     <button
                         onClick={() => setSidebarOpen(false)}
-                        className="text-neutral-400 hover:text-white p-1 transition-colors"
+                        className="text-pencil hover:text-chalk p-1 transition-colors"
                         aria-label="Close navigation"
                     >
                         <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -152,8 +153,8 @@ const Resources = () => {
                 <aside
                     id="resources-sidebar"
                     className={`
-                        hidden lg:block sticky top-16 self-start h-[calc(100vh-4rem)] overflow-y-auto
-                        bg-black/95 backdrop-blur-xl border-r border-neutral-800
+                        hidden lg:block sticky top-[72px] self-start h-[calc(100vh-72px)] overflow-y-auto
+                        bg-pad border-r border-rule-major
                         transition-all duration-300 ease-in-out flex-shrink-0
                         ${sidebarCollapsed ? 'w-0 border-r-0 overflow-hidden' : 'w-72'}
                     `}
@@ -162,12 +163,12 @@ const Resources = () => {
                 </aside>
 
                 {/* Main content */}
-                <main className="flex-1 min-h-[calc(100vh-4rem)] min-w-0">
+                <main className="flex-1 min-h-[calc(100vh-72px)] min-w-0">
                     {/* Desktop sidebar toggle */}
                     <button
                         id="resources-sidebar-desktop-toggle"
                         onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-                        className="hidden lg:flex items-center gap-2 mt-6 ml-6 text-neutral-500 hover:text-neutral-300 text-xs font-medium transition-colors"
+                        className="hidden lg:flex items-center gap-2 mt-6 ml-6 text-pencil hover:text-chalk text-[13px] font-medium transition-colors cursor-pointer"
                         aria-label={sidebarCollapsed ? 'Show sidebar' : 'Hide sidebar'}
                     >
                         <svg
@@ -184,27 +185,26 @@ const Resources = () => {
                             <>
                                 {/* Guide header */}
                                 <header className="mb-10">
-                                    <h1 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
+                                    <h1 className="text-[32px] sm:text-[40px] leading-[1.15] font-extrabold tracking-[-0.03em] text-chalk">
                                         {activeGuide.title}
                                     </h1>
                                     {activeGuide.description && (
-                                        <p className="mt-4 text-lg text-neutral-400 leading-relaxed max-w-3xl">
+                                        <p className="mt-4 text-[17px] leading-[28px] text-pencil max-w-[64ch]">
                                             {activeGuide.description}
                                         </p>
                                     )}
-                                    <div className="mt-6 h-px bg-neutral-800" />
+                                    <div className="mt-6 h-px bg-rule-major" />
                                 </header>
 
                                 {/* Guide sections */}
                                 <div className="guide-content space-y-10" onClick={handleAnchorClick}>
                                     {activeGuide.sections.map((section) => (
                                         <section key={section.id} id={section.id} style={{ scrollMarginTop: '5rem' }}>
-                                            <h2 className="text-xl sm:text-2xl font-bold text-white mb-4 flex items-center gap-3">
-                                                <span className="w-1 h-6 bg-white inline-block" />
+                                            <h2 className="text-[22px] sm:text-[26px] leading-[1.25] font-bold tracking-[-0.02em] text-chalk mb-4">
                                                 {section.title}
                                             </h2>
                                             <div
-                                                className="guide-section-content text-neutral-300 leading-relaxed"
+                                                className="guide-section-content max-w-[68ch] text-[16px] text-chalk/90 leading-[1.75]"
                                                 dangerouslySetInnerHTML={{ __html: section.content }}
                                             />
                                         </section>
@@ -213,8 +213,8 @@ const Resources = () => {
                             </>
                         ) : (
                             <div className="text-center py-20">
-                                <p className="text-neutral-400 text-lg">Guide not found.</p>
-                                <Link to="/resources" className="text-neutral-400 hover:text-white mt-4 inline-block">
+                                <p className="text-pencil text-lg">Guide not found.</p>
+                                <Link to="/resources" className="ink-link text-chalk mt-4 inline-block">
                                     ← Back to Resources
                                 </Link>
                             </div>

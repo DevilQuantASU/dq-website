@@ -2,9 +2,9 @@
 // (.github/workflows/ci.yml) and locally with `npm run perf`.
 // Mobile preset, 3 runs per page, judged on the median run.
 //
-// Budgets match the current About page (old design: heavy animated decorations,
-// ~1.2 s blocking time) with headroom for CI noise. They catch large regressions
-// such as heavy media returning to the bundle; tighten them as pages get faster.
+// Budgets sit just above the redesigned site (measured locally: Home 98 / About 96,
+// LCP 2.1 / 2.6 s, TBT < 150 ms, 197 / 388 KB), with headroom for slower CI runners.
+// A PR that breaks one makes the site measurably slower; fix it or justify a change here.
 module.exports = {
   ci: {
     collect: {
@@ -17,11 +17,11 @@ module.exports = {
     },
     assert: {
       assertions: {
-        'categories:performance': ['error', { minScore: 0.6, aggregationMethod: 'median' }],
-        'largest-contentful-paint': ['error', { maxNumericValue: 3500, aggregationMethod: 'median' }],
-        'total-blocking-time': ['error', { maxNumericValue: 2500, aggregationMethod: 'median' }],
-        'cumulative-layout-shift': ['error', { maxNumericValue: 0.1, aggregationMethod: 'median' }],
-        'total-byte-weight': ['error', { maxNumericValue: 1000000, aggregationMethod: 'median' }],
+        'categories:performance': ['error', { minScore: 0.85, aggregationMethod: 'median' }],
+        'largest-contentful-paint': ['error', { maxNumericValue: 3000, aggregationMethod: 'median' }],
+        'total-blocking-time': ['error', { maxNumericValue: 400, aggregationMethod: 'median' }],
+        'cumulative-layout-shift': ['error', { maxNumericValue: 0.05, aggregationMethod: 'median' }],
+        'total-byte-weight': ['error', { maxNumericValue: 600000, aggregationMethod: 'median' }],
       },
     },
     upload: { target: 'filesystem', outputDir: './.lighthouseci' },

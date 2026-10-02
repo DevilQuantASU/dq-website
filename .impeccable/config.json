@@ -1,0 +1,14 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "design-system-font",
+        "value": "jetbrains mono",
+        "createdAt": "2026-10-01T12:34:32.823Z",
+        "reason": "Claude triage: pre-existing monospace stack for code blocks in Resources guide content; the craft floor allows monospace for code"
+      }
+    ]
+  }
+}
