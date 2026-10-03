@@ -106,6 +106,8 @@ The pull request description should include:
 
 After review, address requested changes with additional focused commits. Once the pull request is approved and checks pass, merge it into `main`. Delete the feature branch after merging when it is no longer needed.
 
+If a pull request is based on another feature branch (a stacked PR), check that its base says `main` before merging. GitHub only retargets it automatically when the branch below it is deleted; otherwise the merge lands on that branch and never reaches `main` or the live site.
+
 ## 7. Build and Deploy
 
 A build on a feature branch only verifies that branch locally. It does not publish anything:
@@ -114,7 +116,7 @@ A build on a feature branch only verifies that branch locally. It does not publi
 npm run build
 ```
 
-Deployment is automatic. The `CI` workflow (`.github/workflows/ci.yml`) runs on every pull request and every push to `main`: lint, internal link check, and build. A PR should not be merged until it passes. When CI passes on `main` after a merge, the `Deploy` workflow (`.github/workflows/deploy.yml`) publishes `dist/` to the generated `gh-pages` branch. GitHub Pages detects that push and runs its `pages-build-deployment` workflow.
+Deployment is automatic. The `CI` workflow (`.github/workflows/ci.yml`) runs on every pull request and every push to `main`: lint, internal link check, and build (`verify`), plus the Lighthouse budgets (`performance`). A PR should not be merged until it passes. When CI passes on `main` after a merge, the `Deploy` workflow (`.github/workflows/deploy.yml`) publishes `dist/` to the generated `gh-pages` branch. GitHub Pages detects that push and runs its `pages-build-deployment` workflow.
 
 A weekly `External links` workflow (`.github/workflows/links.yml`) checks external URLs. It can also be run manually from the Actions tab.
 
