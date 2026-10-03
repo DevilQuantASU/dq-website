@@ -1,0 +1,51 @@
+name: CI
+
+# Every PR and every push to main: lint, internal link check, build.
+# Publishing happens in deploy.yml, after this workflow passes on main.
+#
+# No concurrency group: runs take ~20s, and cancelling duplicates (e.g. when
+# stacked PR branches are pushed together) showed up as failed checks.
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run check-links
+      - run: npm run build
+
+  # Lighthouse on every PR and push to main: fails the check when a page breaks a
+  # budget in lighthouserc.cjs, and posts the medians to the run's summary page.
+  performance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: npx --yes @lhci/cli@0.15.1 autorun
+      - if: always()
+        run: node scripts/perf-summary.mjs
+      - if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: lighthouse-reports
+          path: .lighthouseci/
+          retention-days: 14

@@ -25,3 +25,17 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Impeccable working files (screenshots, mocks, build state); briefs and design.json are committed
+.impeccable/review/
+.impeccable/mocks/
+.impeccable/build/
+.impeccable/questions/
+
+# Lighthouse CI output
+.lighthouseci/
+
+# Claude Code notes are kept local only (outside the repo)
+/CLAUDE.md
+/CLAUDE.local.md
+/PROMPT.md

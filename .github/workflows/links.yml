@@ -1,0 +1,32 @@
+name: External links
+
+# External sites go down independently of our code, so this runs weekly
+# (and on demand) instead of blocking PRs. Internal links are checked in CI.
+on:
+  schedule:
+    - cron: '0 15 * * 1' # Mondays 08:00 Arizona time
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lychee:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: lycheeverse/lychee-action@v2
+        with:
+          # 999 is LinkedIn's bot-block code. The excluded sites block bots with 403/402
+          # and must be checked by hand; the w3.org and font hosts are namespaces/preconnects.
+          args: >-
+            --no-progress
+            --max-retries 3
+            --accept '200..=299,429,999'
+            --exclude '^http://www\.w3\.org/'
+            --exclude '^https://fonts\.(googleapis|gstatic)\.com/?$'
+            --exclude 'joinhandshake\.com'
+            --exclude 'glassdoor\.com'
+            --exclude 'investopedia\.com'
+            'src/**/*.js' 'src/**/*.jsx' 'src/**/*.json' 'public/**/*.html' index.html
+          fail: true

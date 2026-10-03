@@ -1,139 +1,108 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import Monogram from './Monogram';
+import PenCircle from './PenCircle';
+import { DISCORD_URL } from '../data/links';
+
+const pages = [
+    { to: '/', label: 'Home' },
+    { to: '/about', label: 'About' },
+    { to: '/resources', label: 'Resources' },
+    { to: '/projects', label: 'Projects' },
+];
 
 const Navbar = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    const [scrolled, setScrolled] = useState(false);
-    const [isOpen, setIsOpen] = useState(false);
+    // The mobile menu is open only for the location it was opened on,
+    // so any navigation closes it.
+    const [openedAt, setOpenedAt] = useState(null);
+    const isOpen = openedAt === location.key;
+    const setIsOpen = (open) => setOpenedAt(open ? location.key : null);
 
-    // Navigate to a page and then scroll to a section by ID
+    // The target page scrolls to `scrollTo` once it has rendered.
     const navigateToSection = (path, sectionId) => {
-        if (location.pathname === path) {
-            // Already on the page, just scroll
-            const el = document.getElementById(sectionId);
-            if (el) el.scrollIntoView({ behavior: 'smooth' });
-        } else {
-            navigate(path);
-            // Wait for the page to render, then scroll
-            setTimeout(() => {
-                const el = document.getElementById(sectionId);
-                if (el) el.scrollIntoView({ behavior: 'smooth' });
-            }, 100);
-        }
+        navigate(path, { state: { scrollTo: sectionId } });
     };
 
-    // Check if we are on the home page
-    const isHome = location.pathname === '/';
-
-    useEffect(() => {
-        const handleScroll = () => {
-            const isScrolled = window.scrollY > 20;
-            if (isScrolled !== scrolled) {
-                setScrolled(isScrolled);
-            }
-        };
-
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, [scrolled]);
-
-    // Close mobile menu when location changes
-    useEffect(() => {
-        setIsOpen(false);
-    }, [location]);
-
-    // navbar background logic:
-    // - If Home page: ALWAYS transparent, no border
-    // - If NOT home page: dark background
-    const navbarClasses = isHome && !isOpen
-        ? "bg-transparent border-none"
-        : "bg-black/90 backdrop-blur-md border-b border-neutral-800 shadow-md";
+    const isCurrent = (path) => location.pathname === path;
 
     return (
-        <nav className={`fixed w-full z-50 transition-[background-color,backdrop-filter,box-shadow] duration-300 ${navbarClasses}`}>
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex justify-between items-center h-16">
-                    <div className="flex-shrink-0 flex items-center">
-                        <Link to="/" className="font-bold text-xl tracking-tight text-white flex items-center gap-2">
-                            DevilQuant
-                        </Link>
-                    </div>
-                    <div className="hidden md:ml-6 md:flex md:space-x-8">
-                        <Link to="/" className="text-neutral-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors">
-                            Home
-                        </Link>
-                        <Link to="/about" className="text-neutral-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors">
-                            About Us
-                        </Link>
-                        <Link to="/resources" className="text-neutral-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors">
-                            Resources
-                        </Link>
-                        <Link to="/projects" className="text-neutral-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors">
-                            Projects
-                        </Link>
-                        <button onClick={() => navigateToSection('/about', 'contact')} className="text-neutral-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors">
-                            Contact
-                        </button>
-                    </div>
-                    <div className="md:hidden">
-                        <button
-                            onClick={() => setIsOpen(!isOpen)}
-                            className="text-neutral-300 hover:text-white focus:outline-none p-2"
-                        >
-                            <span className="sr-only">Open main menu</span>
-                            {!isOpen ? (
-                                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                                </svg>
-                            ) : (
-                                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                                </svg>
-                            )}
-                        </button>
-                    </div>
-                </div>
-            </div>
+        <header className="sticky top-0 z-50 bg-pad border-b border-rule-major">
+            <nav className="sheet h-[72px] flex items-center justify-between" aria-label="Main">
+                <Link to="/" className="flex items-center gap-3 text-chalk" aria-label="DevilQuant home">
+                    <Monogram className="h-[24px] w-auto" />
+                    <span className="text-[20px] font-bold tracking-[-0.03em]">DevilQuant</span>
+                </Link>
 
-            {/* Mobile menu, show/hide based on menu state */}
+                <div className="hidden lg:flex items-center gap-[28px]">
+                    {pages.map(({ to, label }) => (
+                        <Link
+                            key={to}
+                            to={to}
+                            aria-current={isCurrent(to) ? 'page' : undefined}
+                            className={`relative ${isCurrent(to) ? '' : 'ink-link '}text-[15px] font-medium ${isCurrent(to) ? 'text-chalk' : 'text-pencil hover:text-chalk'}`}
+                        >
+                            {label}
+                            {isCurrent(to) && <PenCircle />}
+                        </Link>
+                    ))}
+                    <button
+                        type="button"
+                        onClick={() => navigateToSection('/about', 'contact')}
+                        className="ink-link text-[15px] font-medium text-pencil hover:text-chalk cursor-pointer"
+                    >
+                        Contact
+                    </button>
+                    <a href={DISCORD_URL} target="_blank" rel="noopener noreferrer" className="btn-highlight !min-h-[40px] !px-[16px] text-[15px]">
+                        Join the Discord
+                    </a>
+                </div>
+
+                <button
+                    type="button"
+                    onClick={() => setIsOpen(!isOpen)}
+                    aria-expanded={isOpen}
+                    aria-controls="mobile-menu"
+                    className="lg:hidden btn-pen !min-h-[40px] !px-[16px] text-[15px] cursor-pointer"
+                >
+                    {isOpen ? 'Close' : 'Menu'}
+                </button>
+            </nav>
+
             {isOpen && (
-                <div className="md:hidden bg-black/95 backdrop-blur-xl border-b border-neutral-800">
-                    <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                        <Link
-                            to="/"
-                            className="text-neutral-300 hover:text-white block px-3 py-2 text-base font-medium"
-                        >
-                            Home
-                        </Link>
-                        <Link
-                            to="/about"
-                            className="text-neutral-300 hover:text-white block px-3 py-2 text-base font-medium"
-                        >
-                            About Us
-                        </Link>
-                        <Link
-                            to="/resources"
-                            className="text-neutral-300 hover:text-white block px-3 py-2 text-base font-medium"
-                        >
-                            Resources
-                        </Link>
-                        <Link
-                            to="/projects"
-                            className="text-neutral-300 hover:text-white block px-3 py-2 text-base font-medium"
-                        >
-                            Projects
-                        </Link>
-                        <button
-                            onClick={() => navigateToSection('/about', 'contact')}
-                            className="text-neutral-300 hover:text-white block px-3 py-2 text-base font-medium w-full text-left"
-                        >
-                            Contact
-                        </button>
+                <div id="mobile-menu" className="lg:hidden fixed inset-x-0 top-[72px] bottom-0 bg-pad overflow-y-auto">
+                    <div className="sheet py-[24px] flex flex-col min-h-full">
+                        <ul>
+                            {pages.map(({ to, label }) => (
+                                <li key={to}>
+                                    <Link
+                                        to={to}
+                                        aria-current={isCurrent(to) ? 'page' : undefined}
+                                        className={`relative inline-block py-[12px] text-[32px] leading-[48px] font-bold tracking-[-0.03em] ${isCurrent(to) ? 'text-chalk' : 'text-pencil active:text-chalk'}`}
+                                    >
+                                        {label}
+                                        {isCurrent(to) && <PenCircle />}
+                                    </Link>
+                                </li>
+                            ))}
+                            <li>
+                                <button
+                                    type="button"
+                                    onClick={() => navigateToSection('/about', 'contact')}
+                                    className="py-[12px] text-[32px] leading-[48px] font-bold tracking-[-0.03em] text-pencil active:text-chalk cursor-pointer"
+                                >
+                                    Contact
+                                </button>
+                            </li>
+                        </ul>
+                        <a href={DISCORD_URL} target="_blank" rel="noopener noreferrer" className="btn-highlight mt-auto justify-center text-[17px]">
+                            Join the Discord
+                        </a>
                     </div>
                 </div>
             )}
-        </nav>
+        </header>
     );
 };
 

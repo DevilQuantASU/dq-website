@@ -1,70 +1,74 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import LeaderCard from '../components/LeaderCard';
+import PlacementLogos from '../components/PlacementLogos';
+import SocialLinks from '../components/SocialLinks';
 import leadersByYear from '../data/leaders.json';
 import membersByYear from '../data/members.json';
-import { IconCloud } from '../components/magicui/icon-cloud';
-import { DotPattern } from '../components/magicui/dot-pattern';
-
-const placementLogos = [
-    "./logos/amazon.svg",
-    "./logos/aws.svg",
-    "./logos/capitalone.svg",
-    "./logos/generaldynamics.svg",
-    "./logos/microsoft.svg",
-    "./logos/seagate.svg",
-    "./logos/servicenow.svg",
-    "./logos/wellsfargo.svg",
-];
 
 // Combine years from both data sources
 const allYears = [...new Set([...Object.keys(leadersByYear), ...Object.keys(membersByYear)])].sort((a, b) => b - a);
 const currentYear = new Date().getFullYear().toString();
 const defaultYear = allYears.includes(currentYear) ? currentYear : allYears[0];
 
-const YearDropdown = ({ value, onChange, years }) => {
-    const [open, setOpen] = useState(false);
-    const ref = useRef(null);
+// Founders are leaders whose role mentions "Founder" in any year, listed once each.
+const founders = [...new Map(
+    Object.values(leadersByYear)
+        .flat()
+        .filter((leader) => /founder/i.test(leader.role))
+        .map((leader) => [leader.name, { name: leader.name, ...leader.socialLinks }])
+).values()];
 
-    useEffect(() => {
-        const handleClickOutside = (e) => {
-            if (ref.current && !ref.current.contains(e.target)) setOpen(false);
-        };
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => document.removeEventListener('mousedown', handleClickOutside);
-    }, []);
+// Headshots in src/assets/Headshots, keyed by filename (e.g. "cedric.jpg").
+const headshots = Object.fromEntries(
+    Object.entries(import.meta.glob('../assets/Headshots/*.{png,jpg,jpeg,webp,svg}', { eager: true, import: 'default' }))
+        .map(([path, url]) => [path.split('/').pop(), url])
+);
 
-    return (
-        <div className="relative" ref={ref}>
-            <button
-                onClick={() => setOpen(!open)}
-                className="bg-neutral-900 border border-neutral-700 text-neutral-300 text-sm px-5 py-2.5 flex items-center gap-3 hover:border-neutral-500 transition-colors cursor-pointer"
-            >
-                {value}
-                <svg className={`w-3 h-3 transition-transform ${open ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-            </button>
-            {open && (
-                <div className="absolute right-0 mt-1 bg-neutral-900 border border-neutral-700 z-20 min-w-full">
-                    {years.map((year) => (
-                        <button
-                            key={year}
-                            onClick={() => { onChange(year); setOpen(false); }}
-                            className={`block w-full text-left px-3 py-2 text-sm transition-colors ${
-                                year === value ? 'text-white bg-neutral-800' : 'text-neutral-400 hover:text-white hover:bg-neutral-800'
-                            }`}
-                        >
-                            {year}
-                        </button>
-                    ))}
-                </div>
-            )}
-        </div>
-    );
+// `image` in leaders.json is a Headshots filename, a full URL, or null.
+const getHeadshotUrl = (imageName) => {
+    if (!imageName) return null;
+    if (imageName.startsWith('http')) return imageName;
+    return headshots[imageName] ?? null;
 };
+
+const whatWeDo = [
+    'Algorithmic Trading Competitions',
+    'Guest Speaker Series from Industry Pros',
+    'Collaborative Research Projects',
+];
+
+const sectionHeading = 'text-[32px] leading-[48px] font-bold tracking-[-0.03em] text-chalk';
+
+const YearSelect = ({ value, onChange, years }) => (
+    <label className="relative inline-flex items-center">
+        <span className="sr-only">Year</span>
+        <select
+            value={value}
+            onChange={(e) => onChange(e.target.value)}
+            className="appearance-none bg-pad text-chalk text-[15px] font-medium min-h-[48px] pl-[16px] pr-[40px] shadow-[inset_0_0_0_1.5px_var(--color-chalk)] cursor-pointer"
+        >
+            {years.map((year) => (
+                <option key={year} value={year}>{year}</option>
+            ))}
+        </select>
+        <svg className="pointer-events-none absolute right-[14px] w-[12px] h-[12px] text-chalk" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+        </svg>
+    </label>
+);
 
 const About = () => {
     const [selectedYear, setSelectedYear] = useState(defaultYear);
+    const location = useLocation();
+
+    // Scroll to a section when navigated here with state.scrollTo (e.g. navbar "Contact")
+    useEffect(() => {
+        const sectionId = location.state?.scrollTo;
+        // Jump rather than animate, so the section is in view as soon as the page
+        // renders; a smooth scroll can stall behind main-thread work on slow devices.
+        if (sectionId) document.getElementById(sectionId)?.scrollIntoView({ behavior: 'auto' });
+    }, [location.key, location.state]);
 
     const leaders = leadersByYear[selectedYear] || [];
     const members = (membersByYear[selectedYear] || []).slice().sort((a, b) => {
@@ -75,181 +79,104 @@ const About = () => {
         return keyA.localeCompare(keyB);
     });
 
-    // Import all headshots
-    const headshots = import.meta.glob('../assets/Headshots/*.{png,jpg,jpeg,svg}', { eager: true });
-
-    // Helper to get image URL
-    const getHeadshotUrl = (imageName) => {
-        if (!imageName) return null;
-        if (imageName.startsWith('http')) return imageName;
-
-        // Try to find the image in the imported headshots
-        // The keys are relative paths like '../assets/Headshots/cedric.png'
-        const matchingPath = Object.keys(headshots).find(path => path.includes(imageName));
-        return matchingPath ? headshots[matchingPath].default : null;
-    };
-
     return (
-        <div className="min-h-screen bg-black pt-24 pb-12">
-            <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-                {/* Hero heading */}
-                <div className="mb-20">
-                    <h1 className="text-5xl sm:text-6xl font-bold text-white tracking-widest uppercase mb-6">
-                        About
-                    </h1>
-                    <p className="text-lg text-neutral-400 leading-relaxed max-w-2xl">
-                        We are a student-run quantitative finance organization dedicated to bridging the gap between academic theory and practical application in financial markets.
+        <div className="sheet py-[72px]">
+            <header>
+                <h1 className="text-[clamp(48px,10vw,96px)] leading-[1] font-extrabold tracking-[-0.04em] text-chalk">
+                    About
+                </h1>
+                <p className="mt-[24px] max-w-[60ch] text-[17px] leading-[28px] text-pencil">
+                    We are a student-run quantitative finance organization dedicated to bridging the gap between academic theory and practical application in financial markets.
+                </p>
+            </header>
+
+            <section className="mt-[72px] pt-[48px] border-t border-rule-major grid grid-cols-1 md:grid-cols-2 gap-[48px]">
+                <div>
+                    <h2 className={sectionHeading}>Our Mission</h2>
+                    <p className="mt-[12px] max-w-[60ch] text-[16px] leading-[26px] text-pencil">
+                        To provide students with hands-on experience in quantitative analysis, algorithmic trading, and financial data science. We aim to foster a collaborative environment where members can research, build, and test their own trading strategies.
                     </p>
                 </div>
-
-                {/* Mission & What We Do */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20 border-t border-neutral-800 pt-12">
-                    <div className="text-center md:text-left">
-                        <h2 className="text-3xl font-bold text-white mb-4">Our Mission</h2>
-                        <p className="text-neutral-400 leading-relaxed">
-                            To provide students with hands-on experience in quantitative analysis, algorithmic trading, and financial data science. We aim to foster a collaborative environment where members can research, build, and test their own trading strategies.
-                        </p>
-                    </div>
-                    <div className="text-center md:text-right">
-                        <h2 className="text-3xl font-bold text-white mb-4">What We Do</h2>
-                        <ul className="space-y-3 text-neutral-400">
-                            <li className="flex items-center justify-center md:justify-end">
-                                <span className="md:order-2 w-1.5 h-1.5 bg-white mr-3 md:mr-0 md:ml-3 shrink-0"></span>
-                                Algorithmic Trading Competitions
-                            </li>
-                            <li className="flex items-center justify-center md:justify-end">
-                                <span className="md:order-2 w-1.5 h-1.5 bg-white mr-3 md:mr-0 md:ml-3 shrink-0"></span>
-                                Guest Speaker Series from Industry Pros
-                            </li>
-                            <li className="flex items-center justify-center md:justify-end">
-                                <span className="md:order-2 w-1.5 h-1.5 bg-white mr-3 md:mr-0 md:ml-3 shrink-0"></span>
-                                Collaborative Research Projects
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                {/* Member Placements Section */}
-                <div className="mb-20 relative overflow-hidden py-10">
-                    <DotPattern
-                        width={20}
-                        height={20}
-                        cr={1.2}
-                        glow
-                        className="text-neutral-500/60 [mask-image:radial-gradient(circle_at_center,white_20%,transparent_70%)]"
-                    />
-                    <h2 className="text-3xl font-bold text-white mb-4 text-center relative z-10">Member Placements</h2>
-                    <div className="flex justify-center relative z-10">
-                        <IconCloud images={placementLogos} />
-                    </div>
-                </div>
-
-                {/* Leadership & Members — shared year */}
                 <div>
-                    <div className="flex items-center justify-between mb-12">
-                        <h2 className="text-3xl font-bold text-white">Leadership Team</h2>
-                        <YearDropdown value={selectedYear} onChange={setSelectedYear} years={allYears} />
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {leaders.map((leader, index) => (
-                            <LeaderCard
-                                key={index}
-                                {...leader}
-                                image={getHeadshotUrl(leader.image)}
-                            />
+                    <h2 className={sectionHeading}>What We Do</h2>
+                    <ul className="mt-[12px] space-y-[12px]">
+                        {whatWeDo.map((item) => (
+                            <li key={item} className="flex items-center gap-[12px] text-[16px] text-chalk">
+                                <svg className="w-[20px] h-[12px] shrink-0 text-redpen" viewBox="0 0 20 12" fill="none" aria-hidden="true">
+                                    <path d="M1 7C4 6 7 10 9 10C12 10 15 3 19 1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                                </svg>
+                                {item}
+                            </li>
                         ))}
-                    </div>
-
-                    <h2 className="text-3xl font-bold text-white mt-20 mb-8">Members</h2>
-                    <div className="max-h-80 overflow-y-auto border border-neutral-800 p-6">
-                        {members.length > 0 ? (
-                            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-3">
-                                {members.map((member, index) => (
-                                    <span
-                                        key={index}
-                                        className="text-neutral-300 text-sm"
-                                    >
-                                        {member.name}
-                                    </span>
-                                ))}
-                            </div>
-                        ) : (
-                            <p className="py-8 text-neutral-500 text-center text-sm">No members listed for this year.</p>
-                        )}
-                    </div>
+                    </ul>
                 </div>
-                {/* Founders Section */}
-                <div className="mt-20 border border-neutral-800">
-                    <div className="grid grid-cols-1 md:grid-cols-2">
-                        {/* Left: Founding info */}
-                        <div className="px-8 py-10 sm:px-12 sm:py-14 flex flex-col justify-center border-b md:border-b-0 md:border-r border-neutral-800">
-                            <h2 className="text-2xl font-bold text-white tracking-wide uppercase mb-2">Founders</h2>
-                            <p className="text-sm font-mono text-neutral-500 uppercase tracking-widest mb-6">Est. January 2025</p>
-                            <p className="text-neutral-400 leading-relaxed">
-                                Founded at Arizona State University to give students a real path into quantitative finance, not just theory.
-                            </p>
-                        </div>
+            </section>
 
-                        {/* Right: Founder profiles */}
-                        <div className="px-8 py-10 sm:px-12 sm:py-14 flex flex-col justify-center space-y-6">
-                            {[
-                                { name: "Cedric Claessens", linkedin: "https://linkedin.com/in/cedric-cl", github: "https://github.com/1nsomnes", portfolio: "https://cedricclaessens.com" },
-                                { name: "Vaibhav Urs", linkedin: "https://www.linkedin.com/in/vaibhavurs/" },
-                                { name: "Ryan Kimberley", linkedin: "https://www.linkedin.com/in/ryan-ki/" },
-                            ].map((founder) => (
-                                <div key={founder.name} className="flex items-center justify-between">
-                                    <span className="text-white font-medium">{founder.name}</span>
-                                    <div className="flex items-center gap-3">
-                                        {founder.linkedin && (
-                                            <a href={founder.linkedin} target="_blank" rel="noopener noreferrer" className="text-neutral-500 hover:text-white transition-colors">
-                                                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                                            </a>
-                                        )}
-                                        {founder.github && (
-                                            <a href={founder.github} target="_blank" rel="noopener noreferrer" className="text-neutral-500 hover:text-white transition-colors">
-                                                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
-                                            </a>
-                                        )}
-                                        {founder.portfolio && (
-                                            <a href={founder.portfolio} target="_blank" rel="noopener noreferrer" className="text-neutral-500 hover:text-white transition-colors">
-                                                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" /></svg>
-                                            </a>
-                                        )}
-                                    </div>
-                                </div>
+            <section className="mt-[72px] pt-[48px] border-t border-rule-major">
+                <h2 className={sectionHeading}>Member Placements</h2>
+                <div className="mt-[12px]">
+                    <PlacementLogos />
+                </div>
+            </section>
+
+            <section className="mt-[72px] pt-[48px] border-t border-rule-major">
+                <div className="flex items-center justify-between gap-[24px]">
+                    <h2 className={sectionHeading}>Leadership Team</h2>
+                    <YearSelect value={selectedYear} onChange={setSelectedYear} years={allYears} />
+                </div>
+                <div className="mt-[48px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-[24px] gap-y-[48px]">
+                    {leaders.map((leader) => (
+                        <LeaderCard
+                            key={leader.name}
+                            {...leader}
+                            image={getHeadshotUrl(leader.image)}
+                        />
+                    ))}
+                </div>
+
+                <h2 className={`${sectionHeading} mt-[72px]`}>Members</h2>
+                <div className="mt-[24px] max-h-[312px] overflow-y-auto p-[24px] shadow-[inset_0_0_0_1.5px_var(--color-rule-major)] bg-pad">
+                    {members.length > 0 ? (
+                        <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-[24px] gap-y-[12px]">
+                            {members.map((member) => (
+                                <li key={member.name} className="text-[15px] leading-[24px] text-chalk">
+                                    {member.name}
+                                </li>
                             ))}
-                        </div>
-                    </div>
+                        </ul>
+                    ) : (
+                        <p className="py-[24px] text-[15px] text-pencil">No members listed for this year.</p>
+                    )}
                 </div>
+            </section>
 
-                {/* Contact Section */}
-                <div className="mt-20" id="contact">
-                    <div className="bg-neutral-900 border border-neutral-800 overflow-hidden px-6 py-10 sm:px-12 sm:py-16 text-center">
-                        <div>
-                            <div className="mx-auto flex items-center justify-center w-16 h-16 border border-neutral-700 text-white mb-6">
-                                <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                                </svg>
-                            </div>
-
-                            <h2 className="text-3xl font-bold text-white mb-4 tracking-tight">Contact Us</h2>
-                            <p className="text-neutral-400 text-lg mb-8 max-w-2xl mx-auto leading-relaxed">
-                                Have questions about our research or want to get involved? We'd love to hear from you.
-                            </p>
-
-                            <a
-                                href="mailto:contact@devilquant.com"
-                                className="inline-flex items-center justify-center px-8 py-4 text-base font-medium text-black bg-white hover:bg-neutral-200 md:text-lg transition-colors duration-200 group"
-                            >
-                                <svg className="w-5 h-5 mr-3 -ml-1 text-neutral-600 group-hover:text-black transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                                </svg>
-                                contact@devilquant.com
-                            </a>
-                        </div>
-                    </div>
+            <section className="mt-[72px] grid grid-cols-1 md:grid-cols-2 shadow-[inset_0_0_0_1.5px_var(--color-chalk)] bg-pad">
+                <div className="p-[24px] md:p-[48px] border-b md:border-b-0 md:border-r border-rule-major">
+                    <h2 className={sectionHeading}>Founders</h2>
+                    <p className="font-hand text-[18px] leading-[24px] text-redpen">Est. January 2025</p>
+                    <p className="mt-[24px] max-w-[48ch] text-[16px] leading-[26px] text-pencil">
+                        Founded at Arizona State University to give students a real path into quantitative finance, not just theory.
+                    </p>
                 </div>
-            </div>
+                <ul className="p-[24px] md:p-[48px] flex flex-col justify-center gap-[24px]">
+                    {founders.map((founder) => (
+                        <li key={founder.name} className="flex items-center justify-between gap-[24px]">
+                            <span className="text-[17px] font-semibold text-chalk">{founder.name}</span>
+                            <SocialLinks links={founder} name={founder.name} />
+                        </li>
+                    ))}
+                </ul>
+            </section>
+
+            <section id="contact" className="mt-[72px] scroll-mt-[96px] pt-[48px] border-t border-rule-major">
+                <h2 className={sectionHeading}>Contact Us</h2>
+                <p className="mt-[12px] max-w-[60ch] text-[17px] leading-[28px] text-pencil">
+                    Have questions about our research or want to get involved? We'd love to hear from you.
+                </p>
+                <a href="mailto:contact@devilquant.com" className="btn-highlight mt-[24px] text-[17px]">
+                    contact@devilquant.com
+                </a>
+            </section>
         </div>
     );
 };
