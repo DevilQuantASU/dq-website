@@ -93,7 +93,7 @@ const Resources = () => {
                                             }
                                         `}
                                     >
-                                        <span className="relative">{guide.title}{isActive && <PenCircle />}</span>
+                                        <span className="relative inline-block">{guide.title}{isActive && <PenCircle />}</span>
                                     </button>
                                 </li>
                             );
