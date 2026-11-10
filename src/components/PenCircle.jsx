@@ -1,7 +1,8 @@
 import React from 'react';
 
 // A loose red-pen loop (a hand-drawn rounded box) around the current item.
-// Place inside a `relative` element; it clears the text by 14px on each side so it never crosses a glyph.
+// Place inside a `relative` element that is one box (`inline-block` or `block`); in a plain inline span that wraps,
+// the loop only covers the first line. It clears the text by 14px on each side so it never crosses a glyph.
 const PenCircle = ({ className = '' }) => (
     <svg
         className={`pointer-events-none absolute -left-[14px] -top-[8px] w-[calc(100%+28px)] h-[calc(100%+16px)] text-redpen ${className}`}
