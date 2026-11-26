@@ -404,10 +404,17 @@ const TShapeGraph = () => (
             Your goal should be to develop a T-shaped skill profile. Quant development rewards people who are proficient across a broad range of skills and expert at one or two things. Choose one or two topics for serious depth while building working knowledge across the rest of the stack.
         </p>
 
+        <div className="mt-[24px] max-w-[60ch] border-[1.5px] border-pencil/50 bg-pencil/[0.08] p-[24px]">
+            <p className="font-hand text-[20px] leading-[24px] text-redpen">just an example</p>
+            <p className="mt-[4px] text-[16px] leading-[26px] text-chalk">
+                These are not the skills everyone needs. The graph only shows the shape: one deep area with working knowledge around it. Your own deep area and supporting skills depend on your lane and interests.
+            </p>
+        </div>
+
         <div className="mt-[24px] overflow-x-auto pb-[12px]">
             <div
                 role="img"
-                aria-label="Illustrative bar chart: one deep specialty, high-performance computing, at expert level, and working proficiency in databases, networking, numerical methods, and ML Ops."
+                aria-label="Example bar chart, not a requirement: one deep specialty, high-performance computing, at expert level, and working proficiency in databases, networking, numerical methods, and ML Ops."
                 className="relative min-w-[32rem] pt-[36px]"
             >
                 <span className="absolute left-[12px] top-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-90 whitespace-nowrap font-hand text-[18px] leading-[24px] text-pencil">
@@ -439,7 +446,7 @@ const TShapeGraph = () => (
                 </div>
             </div>
         </div>
-        <p className="text-[14px] leading-[24px] text-pencil">An illustration of the shape, not measured data. Your deep area could be HPC, numerical methods, databases, networking, or ML Ops.</p>
+        <p className="text-[14px] leading-[24px] text-pencil">Example only. Bar heights are illustrative, not measured data. Your deep area could be HPC, numerical methods, databases, networking, or ML Ops.</p>
 
         <div className="mt-[24px] border-t border-rule pt-[24px]">
             <h4 className={subHeading}>Try to make the skillset coherent.</h4>
