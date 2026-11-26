@@ -10,6 +10,7 @@ import SunDevilCentral from './pages/redirects/SunDevilCentral';
 import LinkedIn from './pages/redirects/LinkedIn';
 import Resources from './pages/Resources';
 import Projects from './pages/Projects';
+import Roadmap from './pages/Roadmap';
 import NotFound from './pages/NotFound';
 
 function AppContent() {
@@ -21,6 +22,7 @@ function AppContent() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/resources" element={<Resources />} />
+          <Route path="/roadmap" element={<Roadmap />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/discord" element={<Discord />} />
           <Route path="/sundevilcentral" element={<SunDevilCentral />} />

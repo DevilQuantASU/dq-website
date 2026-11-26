@@ -9,6 +9,7 @@ const pages = [
     { to: '/about', label: 'About' },
     { to: '/resources', label: 'Resources' },
     { to: '/projects', label: 'Projects' },
+    { to: '/roadmap', label: 'Roadmap' },
 ];
 
 const Navbar = () => {
