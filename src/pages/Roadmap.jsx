@@ -44,6 +44,7 @@ const paths = [
                 resources: [
                     { label: 'Fluent Python', href: 'https://www.oreilly.com/library/view/fluent-python-2nd/9781492056348/', kind: 'Book · Python' },
                     { label: 'NumPy user guide', href: 'https://numpy.org/doc/stable/user/index.html', kind: 'Docs · Python' },
+                    { label: 'Python for Finance', href: 'https://www.amazon.com/dp/1491945281', kind: 'Book · Python · Recommended by Citadel' },
                     { label: 'learncpp.com', href: 'https://www.learncpp.com/', kind: 'Tutorial · C++' },
                     { label: 'A Tour of C++', href: 'https://www.stroustrup.com/tour2.html', kind: 'Book · C++' },
                     { label: 'Effective C++', href: 'https://www.oreilly.com/library/view/effective-c-3rd/0321334876/', kind: 'Book · C++' },
@@ -141,6 +142,7 @@ const paths = [
                 resources: [
                     { label: 'LeetCode problem set', href: 'https://leetcode.com/problemset/', kind: 'Practice' },
                     { label: 'Codeforces', href: 'https://codeforces.com/', kind: 'Practice' },
+                    { label: 'MyntBit: Quant Developer track', href: 'https://myntbit.com/tracks/developer', kind: 'Interview practice · free tier' },
                     { label: 'System Design Interview, Volume 1', href: 'https://www.amazon.com/dp/B08B3FWYBX', kind: 'Book' },
                     { label: 'System Design Interview, Volume 2', href: 'https://www.amazon.com/dp/B0CR977BQH', kind: 'Book' },
                     { label: 'Landing a quant internship', href: '/resources?guide=landing-a-quant-internship', kind: 'DevilQuant guide' },
