@@ -2,6 +2,10 @@ import React, { useRef } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import PenCircle from '../components/PenCircle';
 import { DISCORD_URL } from '../data/links';
+import { stages as traderStages } from '../data/roadmap/trader/index.js';
+import TraderOverview from '../components/roadmap/TraderOverview';
+import TraderStage from '../components/roadmap/TraderStage';
+import { useTrackProgress } from '../components/roadmap/progress';
 
 const paths = [
     {
@@ -155,50 +159,12 @@ const paths = [
         id: 'trader',
         title: 'Quant Trader',
         summary: 'Making decisions under uncertainty.',
-        stages: [
-            {
-                title: 'Probability foundations',
-                type: 'Foundation',
-                description: 'Learn to think in distributions, conditional outcomes, and expected value.',
-                learn: ['Probability rules', 'Random variables', 'Expected value and variance', 'Conditional probability'],
-                resources: ['Work through probability exercises', 'Simulate a simple strategy'],
-            },
-            {
-                title: 'Market mechanics',
-                type: 'Foundation',
-                description: 'See how orders become trades and how liquidity, information, and incentives shape markets.',
-                learn: ['Order types', 'Liquidity and spreads', 'Price discovery', 'Market structure'],
-                resources: ['Read an exchange specification', 'Observe a live order book'],
-            },
-            {
-                title: 'Risk & position sizing',
-                type: 'Core',
-                description: 'Build decision rules that respect uncertainty, drawdowns, and the limits of a strategy.',
-                learn: ['Risk-adjusted returns', 'Position sizing', 'Drawdowns and limits', 'Scenario analysis'],
-                resources: ['Create a risk dashboard', 'Stress test a portfolio'],
-            },
-            {
-                title: 'Trading-system fundamentals',
-                type: 'Core',
-                description: 'Combine a market view with repeatable execution and disciplined measurement.',
-                learn: ['Signal design', 'Execution assumptions', 'Performance attribution', 'Trading journals'],
-                resources: ['Paper trade a hypothesis', 'Review your assumptions'],
-            },
-            {
-                title: 'Choose your specialization',
-                type: 'Applied',
-                description: 'Focus your curiosity on a market, time horizon, or style of decision-making.',
-                learn: ['Equities and ETFs', 'Derivatives', 'Macro and rates', 'Systematic strategies'],
-                resources: ['Compare two markets', 'Present a trade thesis'],
-            },
-            {
-                title: 'Interviews & portfolio',
-                type: 'Career preparation',
-                description: 'Show clear thinking under uncertainty and communicate decisions with evidence.',
-                learn: ['Mental math and estimation', 'Probability interviews', 'Trade idea presentation', 'Behavioral preparation'],
-                resources: ['Write a trade memo', 'Practice market questions'],
-            },
-        ],
+        stages: traderStages.map((item) => ({
+            title: item.title,
+            type: item.type,
+            description: item.description,
+            trader: item,
+        })),
     },
     {
         id: 'researcher',
@@ -504,6 +470,7 @@ const StageSelect = ({ stages, value, onChange }) => (
 const Roadmap = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const articleRef = useRef(null);
+    const traderProgress = useTrackProgress('trader');
 
     // The path and stage live in the URL (?path=trader&stage=3) so a stage can be shared.
     const activePath = paths.find((path) => path.id === searchParams.get('path')) || paths[0];
@@ -552,6 +519,8 @@ const Roadmap = () => {
                 </ul>
             </section>
 
+            {activePath.id === 'trader' && <TraderOverview progress={traderProgress} />}
+
             <section className="mt-[72px] grid gap-[48px] border-t border-rule-major pt-[48px] lg:grid-cols-[288px_1fr]">
                 <aside className="lg:sticky lg:top-[96px] lg:self-start lg:bg-pad lg:p-[24px] lg:shadow-[inset_0_0_0_1.5px_var(--color-rule-major)]">
                     <p className="font-hand text-[20px] leading-[24px] text-chalk">{activePath.title}</p>
@@ -585,26 +554,32 @@ const Roadmap = () => {
                     <h2 className={`mt-[4px] ${sectionHeading}`}>{stage.title}</h2>
                     <p className="font-hand text-[18px] leading-[24px] text-redpen">{stage.type}</p>
                     <p className="mt-[24px] max-w-[60ch] text-[16px] leading-[26px] text-chalk">{stage.description}</p>
-                    {stage.outcome && <Outcome text={stage.outcome} />}
-                    {stage.lanes && <Lanes lanes={stage.lanes} />}
+                    {stage.trader ? (
+                        <TraderStage stage={stage.trader} progress={traderProgress} desk={traderProgress.get('trader.desk')} />
+                    ) : (
+                        <>
+                        {stage.outcome && <Outcome text={stage.outcome} />}
+                        {stage.lanes && <Lanes lanes={stage.lanes} />}
 
-                    <section className="mt-[48px] border-t border-rule-major pt-[24px]">
-                        <h3 className={subHeading}>What you&apos;ll learn</h3>
-                        <TickList className="mt-[24px]" items={stage.learn} />
-                        {stage.ideas && <ProjectIdeas ideas={stage.ideas} />}
-                        {stage.showTShape && <TShapeGraph />}
-                    </section>
+                        <section className="mt-[48px] border-t border-rule-major pt-[24px]">
+                            <h3 className={subHeading}>What you&apos;ll learn</h3>
+                            <TickList className="mt-[24px]" items={stage.learn} />
+                            {stage.ideas && <ProjectIdeas ideas={stage.ideas} />}
+                            {stage.showTShape && <TShapeGraph />}
+                        </section>
 
-                    {stage.courses && <Courses courses={stage.courses} />}
+                        {stage.courses && <Courses courses={stage.courses} />}
 
-                    <section className="mt-[48px] border-t border-rule-major pt-[24px]">
-                        <h3 className={subHeading}>Start with these resources</h3>
-                        <ul className="mt-[12px] grid gap-x-[48px] sm:grid-cols-2">
-                            {stage.resources.map((resource) => (
-                                <ResourceLink key={resourceKey(resource)} resource={resource} />
-                            ))}
-                        </ul>
-                    </section>
+                        <section className="mt-[48px] border-t border-rule-major pt-[24px]">
+                            <h3 className={subHeading}>Start with these resources</h3>
+                            <ul className="mt-[12px] grid gap-x-[48px] sm:grid-cols-2">
+                                {stage.resources.map((resource) => (
+                                    <ResourceLink key={resourceKey(resource)} resource={resource} />
+                                ))}
+                            </ul>
+                        </section>
+                        </>
+                    )}
 
                     <div className="mt-[48px] flex flex-wrap items-center justify-between gap-[24px] border-t border-rule-major pt-[24px]">
                         {activeStage > 0 ? (
