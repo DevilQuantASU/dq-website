@@ -13,7 +13,7 @@ const stage = {
             resources: [
                 { key: 'openintro', section: 'Chapter 3, the video "Would you take this bet? Thinking through probability and risk".' },
             ],
-            note: 'A positive expected value bet can still be a bad idea if the downside would end the game for you. The practice problems below make this concrete.',
+            note: 'A positive expected value bet can still be a bad idea if the downside would end the game for you. The Kelly example in lesson 3 makes this concrete.',
         },
         {
             id: 'l2', label: 'Core', title: 'Variance, diversification, and drawdown', hours: 5,
@@ -61,26 +61,6 @@ const stage = {
                 { key: 'numpy', section: 'Section "Generating random numbers" for a seeded generator.' },
                 { key: 'dqMonteCarlo', section: 'The DevilQuant Monte Carlo simulator guide.', alt: true },
             ],
-        },
-    ],
-    practice: [
-        {
-            id: 'p1', title: 'Which fraction to bet',
-            q: 'An even-money bet wins with probability 0.6. What fraction of your wealth maximises long-run growth? Compute the growth rate per bet at that fraction and at double that fraction.',
-            hints: ['Write the growth rate g(f) = p ln(1 + f) + (1 − p) ln(1 − f).', 'Differentiate and set to zero.', 'Plug in f = 0.2 and f = 0.4 and compare.'],
-            solution: 'f* = 2 × 0.6 − 1 = 0.2. g(0.2) = 0.02014 per bet. g(0.4) = −0.00245. Betting twice the optimal fraction has negative long-run growth despite a positive edge.',
-        },
-        {
-            id: 'p2', title: 'Is this strategy better than a coin?',
-            q: 'A strategy wins 130 of 200 trades. Build a 95% confidence interval for its win rate and say whether you can rule out a 50% win rate. How many trades would you need to make the interval half as wide?',
-            hints: ['The sample proportion is 130 / 200.', 'Standard error = √(p(1 − p) / n).', 'Compare 0.5 with the interval. For the last part, ask how the standard error changes when n is multiplied by 4.'],
-            solution: 'p = 0.65 and the standard error is 0.0337. The interval is about (0.584, 0.716), which excludes 0.50, so a coin flip is ruled out at the 95% level (compare the 56% on 200 trades example, whose interval included 0.50). The standard error shrinks with the square root of n, so you need about four times as many trades, around 800, to halve the width.',
-        },
-        {
-            id: 'p3', title: 'Drawdown from a path',
-            q: 'An account moves through 100, 110, 105, 90, 95, 120. Find the maximum drawdown and the date range over which it occurred. Then say what drawdown limit you would have chosen in advance and whether the path breaches it.',
-            hints: ['Track the highest value seen so far.', 'At each point compute the fall from that running high as a percentage of the high.', 'Take the largest.'],
-            solution: 'The running high is 110 when the value hits 90, so the drawdown is 20 / 110 = 18.18%. Any limit tighter than 18% would have been breached. The point is that the limit is set before the path is seen.',
         },
     ],
     deliverable: {

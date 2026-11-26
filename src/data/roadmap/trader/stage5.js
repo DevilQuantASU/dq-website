@@ -158,32 +158,6 @@ const stage = {
             'Options: add an option position on the fair value and delta-hedge it each step.',
         ],
     },
-    practice: [
-        {
-            id: 'p1', title: 'Twenty tests',
-            q: 'You try 20 unrelated trading ideas and test each at the 5% level. What is the probability that at least one passes by luck? What per-test threshold would keep the overall chance at 5%?',
-            hints: ['Find the probability that none passes first.', 'Use 0.95 raised to the number of tests.', 'For the threshold, divide 0.05 by the number of tests.'],
-            solution: '0.95^20 = 0.3585, so at least one passes with probability 0.6415. A Bonferroni threshold is 0.05 / 20 = 0.0025 per test.',
-        },
-        {
-            id: 'p2', title: 'Is a correlation of 0.10 real?',
-            q: 'A signal has a correlation of 0.10 with next-day returns across 250 days. Compute the t statistic and say whether it is significant at the 5% level.',
-            hints: ['The statistic is r √(n − 2) / √(1 − r²).', 'The two-sided 5% cutoff is about 1.97 for this many observations.'],
-            solution: 't = 0.10 × √248 / √0.99 = 1.58. That is below 1.97, so it is not significant. A correlation of 0.10 sounds small but can be economically useful, which is why you need far more data to be sure.',
-        },
-        {
-            id: 'p3', title: 'A short-sample Sharpe ratio',
-            q: 'A strategy has an annualised Sharpe ratio of 2.0 over 60 trading days. Using the approximation SE = √((1 + SR² / 2) / T) with T in years, how uncertain is the estimate? Would you trust it?',
-            hints: ['T is 60 divided by 252 years.', 'Plug SR = 2 into the formula.', 'Compare the standard error with the estimate itself.'],
-            solution: 'T = 0.238 and SE = √(3 / 0.238) = 3.55. The standard error (3.55) is larger than the estimate (2.0). An approximate 95% interval is 2 ± 1.96 × 3.55, roughly −5 to 9, which includes zero. With so little data, you could not trust it.',
-        },
-        {
-            id: 'p4', title: 'Win rate versus payoff',
-            q: 'A strategy wins 70% of the time for +1 and loses 30% of the time for −3. A second wins 40% for +3 and loses 60% for −1. Compare their expected value per trade.',
-            hints: ['Expected value is probability times payoff, summed.', 'Compute each strategy separately.'],
-            solution: 'First: 0.7 × 1 − 0.3 × 3 = −0.2. Second: 0.4 × 3 − 0.6 × 1 = +0.6. The strategy that wins less often is the profitable one.',
-        },
-    ],
     deliverable: {
         title: 'The Market-Making Simulator',
         text: 'The capstone repository, README, and report described in the brief. This is the main deliverable for the path.',

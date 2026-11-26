@@ -82,26 +82,6 @@ const stage = {
             ],
         },
     ],
-    practice: [
-        {
-            id: 'p1', title: 'A simple dice game',
-            q: 'You roll a fair die. If the roll is even you win that many dollars. If it is odd you lose $3. What is the expected value of one play?',
-            hints: ['List the six outcomes and the payoff for each.', 'Each outcome has probability 1/6.', 'Sum payoff times probability.'],
-            solution: 'Even rolls pay 2, 4, 6, total 12. Odd rolls cost 3 each, three of them, total −9. Expected value = (12 − 9) / 6 = +$0.50 per play.',
-        },
-        {
-            id: 'p2', title: 'Which coin is it?',
-            q: 'One of two coins is chosen at random. Coin A is fair. Coin B lands heads 70% of the time. You flip the chosen coin once and see heads. What is the probability it was coin B?',
-            hints: ['Compute the probability of heads from each coin, weighted by the chance of picking that coin.', 'Bayes: P(B | heads) = P(B and heads) / P(heads).'],
-            solution: 'P(B and heads) = 0.5 × 0.7 = 0.35. P(A and heads) = 0.5 × 0.5 = 0.25. P(B | heads) = 0.35 / 0.60 = 7/12 ≈ 0.583.',
-        },
-        {
-            id: 'p3', title: 'Maximum by linearity',
-            q: 'Find the expected maximum of two fair dice without listing all 36 outcomes. Then confirm your answer with a simulation of one million trials.',
-            hints: ['Use E[max] = sum over k of P(max ≥ k).', 'P(max ≥ k) = 1 − ((k − 1)/6)^2.', 'For the simulation use a seeded generator and report the standard error.'],
-            solution: 'P(max ≥ k) for k = 1 to 6 is 1, 35/36, 32/36, 27/36, 20/36, 11/36. Sum = (36 + 35 + 32 + 27 + 20 + 11) / 36 = 161/36 ≈ 4.4722. A million-trial simulation should land within about 0.005 of this, and your reported standard error should be near 0.0014.',
-        },
-    ],
     deliverable: {
         title: 'Expected-value and Monte Carlo notebook',
         text: 'A notebook with five probability or expected-value problems of your choice. For each, give the analytic answer and a seeded simulation estimate with a margin of error, and say in a sentence whether they agree.',

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
     resources as registry,
     checkpointNote,
@@ -135,28 +135,6 @@ const Lesson = ({ stage, lesson, progress, index }) => {
     );
 };
 
-const Practice = ({ problem }) => {
-    const [revealed, setRevealed] = useState(0);
-    return (
-        <li className={`${panel} list-none`}>
-            <p className="text-[16px] leading-[24px] font-medium text-chalk">{problem.title}</p>
-            <p className={`mt-[8px] ${bodyText}`}>{problem.q}</p>
-            {problem.hints.slice(0, revealed).map((hint, i) => (
-                <p key={hint} className={`mt-[8px] ${bodyText}`}><span className="font-hand text-[18px] text-redpen">hint {i + 1} </span>{hint}</p>
-            ))}
-            {revealed < problem.hints.length && (
-                <button type="button" onClick={() => setRevealed(revealed + 1)} className="btn-pen mt-[12px] cursor-pointer py-[6px] text-left text-[15px]">
-                    {revealed === 0 ? 'Show a hint' : 'Show the next hint'} ({revealed} of {problem.hints.length} shown)
-                </button>
-            )}
-            <details className="mt-[12px]">
-                <summary className="cursor-pointer text-[15px] leading-[24px] font-medium text-chalk">Try it first, then show the solution</summary>
-                <p className={`mt-[8px] ${bodyText}`}>{problem.solution}</p>
-            </details>
-        </li>
-    );
-};
-
 const List = ({ title, items }) => (
     <div className="mt-[24px]">
         <h4 className="text-[16px] leading-[24px] font-bold text-chalk">{title}</h4>
@@ -245,16 +223,6 @@ const TraderStage = ({ stage, progress, desk }) => {
             </section>
 
             {stage.capstone && <Capstone capstone={stage.capstone} />}
-
-            <section className="mt-[48px] border-t border-rule-major pt-[24px]" aria-labelledby={`${stage.id}-practice`}>
-                <h3 id={`${stage.id}-practice`} className={subHeading}>Practice problems</h3>
-                <p className={`mt-[8px] max-w-[60ch] ${smallText}`}>
-                    These problems were written for this roadmap. Try each on paper first. Hints appear one at a time so you can stop as soon as you are unstuck.
-                </p>
-                <ul className="mt-[24px] grid gap-[24px]">
-                    {stage.practice.map((problem) => <Practice key={problem.id} problem={problem} />)}
-                </ul>
-            </section>
 
             <section className="mt-[48px] border-t border-rule-major pt-[24px]" aria-labelledby={`${stage.id}-deliverable`}>
                 <h3 id={`${stage.id}-deliverable`} className={subHeading}>Deliverable: {stage.deliverable.title}</h3>

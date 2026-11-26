@@ -85,26 +85,6 @@ const stage = {
             ],
         },
     ],
-    practice: [
-        {
-            id: 'p1', title: 'Down then up',
-            q: 'A stock falls 20% one day and rises 20% the next. What is the net change, and why is it not zero?',
-            hints: ['Write each move as a multiplier on the price.', 'The first multiplier is 0.8. What is the second?', 'Multiply the two multipliers and compare to 1.'],
-            solution: '0.8 × 1.2 = 0.96, a net loss of 4%. The 20% gain is taken on a smaller base than the 20% loss was, so a percentage gain does not undo a percentage loss of the same size.',
-        },
-        {
-            id: 'p2', title: 'A fee in basis points',
-            q: 'A fund charges a fee of 35 basis points a year on $2,000,000. How much is the fee in dollars?',
-            hints: ['One basis point is 0.01%, which is 0.0001 as a decimal.', 'Convert 35 basis points to a decimal.'],
-            solution: '35 bp = 0.0035. 0.0035 × 2,000,000 = $7,000.',
-        },
-        {
-            id: 'p3', title: 'Average fill',
-            q: 'You buy 200 shares at 50.10 and 300 at 50.30. Without a calculator, find the average price. Then say whether it is closer to 50.10 or 50.30 and why.',
-            hints: ['Do not average 50.10 and 50.30. The two fills are different sizes.', 'Weight each price by its share count.', 'Work with the differences from 50.10 to keep the numbers small.'],
-            solution: 'Weighted average = (200 × 50.10 + 300 × 50.30) / 500 = 50.22. It is closer to 50.30 because more shares were bought there. Shortcut: 50.10 + 0.20 × (300 / 500) = 50.10 + 0.12 = 50.22.',
-        },
-    ],
     deliverable: {
         title: 'Practice log and a tested function module',
         text: 'A practice log with at least ten dated mental-arithmetic sessions, and a small Python file with at least six functions (for example percent change, basis points to decimal, weighted average, compounding, average fill price, and short-sale profit) with tests that pass.',

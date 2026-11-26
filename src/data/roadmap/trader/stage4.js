@@ -27,7 +27,7 @@ const stage = {
             resources: [
                 { key: 'optiver', section: 'The trading page, for how one firm describes pricing and managing risk. Read it for context, not as a teaching text.' },
             ],
-            note: 'This lesson is self-contained. Do the worked example, then try the practice problem on adverse selection before moving on.',
+            note: 'This lesson is self-contained. Do the worked example, then redo it yourself with a different mix of informed and uninformed traders before moving on.',
             worked: {
                 title: 'Adverse selection',
                 prompt: 'You quote a half-spread of 0.02 around a fair value. 70% of the trades against you are uninformed and 30% are informed. After an informed trade the true value moves 0.10 against you. What is your expected profit per trade, and what half-spread breaks even?',
@@ -84,38 +84,6 @@ const stage = {
                 { key: 'natenberg', section: 'Optional and paid. Chapter titles were not checked.' },
             ],
             note: 'Not needed to finish the path. Come back to this after the capstone if it interests you.',
-        },
-    ],
-    practice: [
-        {
-            id: 'p1', title: 'Walk the book',
-            q: 'Asks: 200 shares at 100.02 and 300 at 100.03. You buy 500 at market. Find the average price. If the mid price is 100.01, what is the total cost of crossing the spread compared to the mid?',
-            hints: ['Compute the dollar cost of each fill separately.', 'Divide the total by 500.', 'Subtract the mid and multiply by the share count.'],
-            solution: 'Cost = 200 × 100.02 + 300 × 100.03 = 50,013. Average = 100.026. Slippage versus the mid is 0.016 × 500 = $8.00.',
-        },
-        {
-            id: 'p2', title: 'A put from a call',
-            q: 'A stock is at 100 and the interest rate is 4% continuously compounded. A 6-month call with strike 100 costs 7.50. What should the 6-month put with strike 100 cost? What would you do if it traded at 6.50?',
-            hints: ['Use C − P = S − K e^(−rT).', 'Work out K e^(−rT) first.', 'Compare the model value with 6.50 and think about which side is cheap.'],
-            solution: 'Parity gives P = 7.50 − 100 + 98.02 = 5.52. If the put trades at 6.50 it is rich by about 0.98, so you would sell the put, buy the call, and short the stock with the cash invested at the rate. Check the sign of each leg by drawing the payoffs.',
-        },
-        {
-            id: 'p3', title: 'Break-even spread',
-            q: 'A quote has a half-spread h. 80% of trades are uninformed and 20% are informed. After an informed trade the value moves 0.15 against you. What half-spread breaks even?',
-            hints: ['Expected profit per trade = h − (share informed × move).', 'Set that equal to zero.'],
-            solution: 'The informed share times the move is 0.2 × 0.15 = 0.03. Expected profit = h − 0.03, so break even at h = 0.03. A quote tighter than this loses money on average, however busy the market is.',
-        },
-        {
-            id: 'p4', title: 'Hedge a position',
-            q: 'You are long 12 call contracts of 100 shares each with a delta of 0.40. How many shares do you trade to be delta neutral? If the stock then rises by 1 and delta rises to 0.45, how many additional shares do you trade?',
-            hints: ['Delta exposure = contracts × shares per contract × delta.', 'Neutral means the hedge offsets exposure.', 'Compute exposure again at the new delta.'],
-            solution: 'Initial exposure = 12 × 100 × 0.40 = 480, so sell 480 shares. After the move exposure is 12 × 100 × 0.45 = 540, so sell another 60 shares. Rebalancing like this is the practice of delta hedging.',
-        },
-        {
-            id: 'p5', title: 'Annualising volatility',
-            q: 'Daily returns have a standard deviation of 1.13%. What is the annualised volatility using 252 trading days?',
-            hints: ['Volatility scales with the square root of time.', 'Multiply by √252.'],
-            solution: '0.0113 × √252 = 0.0113 × 15.87 = 0.1794, or about 17.9% a year.',
         },
     ],
     deliverable: {

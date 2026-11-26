@@ -82,32 +82,6 @@ const stage = {
             ],
         },
     ],
-    practice: [
-        {
-            id: 'p1', title: 'Reroll once',
-            q: 'You roll a fair die and may reroll once, keeping the second roll. What strategy maximises your expected value, and what is it?',
-            hints: ['What is the average of a fresh roll?', 'Reroll whenever your current roll is below that average.', 'Compute the expected value by splitting on keep and reroll.'],
-            solution: 'A fresh roll averages 3.5, so reroll on 1, 2, or 3 and keep 4, 5, or 6. Expected value = (4 + 5 + 6) / 6 + (1/2) × 3.5 = 4.25.',
-        },
-        {
-            id: 'p2', title: 'First ace',
-            q: 'You deal cards from a shuffled 52-card deck. What is the expected number of cards dealt up to and including the first ace? Check with a quick simulation.',
-            hints: ['The four aces divide the remaining 48 cards into five gaps.', 'By symmetry each gap has the same expected size.', 'Add one for the ace itself.'],
-            solution: 'Each of the five gaps holds 48/5 = 9.6 cards on average, and the first ace comes after the first gap, so the expected count is 9.6 + 1 = 10.6 = 53/5. A simulation of 100,000 shuffles should come within about 0.05.',
-        },
-        {
-            id: 'p3', title: 'Quote a market',
-            q: 'Make a two-sided market on the sum of two fair dice. Justify the fair value, your bid and offer, and what you do after someone buys five times in a row.',
-            hints: ['Find the expected sum.', 'Choose a spread wide enough to cover the risk of an informed counterparty.', 'Repeated buying is information.'],
-            solution: 'Fair value is 7. A quote such as 6.5 at 7.5 earns an expected 0.5 per fill against an uninformed counterparty. Five buys in a row suggest the other side may know the outcome, so you raise both quotes and widen the spread, and you say that out loud.',
-        },
-        {
-            id: 'p4', title: 'Estimate aloud',
-            q: 'A 15% tip on 84 dollars. Say the steps out loud and give the answer to the nearest ten cents.',
-            hints: ['Split 15% into 10% plus 5%.', '5% is half of 10%.'],
-            solution: '10% of 84 is 8.40. Half of that, 5%, is 4.20. The sum is 12.60.',
-        },
-    ],
     deliverable: {
         title: 'Recruiting packet and mock interview record',
         text: 'A one-page resume that includes your capstone, a firm tracker with stated processes and the dates you checked them, a five-minute talk on your capstone, and a record of at least three scored mock interviews.',
