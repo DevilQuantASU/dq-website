@@ -4,7 +4,7 @@ const stage = {
     type: 'Foundation',
     description: 'Build the fast, accurate number sense that every later stage depends on, and fill any gaps in the school math that trading uses.',
     purpose: 'Trading decisions are made with numbers you often have to produce in your head. This stage makes percentages, basis points, averages, and estimates automatic, and gets you writing small Python functions for the same calculations.',
-    prerequisites: ['Comfort with high-school algebra. If the entry diagnostic showed gaps, do the matching refresher first.', 'No finance or programming experience is required, though the diagnostic will tell you if you need the Python refresher.'],
+    prerequisites: ['Comfort with high-school algebra. If that feels shaky, work through Khan Academy Algebra 1 first.', 'No finance or programming experience is required, though the diagnostic will tell you if you need the Python refresher.'],
     alongside: 'Start ten minutes of mental arithmetic on most days now and keep it going through the whole path.',
     lessons: [
         {
@@ -126,8 +126,8 @@ const stage = {
         { mistake: 'Skipping the log or calculus bridges because they feel abstract.', fix: 'Do one tiny calculation per idea (ln(1.10), the slope of x squared at 3). Fluency, not proof, is the goal.' },
         { mistake: 'Practising mental arithmetic in long, rare sessions.', fix: 'Ten minutes on most days beats one long session a week. Keep the same settings so your log is comparable.' },
     ],
-    skip: 'If you can meet every item in the checkpoint cold, and the diagnostic showed no gaps, skip the lessons and go straight to Stage 2. Keep up the daily arithmetic either way.',
-    next: 'Open the Zetamac page, run your first 120-second session, and write the score in your log. Then pick the first lesson that the diagnostic flagged.',
+    skip: 'If you can meet every item in the checkpoint cold, skip the lessons and go straight to Stage 2. Keep up the daily arithmetic either way.',
+    next: 'Open the Zetamac page, run your first 120-second session, and write the score in your log. Then start with whichever lesson below feels least familiar.',
 };
 
 export default stage;

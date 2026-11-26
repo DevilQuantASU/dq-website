@@ -3,7 +3,6 @@ import { Link, useSearchParams } from 'react-router-dom';
 import PenCircle from '../components/PenCircle';
 import { DISCORD_URL } from '../data/links';
 import { stages as traderStages } from '../data/roadmap/trader/index.js';
-import TraderOverview from '../components/roadmap/TraderOverview';
 import TraderStage from '../components/roadmap/TraderStage';
 import { useTrackProgress } from '../components/roadmap/progress';
 
@@ -518,8 +517,6 @@ const Roadmap = () => {
                     })}
                 </ul>
             </section>
-
-            {activePath.id === 'trader' && <TraderOverview progress={traderProgress} />}
 
             <section className="mt-[72px] grid gap-[48px] border-t border-rule-major pt-[48px] lg:grid-cols-[288px_1fr]">
                 <aside className="lg:sticky lg:top-[96px] lg:self-start lg:bg-pad lg:p-[24px] lg:shadow-[inset_0_0_0_1.5px_var(--color-rule-major)]">

@@ -8,6 +8,7 @@ import {
     resourceOpenId,
     stageHours,
     specializations,
+    finalRubric,
 } from '../../data/roadmap/trader/index.js';
 import { Link } from 'react-router-dom';
 
@@ -280,6 +281,31 @@ const TraderStage = ({ stage, progress, desk }) => {
                 </div>
                 <p className={`mt-[8px] max-w-[60ch] ${smallText}`}>{stage.checkpoint.target} {checkpointNote.text}</p>
                 {checkpointMet && <p className="mt-[12px] font-hand text-[20px] leading-[24px] text-redpen">checkpoint met, you can move on</p>}
+                {stage.showRubric && (
+                    <div className="mt-[24px]">
+                        <h4 className="text-[16px] leading-[24px] font-bold text-chalk">{finalRubric.title}</h4>
+                        <p className={`mt-[8px] max-w-[60ch] ${bodyText}`}>{finalRubric.intro}</p>
+                        <div className="mt-[12px] overflow-x-auto" tabIndex={0} role="region" aria-label="Final rubric">
+                            <table className="w-full min-w-[720px] border-collapse">
+                                <caption className="sr-only">Final rubric with three levels for each skill</caption>
+                                <thead>
+                                    <tr>
+                                        <th scope="col" className="px-[12px] py-[8px] text-left text-[14px] leading-[24px] font-medium text-pencil">Skill</th>
+                                        {finalRubric.levels.map((l) => <th key={l} scope="col" className="px-[12px] py-[8px] text-left text-[14px] leading-[24px] font-medium text-pencil">{l}</th>)}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {finalRubric.rows.map((row) => (
+                                        <tr key={row.name}>
+                                            <th scope="row" className="border-t border-rule px-[12px] py-[12px] text-left align-top text-[15px] leading-[24px] font-medium text-chalk">{row.name}</th>
+                                            {row.cells.map((c) => <td key={c} className="border-t border-rule px-[12px] py-[12px] align-top text-[15px] leading-[24px] text-chalk">{c}</td>)}
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                )}
                 <Callout title="can you skip this stage?">{stage.skip}</Callout>
             </section>
 

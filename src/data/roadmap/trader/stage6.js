@@ -42,7 +42,7 @@ const stage = {
             resources: [
                 { key: 'jsInterviews', section: 'The page describing the interview process and tips (approach methodically, communicate clearly, correct your mistakes, ask why), and the roughly 23-minute mock interview video with three parts.' },
             ],
-            note: 'Do at least three mock interviews with a peer or mentor. Use the six-row rubric at the bottom of the page and score yourself afterwards. Record one and watch it back.',
+            note: 'Do at least three mock interviews with a peer or mentor. Use the six-row rubric in this stage\'s checkpoint section and score yourself afterwards. Record one and watch it back.',
         },
         {
             id: 'l4', label: 'Core', title: 'Recruiting: materials, timelines, and firm research', hours: 4,
@@ -113,6 +113,7 @@ const stage = {
         text: 'A one-page resume that includes your capstone, a firm tracker with stated processes and the dates you checked them, a five-minute talk on your capstone, and a record of at least three scored mock interviews.',
         doneWhen: ['The resume is one page and links to your capstone repository.', 'The tracker lists at least five firms with the official page you read and the date you checked it.', 'You gave the five-minute talk to someone who had not seen the capstone and noted their questions.', 'Three mock interviews are scored with the final rubric.'],
     },
+    showRubric: true,
     checkpoint: {
         intro: 'This is the final checkpoint. Tick each item only when you have met it.',
         items: [
