@@ -6,50 +6,146 @@ const paths = [
         id: 'developer',
         icon: '</>',
         title: 'Quant Developer',
-        summary: 'Building reliable systems with Python and C++.',
+        summary: 'Building the fast, reliable software behind trading and research.',
         accent: 'indigo',
         stages: [
             {
-                title: 'Choose a language & learn it deeply',
+                title: 'How quant development splits',
+                type: 'Orientation',
+                description: 'Quant development is not one job. Firms and teams weight three kinds of work differently, and many roles blend them. Treat the lanes below as a way to read job postings, not as official titles. Read a handful of postings at firms you would want to work at, notice which emphasis dominates, and use that to decide where your early effort goes.',
+                lanes: [
+                    { name: 'Low-latency & systems', text: 'Performance-critical software: execution, exchange connectivity, pricing libraries. Usually C++, with heavy emphasis on concurrency, memory, and networking.' },
+                    { name: 'Research platforms & tooling', text: 'The software researchers rely on: backtesting frameworks, simulation, research environments, data access. Often Python, sometimes with C++ underneath.' },
+                    { name: 'Data & infrastructure', text: 'Pipelines, storage, market data, distributed compute, and reliability. The language varies; the problems are about scale and correctness.' },
+                ],
+                learn: ['Read 5 to 10 quant developer postings and note the recurring languages and responsibilities', 'Notice how titles and scope differ between firms', 'Choose a lane to lead with, and expect to borrow skills from the others'],
+                outcome: 'You can say which lane a given posting leans toward, which one you want to lead with, and why.',
+                resources: [
+                    { label: 'What quant finance covers', href: '/resources?guide=getting-started-with-quant', kind: 'DevilQuant guide' },
+                    { label: 'Landing a quant internship', href: '/resources?guide=landing-a-quant-internship', kind: 'DevilQuant guide' },
+                ],
+            },
+            {
+                title: 'Language depth',
                 type: 'Foundation',
-                description: 'You do not need to master both Python and C++ at the beginning. Research several quant developer job postings to see which programming stacks appear repeatedly, then choose the language that matches the work you want and build deep, production-ready knowledge instead of collecting surface-level syntax. Job postings are not a conclusive study of the market, but they can give you enough signal to choose a direction. For C++, work through Tour of C++, then Effective C++, then Daily C++ Interview.',
-                learn: ['Python for data, research, APIs, and automation', 'C++ for systems, performance, and quantitative libraries', 'Read Effective C++ critically: some concepts are dated, but its core lessons remain essential', 'Algorithms, data structures, and complexity'],
-                resources: ['Learn Python deeply', 'Fluent Python', 'Tour of C++', 'Effective C++', 'Daily C++ Interview'],
+                description: 'You do not need to master Python and C++ at the same time. Pick the language that matches your lane and build deep, production-ready knowledge instead of collecting surface-level syntax. Plan to add the other one later; most strong quant developers end up comfortable in both.',
+                learn: [
+                    'Python: the data model, iterators and generators, typing, packaging, profiling, and NumPy/pandas fundamentals',
+                    'C++: modern C++ (17/20), ownership and RAII, the STL and its complexity guarantees, CMake builds, debugging with sanitizers',
+                    'Algorithms, data structures, and complexity in your chosen language',
+                    'Read Effective C++ critically: some advice predates modern C++, but its core lessons remain essential',
+                ],
+                outcome: 'You can build, test, and ship a small multi-file program in your language, and explain its memory and performance behavior.',
+                courses: [
+                    { code: 'CSE 110', name: 'Principles of Programming', note: 'Programming fundamentals; the starting point for either language.' },
+                    { code: 'CSE 310', name: 'Data Structures and Algorithms', note: 'Algorithms and complexity analysis, the base for coding interviews.' },
+                    { code: 'CSE 340', name: 'Principles of Programming Languages', note: 'How programming languages are designed and implemented.' },
+                ],
+                resources: [
+                    { label: 'Fluent Python', href: 'https://www.oreilly.com/library/view/fluent-python-2nd/9781492056348/', kind: 'Book · Python' },
+                    { label: 'NumPy user guide', href: 'https://numpy.org/doc/stable/user/index.html', kind: 'Docs · Python' },
+                    { label: 'learncpp.com', href: 'https://www.learncpp.com/', kind: 'Tutorial · C++' },
+                    { label: 'A Tour of C++', href: 'https://www.stroustrup.com/tour2.html', kind: 'Book · C++' },
+                    { label: 'Effective C++', href: 'https://www.oreilly.com/library/view/effective-c-3rd/0321334876/', kind: 'Book · C++' },
+                    { label: 'Daily C++ Interview', href: 'https://www.amazon.com/Daily-Interview-yourself-interview-question-ebook/dp/B0C31ZD7XP/', kind: 'Book · C++' },
+                ],
             },
             {
-                title: 'Operating systems & networking',
+                title: 'Systems foundations: OS, architecture & networking',
                 type: 'Core',
-                description: 'Build the systems foundation behind quantitative software. Read Operating Systems: Three Easy Pieces through Part 1, Virtualization, and Part 2, Concurrency. Then work through Computer Networking: A Top-Down Approach, Chapters 1 through 5.',
-                learn: ['Processes, memory, and virtual machines', 'Threads, locks, and concurrent programs', 'Networked applications and reliable communication', 'Transport, routing, and link-layer fundamentals'],
-                resources: ['OSTEP: Parts 1 & 2', 'Computer Networking: Chapters 1-5'],
+                description: 'Build the systems foundation underneath quantitative software. Read Operating Systems: Three Easy Pieces through Part 1 (Virtualization) and Part 2 (Concurrency). Then read Computer Systems: A Programmer\'s Perspective to see how hardware actually runs your code, and work through Computer Networking: A Top-Down Approach, Chapters 1 through 5, paying extra attention to the transport layer and sockets.',
+                learn: [
+                    'Processes, scheduling, and virtual memory',
+                    'Threads, locks, and the basics of memory ordering',
+                    'Caches and the memory hierarchy, and why data layout changes speed',
+                    'Sockets, TCP versus UDP, and how reliable communication is built',
+                ],
+                outcome: 'You can explain what happens, from your code through the OS and hardware, when two threads contend for a lock or a packet arrives on a socket.',
+                courses: [
+                    { code: 'CSE 230', name: 'Computer Organization and Assembly Language Programming', note: 'Assembly and how programs map onto the machine.' },
+                    { code: 'CSE 330', name: 'Operating Systems', note: 'Processes, scheduling, memory, and concurrency.' },
+                    { code: 'CSE 420', name: 'Computer Architecture I', note: 'Pipelining and the memory hierarchy. Core to Computer Systems Engineering; check eligibility for your major.' },
+                    { code: 'CSE 434', name: 'Computer Networks', note: 'Protocols, routing, and reliable communication. CS majors choose one of CSE 412, 434, or 445.' },
+                ],
+                resources: [
+                    { label: 'OSTEP: Parts 1 & 2', href: 'https://pages.cs.wisc.edu/~remzi/OSTEP/', kind: 'Book' },
+                    { label: 'Computer Systems: A Programmer\'s Perspective', href: 'https://csapp.cs.cmu.edu/', kind: 'Book' },
+                    { label: 'Computer Networking: Chapters 1-5', href: 'https://gaia.cs.umass.edu/kurose_ross/online_lectures.htm', kind: 'Lectures' },
+                    { label: 'Beej\'s Guide to Network Programming', href: 'https://beej.us/guide/bgnet/', kind: 'Guide' },
+                ],
             },
             {
-                title: 'System Design',
+                title: 'Data & system design',
                 type: 'Core',
-                description: 'Learn to design systems that move, store, and process large amounts of data. Start with Designing Data-Intensive Applications, 2nd Edition, then use Alex Xu\'s two-part System Design Interview series to practice communicating tradeoffs clearly.',
-                learn: ['Data models, storage, and retrieval', 'Replication, partitioning, and consistency', 'Batch and stream processing', 'Reliability, scalability, and system tradeoffs'],
-                resources: ['Designing Data-Intensive Applications, 2nd Edition', 'System Design Interview, Volume 1', 'System Design Interview, Volume 2'],
+                description: 'Learn to design systems that move, store, and process large amounts of data, then apply it to quant-shaped problems: ingesting market data, storing time series, running an event-driven backtester, and tracking the life of an order. Start with Designing Data-Intensive Applications, 2nd Edition, and sketch the quant designs on paper as you go.',
+                learn: [
+                    'Data models, storage engines, and indexing',
+                    'Replication, partitioning, and consistency',
+                    'Batch and stream processing',
+                    'Sketch a market data pipeline and an event-driven backtester, and defend your tradeoffs',
+                ],
+                outcome: 'You can design and defend a market data pipeline or a backtesting system, naming the tradeoffs you chose.',
+                courses: [
+                    { code: 'CSE 412', name: 'Database Management', note: 'Storage, queries, and transactions. CS majors choose one of CSE 412, 434, or 445.' },
+                    { code: 'CSE 445', name: 'Distributed Software Development', note: 'Building software across services and machines.' },
+                ],
+                resources: [
+                    { label: 'Designing Data-Intensive Applications, 2nd Edition', href: 'https://www.oreilly.com/library/view/designing-data-intensive-applications/9781098119058/', kind: 'Book' },
+                    { label: 'A pipeline from raw text to a signal', href: '/resources?guide=sentiment-trading-signal', kind: 'DevilQuant guide' },
+                ],
             },
             {
-                title: 'Build a T-shaped specialty',
+                title: 'Build projects & find your specialty',
                 type: 'Applied',
-                description: 'Keep a broad base across quant development, then develop undeniable depth in one or two areas. Your specialty should be demonstrated by production-level work.',
-                learn: ['High-performance computing and C++', 'Numerical methods and scientific Python', 'Databases and data engineering', 'Open-source contribution and code review'],
-                resources: ['Explore DevilQuant projects', 'Find a project partner'],
+                description: 'Projects are where you discover what you want to go deep on. Build coherent, end-to-end systems, contribute to existing open-source code, and show that you can work inside a real codebase instead of only starting from scratch. As the work accumulates, develop undeniable depth in one or two areas while keeping a broad base. Your specialty should be demonstrated by production-level work.',
+                learn: [
+                    'Choose projects that make you reuse what you learned in stages 2 to 4',
+                    'Ship a complete, documented system with tests and a README',
+                    'Read, review, and improve an existing codebase',
+                    'Use issues, tests, pull requests, and code review',
+                ],
+                ideas: [
+                    { lane: 'Low-latency & systems', items: ['A limit order book and matching engine, with benchmarks', 'A lock-free queue and a write-up of its memory ordering', 'A market data feed handler that parses and replays captured data'] },
+                    { lane: 'Research platforms & tooling', items: ['An event-driven backtester with realistic fills and costs', 'A reproducible research environment with a clean data access layer'] },
+                    { lane: 'Data & infrastructure', items: ['A market data ingestion pipeline with storage and replay', 'A scheduled scraper feeding a queryable store with monitoring'] },
+                ],
+                showTShape: true,
+                outcome: 'You have at least one complete, documented project and one contribution to someone else\'s codebase, and you can say what your specialty is and why.',
+                courses: [
+                    { code: 'CSE 360', name: 'Introduction to Software Engineering', note: 'Teams, testing, and process on a shared codebase.' },
+                ],
+                resources: [
+                    { label: 'Explore DevilQuant projects', href: '/projects', kind: 'DevilQuant' },
+                    { label: 'Find a project partner', href: '/discord', kind: 'DevilQuant' },
+                    { label: 'Getting started with projects', href: '/resources?guide=getting-started-with-projects', kind: 'DevilQuant guide' },
+                    { label: 'Options pricing engine', href: '/resources?guide=options-pricing-engine', kind: 'DevilQuant guide' },
+                    { label: 'How to contribute to open source', href: 'https://opensource.guide/how-to-contribute/', kind: 'Guide' },
+                ],
             },
             {
-                title: 'Build projects & contribute to open source',
-                type: 'Applied',
-                description: 'Turn your knowledge into production-level evidence. Build coherent projects, contribute to existing open-source code, and show that you can work within a real codebase instead of only starting from scratch.',
-                learn: ['Choose projects that reinforce your specialty', 'Ship a complete, documented system', 'Read, review, and improve an existing codebase', 'Use issues, tests, pull requests, and code review'],
-                resources: ['Explore DevilQuant projects', 'Contribute to open source'],
-            },
-            {
-                title: 'Profile, interviews & entry strategy',
+                title: 'Interviews & entry strategy',
                 type: 'Career preparation',
-                description: 'Turn your skill set into evidence and show how you think with other engineers. If the direct quant path is crowded, a strong adjacent engineering role can be the right next step.',
-                learn: ['LeetCode and Codeforces problem patterns', 'Explain your thought process and ask good questions', 'Personable, collaborative behavioral interviews', 'GitHub profile, production projects, and adjacent roles'],
-                resources: ['Polish your GitHub', 'Practice a project walkthrough'],
+                description: 'Turn your skills into evidence and show how you think with other engineers. Interviews combine general algorithm problems with topics from your lane: concurrency and memory, operating systems and networking, or data and system design. If the direct quant path is crowded, a strong adjacent engineering role can be the right next step.',
+                learn: [
+                    'Algorithm patterns through LeetCode and Codeforces',
+                    'Lane-specific topics: C++ and concurrency, OS and networking, or data and system design',
+                    'Explain your reasoning aloud and ask good clarifying questions',
+                    'Walk through a project end to end: decisions, tradeoffs, and what went wrong',
+                    'A GitHub profile and resume bullets that show production-level work',
+                ],
+                outcome: 'You can walk through any project on your resume in depth for 20 minutes, and solve a medium algorithm problem while narrating your reasoning.',
+                courses: [
+                    { code: 'CSE 310', name: 'Data Structures and Algorithms', note: 'The foundation for coding interviews.' },
+                    { code: 'CSE 494', name: 'Competitive Programming and Problem Solving', note: 'Prepares you for ICPC; offered in spring.' },
+                ],
+                resources: [
+                    { label: 'LeetCode problem set', href: 'https://leetcode.com/problemset/', kind: 'Practice' },
+                    { label: 'Codeforces', href: 'https://codeforces.com/', kind: 'Practice' },
+                    { label: 'System Design Interview, Volume 1', href: 'https://www.amazon.com/dp/B08B3FWYBX', kind: 'Book' },
+                    { label: 'System Design Interview, Volume 2', href: 'https://www.amazon.com/dp/B0CR977BQH', kind: 'Book' },
+                    { label: 'Landing a quant internship', href: '/resources?guide=landing-a-quant-internship', kind: 'DevilQuant guide' },
+                    { label: 'Publishing your code and walking through projects', href: '/resources?guide=getting-started-with-projects', kind: 'DevilQuant guide' },
+                ],
             },
         ],
     },
@@ -179,24 +275,6 @@ const accentClasses = {
 };
 
 const resourceLinks = {
-    'Learn Python deeply': 'https://docs.python.org/3/tutorial/',
-    'Fluent Python': 'https://www.oreilly.com/library/view/fluent-python-2nd/9781492056348/',
-    'Build a small data project': '/resources?guide=getting-started-with-projects',
-    'Practice with algorithm problems': 'https://leetcode.com/problemset/',
-    'Learn C++ deeply': 'https://www.learncpp.com/',
-    'Tour of C++': 'https://www.stroustrup.com/tour2.html',
-    'Effective C++': 'https://www.oreilly.com/library/view/effective-c-3rd/0321334876/',
-    'Daily C++ Interview': 'https://www.amazon.com/Daily-Interview-yourself-interview-question-ebook/dp/B0C31ZD7XP/',
-    'Implement a backtester': '/resources?guide=monte-carlo-simulator',
-    'Read market data documentation': '/resources?guide=getting-started-with-projects',
-    'Contribute to open source': 'https://opensource.guide/how-to-contribute/',
-    'Profile a data pipeline': '/projects',
-    'Build a paper-trading system': '/resources?guide=sentiment-trading-signal',
-    'Review a trading project': '/projects',
-    'Explore DevilQuant projects': '/projects',
-    'Find a project partner': '/discord',
-    'Polish your GitHub': 'https://docs.github.com/en/get-started/learning-to-code',
-    'Practice a project walkthrough': '/resources?guide=getting-started-with-projects',
     'Work through probability exercises': 'https://seeing-theory.brown.edu/basic-probability/index.html',
     'Simulate a simple strategy': '/resources?guide=monte-carlo-simulator',
     'Read an exchange specification': 'https://www.sec.gov/answers/orderbystock.htm',
@@ -221,19 +299,26 @@ const resourceLinks = {
     'Find an open question': '/discord',
     'Publish a research note': '/resources?guide=getting-started-with-projects',
     'Present your findings': '/resources?guide=landing-a-quant-internship',
-    'OSTEP: Parts 1 & 2': 'https://pages.cs.wisc.edu/~remzi/OSTEP/',
-    'Computer Networking: Chapters 1-5': 'https://gaia.cs.umass.edu/kurose_ross/online_lectures.htm',
-    'Designing Data-Intensive Applications, 2nd Edition': 'https://dataintensive.net/',
-    'System Design Interview, Volume 1': 'https://www.amazon.com/dp/B08B3FWYBX?ref=KC_GS_GB_US',
-    'System Design Interview, Volume 2': 'https://www.amazon.com/System-Design-Interview-Insiders-Guide-ebook/dp/B0CR977BQH/ref=books_amazonstores_desktop_mfs_author_smart_catalog_4?_encoding=UTF8&pd_rd_w=DWWEx&content-id=amzn1.sym.0f6800d6-c0f7-4cc4-9fe4-a8d57d8d7ad6&pf_rd_p=0f6800d6-c0f7-4cc4-9fe4-a8d57d8d7ad6&pf_rd_r=146-3848614-4847046&pd_rd_wg=9FDpZ&pd_rd_r=c54cb7fa-3507-4d83-952e-458e5541532e',
 };
 
 const isExternalLink = (href) => href.startsWith('http');
 
+// A resource is either { label, href, kind } or, for tracks not yet reworked, a plain label looked up in resourceLinks.
+const toResource = (resource) =>
+    typeof resource === 'string' ? { label: resource, href: resourceLinks[resource] || '/resources' } : resource;
+
 const ResourceLink = ({ resource, accentClass }) => {
-    const href = resourceLinks[resource] || '/resources';
-    const className = 'group flex items-center justify-between border border-neutral-800/90 bg-[#0b0d0f] px-4 py-4 text-left text-sm font-medium text-neutral-200 transition-colors hover:border-neutral-500 hover:bg-neutral-900/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70';
-    const content = <><span>{resource}</span><span className={`${accentClass} transition-transform group-hover:translate-x-0.5`}>↗</span></>;
+    const { label, href, kind } = toResource(resource);
+    const className = 'group flex items-center justify-between gap-3 border border-neutral-800/90 bg-[#0b0d0f] px-4 py-4 text-left text-sm font-medium text-neutral-200 transition-colors hover:border-neutral-500 hover:bg-neutral-900/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70';
+    const content = (
+        <>
+            <span>
+                {label}
+                {kind && <span className="mt-1 block text-xs font-normal text-neutral-500">{kind}</span>}
+            </span>
+            <span className={`${accentClass} transition-transform group-hover:translate-x-0.5`}>↗</span>
+        </>
+    );
 
     return isExternalLink(href) ? (
         <a href={href} target="_blank" rel="noopener noreferrer" className={className}>
@@ -245,6 +330,57 @@ const ResourceLink = ({ resource, accentClass }) => {
         </Link>
     );
 };
+
+const resourceKey = (resource) => toResource(resource).label;
+
+const Outcome = ({ text, accent }) => (
+    <div className={`mt-6 border-l-2 border-current pl-4 ${accent.text}`}>
+        <p className="text-xs font-semibold uppercase tracking-[0.16em]">You are done when</p>
+        <p className="mt-2 text-sm leading-relaxed text-neutral-300">{text}</p>
+    </div>
+);
+
+const Lanes = ({ lanes }) => (
+    <div className="mt-6 grid gap-px border border-neutral-800 bg-neutral-800 sm:grid-cols-3">
+        {lanes.map((lane) => (
+            <div key={lane.name} className="bg-[#0b0d0f] p-4">
+                <h4 className="text-sm font-semibold text-white">{lane.name}</h4>
+                <p className="mt-2 text-sm leading-relaxed text-neutral-400">{lane.text}</p>
+            </div>
+        ))}
+    </div>
+);
+
+const ProjectIdeas = ({ ideas, accentClass }) => (
+    <div className="mt-8">
+        <h4 className="text-sm font-semibold text-white">Project ideas by lane</h4>
+        <div className="mt-4 grid gap-4 sm:grid-cols-3">
+            {ideas.map((group) => (
+                <div key={group.lane} className="border border-neutral-800 bg-[#0b0d0f] p-4">
+                    <p className={`text-xs font-semibold ${accentClass}`}>{group.lane}</p>
+                    <ul className="mt-3 space-y-2 text-sm text-neutral-300">
+                        {group.items.map((item) => <li key={item} className="flex gap-2"><span className={accentClass}>•</span>{item}</li>)}
+                    </ul>
+                </div>
+            ))}
+        </div>
+    </div>
+);
+
+const Courses = ({ courses, accentClass }) => (
+    <div>
+        <h3 className="flex items-center gap-3 text-base font-semibold text-white"><span className={accentClass}>◆</span>Where this shows up at ASU</h3>
+        <ul className="mt-5 space-y-3">
+            {courses.map((course) => (
+                <li key={course.code} className="border border-neutral-800/90 bg-[#0b0d0f] px-4 py-3 text-sm">
+                    <span className="font-semibold text-neutral-200">{course.code}: {course.name}</span>
+                    <span className="mt-1 block text-neutral-500">{course.note}</span>
+                </li>
+            ))}
+        </ul>
+        <p className="mt-3 text-xs text-neutral-500">Course numbers come from the ASU catalog. Which courses are required depends on your major, so check your degree map.</p>
+    </div>
+);
 
 const specializationTopics = [
     { name: 'Databases', level: 42 },
@@ -407,6 +543,8 @@ const Roadmap = () => {
                             </div>
                             <h2 className="mt-5 text-3xl font-bold tracking-tight text-white sm:text-4xl">{stage.title}</h2>
                             <p className="mt-4 max-w-3xl text-base leading-relaxed text-neutral-400">{stage.description}</p>
+                            {stage.outcome && <Outcome text={stage.outcome} accent={accent} />}
+                            {stage.lanes && <Lanes lanes={stage.lanes} />}
                         </div>
 
                         <div className="space-y-10 p-6 sm:p-8">
@@ -415,13 +553,15 @@ const Roadmap = () => {
                                 <ul className="mt-5 grid gap-3 text-sm text-neutral-300 sm:grid-cols-2">
                                     {stage.learn.map((item) => <li key={item} className="flex gap-3"><span className={accent.text}>•</span>{item}</li>)}
                                 </ul>
-                                {activePath.id === 'developer' && activeStage === 3 && <TShapeGraph accentClass={accent.text} />}
+                                {stage.ideas && <ProjectIdeas ideas={stage.ideas} accentClass={accent.text} />}
+                                {stage.showTShape && <TShapeGraph accentClass={accent.text} />}
                             </div>
+                            {stage.courses && <Courses courses={stage.courses} accentClass={accent.text} />}
                             <div>
                                 <h3 className="flex items-center gap-3 text-base font-semibold text-white"><span className={accent.text}>↗</span>Start with these resources</h3>
                                 <div className="mt-5 grid gap-3 sm:grid-cols-2">
                                     {stage.resources.map((resource) => (
-                                        <ResourceLink key={resource} resource={resource} accentClass={accent.text} />
+                                        <ResourceLink key={resourceKey(resource)} resource={resource} accentClass={accent.text} />
                                     ))}
                                 </div>
                             </div>
