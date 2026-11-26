@@ -327,20 +327,20 @@ const ResourceLink = ({ resource }) => {
     );
 };
 
-// A margin note: what "done" looks like for this stage.
+// A callout: what "done" looks like for this stage.
 const Outcome = ({ text }) => (
-    <div className="mt-[24px] max-w-[60ch] border-l-[1.5px] border-redpen pl-[24px]">
+    <div className="mt-[24px] max-w-[60ch] border-[1.5px] border-chalk/60 bg-chalk/[0.06] p-[24px]">
         <p className="font-hand text-[20px] leading-[24px] text-redpen">you are done when</p>
         <p className="mt-[4px] text-[16px] leading-[26px] text-chalk">{text}</p>
     </div>
 );
 
 const Lanes = ({ lanes }) => (
-    <ul className="mt-[48px] grid gap-[24px] md:grid-cols-3 md:gap-[48px]">
+    <ul className="mt-[48px] grid gap-[24px] min-[1224px]:grid-cols-3 min-[1224px]:gap-[48px]">
         {lanes.map((lane) => (
             <li key={lane.name} className="border-t border-rule-major pt-[24px]">
                 <h3 className={subHeading}>{lane.name}</h3>
-                <p className="mt-[12px] text-[15px] leading-[24px] text-pencil">{lane.text}</p>
+                <p className="mt-[12px] text-[15px] leading-[24px] text-chalk">{lane.text}</p>
             </li>
         ))}
     </ul>
@@ -349,13 +349,13 @@ const Lanes = ({ lanes }) => (
 const ProjectIdeas = ({ ideas }) => (
     <div className="mt-[48px]">
         <h3 className={subHeading}>Project ideas by lane</h3>
-        <div className="mt-[24px] grid gap-[24px] md:grid-cols-3 md:gap-[48px]">
+        <div className="mt-[24px] grid gap-[24px] min-[1224px]:grid-cols-3 min-[1224px]:gap-[48px]">
             {ideas.map((group) => (
                 <div key={group.lane} className="border-t border-rule-major pt-[12px]">
                     <p className="text-[16px] leading-[24px] font-semibold text-chalk">{group.lane}</p>
                     <ul className="mt-[12px] space-y-[12px]">
                         {group.items.map((item) => (
-                            <li key={item} className="flex gap-[12px] text-[15px] leading-[24px] text-pencil">
+                            <li key={item} className="flex gap-[12px] text-[15px] leading-[24px] text-chalk">
                                 <Tick />
                                 <span>{item}</span>
                             </li>
@@ -396,11 +396,11 @@ const specializationTopics = [
 ];
 
 const TShapeGraph = () => (
-    <div className="mt-[48px] bg-pad p-[24px] md:p-[48px] shadow-[inset_0_0_0_1.5px_var(--color-rule-major)]">
+    <div className="mt-[48px] border-t border-rule pt-[24px]">
         <h3 className="text-[24px] leading-[36px] font-bold tracking-[-0.03em] text-chalk">
             Broad enough to contribute. Deep enough to be undeniable.
         </h3>
-        <p className="mt-[12px] max-w-[60ch] text-[16px] leading-[26px] text-pencil">
+        <p className="mt-[12px] max-w-[60ch] text-[16px] leading-[26px] text-chalk">
             Your goal should be to develop a T-shaped skill profile. Quant development rewards people who are proficient across a broad range of skills and expert at one or two things. Choose one or two topics for serious depth while building working knowledge across the rest of the stack.
         </p>
 
@@ -443,13 +443,13 @@ const TShapeGraph = () => (
 
         <div className="mt-[24px] border-t border-rule pt-[24px]">
             <h4 className={subHeading}>Try to make the skillset coherent.</h4>
-            <p className="mt-[12px] text-[16px] leading-[26px] text-pencil">Different proficiencies should lend well to one another.</p>
+            <p className="mt-[12px] text-[16px] leading-[26px] text-chalk">Different proficiencies should lend well to one another.</p>
             <div className="mt-[24px] max-w-[60ch] border-l-[1.5px] border-redpen pl-[24px]">
                 <p className="font-hand text-[20px] leading-[24px] text-redpen">for example</p>
                 <p className="mt-[4px] text-[16px] leading-[26px] text-chalk">
                     Expert at <span className="font-semibold">high-performance computing</span>. Proficient with <span className="font-semibold">numerical optimization</span> and <span className="font-semibold">data pipelines</span>.
                 </p>
-                <p className="mt-[12px] text-[16px] leading-[26px] text-pencil">
+                <p className="mt-[12px] text-[16px] leading-[26px] text-chalk">
                     This kind of skillset may make you highly desirable for a team looking to scale the scope of its derivatives pricing engine.
                 </p>
             </div>
@@ -522,7 +522,7 @@ const Roadmap = () => {
             </header>
 
             <section className="mt-[72px] border-t border-rule-major pt-[48px]" aria-label="Choose a path">
-                <ul className="grid gap-[24px] md:grid-cols-3 md:gap-[48px]">
+                <ul className="grid gap-[24px] lg:grid-cols-3">
                     {paths.map((path) => {
                         const isActive = path.id === activePath.id;
                         return (
@@ -531,13 +531,13 @@ const Roadmap = () => {
                                     type="button"
                                     onClick={() => go(path.id, 0)}
                                     aria-pressed={isActive}
-                                    className="group w-full cursor-pointer text-left"
+                                    className={`group block h-full w-full cursor-pointer bg-pad p-[24px] text-left ${isActive ? 'shadow-[inset_0_0_0_1.5px_var(--color-chalk)]' : 'shadow-[inset_0_0_0_1.5px_var(--color-rule-major)] hover:shadow-[inset_0_0_0_1.5px_var(--color-pencil)]'}`}
                                 >
-                                    <span className={`relative inline-block text-[28px] leading-[36px] font-bold tracking-[-0.03em] ${isActive ? 'text-chalk' : 'text-pencil group-hover:text-chalk'}`}>
+                                    <span className={`relative inline-block text-[24px] leading-[32px] font-bold tracking-[-0.03em] ${isActive ? 'text-chalk' : 'text-pencil group-hover:text-chalk'}`}>
                                         {path.title}
                                         {isActive && <PenCircle />}
                                     </span>
-                                    <span className="mt-[12px] block text-[16px] leading-[26px] text-pencil">{path.summary}</span>
+                                    <span className="mt-[12px] block text-[16px] leading-[26px] text-chalk">{path.summary}</span>
                                 </button>
                             </li>
                         );
@@ -545,12 +545,12 @@ const Roadmap = () => {
                 </ul>
             </section>
 
-            <section className="mt-[72px] grid gap-[48px] border-t border-rule-major pt-[48px] lg:grid-cols-[264px_1fr]">
-                <aside className="lg:sticky lg:top-[96px] lg:self-start">
+            <section className="mt-[72px] grid gap-[48px] border-t border-rule-major pt-[48px] lg:grid-cols-[288px_1fr]">
+                <aside className="lg:sticky lg:top-[96px] lg:self-start lg:bg-pad lg:p-[24px] lg:shadow-[inset_0_0_0_1.5px_var(--color-rule-major)]">
                     <p className="font-hand text-[20px] leading-[24px] text-chalk">{activePath.title}</p>
                     <StageSelect stages={activePath.stages} value={activeStage} onChange={(index) => go(activePath.id, index, true)} />
                     <nav className="mt-[12px] hidden lg:block" aria-label={`${activePath.title} stages`}>
-                        <ol className="border-l-[1.5px] border-rule-major pl-[24px]">
+                        <ol className="border-l-[1.5px] border-rule-major pl-[12px]">
                             {activePath.stages.map((item, index) => {
                                 const isCurrent = index === activeStage;
                                 return (
@@ -573,11 +573,11 @@ const Roadmap = () => {
                     </nav>
                 </aside>
 
-                <article ref={articleRef} className="min-w-0 scroll-mt-[96px]">
+                <article ref={articleRef} className="min-w-0 scroll-mt-[96px] bg-pad p-[24px] shadow-[inset_0_0_0_1.5px_var(--color-chalk)] md:p-[48px]">
                     <p className="text-[15px] leading-[24px] text-pencil">Stage {activeStage + 1} of {activePath.stages.length}</p>
                     <h2 className={`mt-[4px] ${sectionHeading}`}>{stage.title}</h2>
                     <p className="font-hand text-[18px] leading-[24px] text-redpen">{stage.type}</p>
-                    <p className="mt-[24px] max-w-[60ch] text-[16px] leading-[26px] text-pencil">{stage.description}</p>
+                    <p className="mt-[24px] max-w-[60ch] text-[16px] leading-[26px] text-chalk">{stage.description}</p>
                     {stage.outcome && <Outcome text={stage.outcome} />}
                     {stage.lanes && <Lanes lanes={stage.lanes} />}
 
