@@ -152,6 +152,11 @@ const resources = {
         skills: ['Python', 'Data analysis'], verified: 'unverified', checked: CHECKED,
         note: 'Added at the club\'s suggestion, which says Citadel recommended it; that recommendation has not been verified. Optional. A later edition may exist.',
     },
+    mathOgenius: {
+        title: 'Learn lightning Fast Mental Maths', provider: 'mathOgenius (YouTube)', url: 'https://www.youtube.com/playlist?list=PLQCYtYck4nKzDCdcKCNyZa_TV_5lhoyEk',
+        format: 'Video playlist, 31 short videos', access: 'Free', difficulty: 'Intro',
+        skills: ['Mental arithmetic', 'Percentages'], verified: 'verified', checked: '2026-11-26',
+    },
     acRoadmapVideo: {
         title: '2026 Quant Roadmap | Projects Skills and Tips to become a Developer Trader or Researcher', provider: 'Algebraic Continuation (YouTube)', url: 'https://www.youtube.com/watch?v=xPxmMFPbfFU',
         format: 'Video, about 20 minutes', access: 'Free', difficulty: 'Intro',

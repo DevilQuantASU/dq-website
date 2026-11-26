@@ -99,6 +99,12 @@ const Lesson = ({ stage, lesson, progress, index }) => {
                     {shown && <span className="font-hand text-[18px] text-redpen">skill shown</span>}
                 </summary>
                 <div className="pb-[24px] pl-[12px] sm:pl-[24px]">
+                    {lesson.lead && (
+                        <div className="mb-[24px] max-w-[60ch] border-[1.5px] border-chalk/60 bg-chalk/[0.06] p-[24px]">
+                            <p className="font-hand text-[20px] leading-[24px] text-redpen">you can do this</p>
+                            <p className={`mt-[4px] ${bodyText}`}>{lesson.lead}</p>
+                        </div>
+                    )}
                     <p className="font-hand text-[18px] leading-[24px] text-redpen">you will be able to</p>
                     <ul className="mt-[4px] list-disc space-y-[4px] pl-[24px]">
                         {lesson.outcomes.map((o) => <li key={o} className={bodyText}>{o}</li>)}

@@ -12,6 +12,7 @@ const stage = {
             outcomes: ['Keep your Stage 1 score steady while someone watches.', 'Estimate a result aloud and say how confident you are.'],
             resources: [
                 { key: 'zetamac', section: 'Longer sessions (300 or 600 seconds) at the same settings, done with a friend listening.' },
+                { key: 'mathOgenius', section: 'Rewatch any trick you still do slowly, especially #4 (multiplication), #5 (division), and #15 (percentages).', alt: true },
                 { key: 'myntbit', section: 'The homepage describes interview practice for quants. The trader-specific page was not checked, so look for it from the homepage.', alt: true },
             ],
             worked: {

@@ -4,15 +4,17 @@ const stage = {
     type: 'Foundation',
     description: 'Build the fast, accurate number sense that every later stage depends on, and fill any gaps in the school math that trading uses.',
     purpose: 'Trading decisions are made with numbers you often have to produce in your head. This stage makes percentages, basis points, averages, and estimates automatic, and gets you writing small Python functions for the same calculations.',
-    prerequisites: ['Comfort with high-school algebra. If that feels shaky, work through Khan Academy Algebra 1 first.', 'No finance or programming experience is required, though the diagnostic will tell you if you need the Python refresher.'],
+    prerequisites: ['Comfort with high-school algebra. If that feels shaky, work through Khan Academy Algebra 1 first.', 'No finance or programming experience is required. If you have never written Python, start CS50P weeks 0 to 3 alongside this stage.'],
     alongside: 'Start ten minutes of mental arithmetic on most days now and keep it going through the whole path.',
     lessons: [
         {
             id: 'l1', label: 'Core', title: 'Fast, accurate mental arithmetic', hours: 3,
             outcomes: ['Do two-digit and three-digit arithmetic in your head by splitting numbers.', 'Keep a practice log and watch your score trend over several sessions.'],
             resources: [
+                { key: 'mathOgenius', section: 'Start with Mental Maths #1, #2 (addition and subtraction), #4 (multiplication), #5 (mental division), #14 (squaring any two-digit number), and #15 (percentage tricks). The rest of the playlist, such as memorising pi, calendar dates, and soroban, is fun but optional for trading.' },
                 { key: 'zetamac', section: 'Use the default settings for 120 seconds, then record the score. Keep the settings fixed so sessions are comparable.' },
             ],
+            lead: 'You do not need to be a genius to get fast at this. Mental arithmetic is a small set of patterns: split numbers into friendly parts, round and then correct, and use a few shortcuts such as squaring numbers that end in 5. People who seem like human calculators have practised those patterns until they became automatic. Learn one trick from the playlist, drill it on Zetamac for a few days, then add the next. Your score will climb, and you will see it in your log.',
             worked: {
                 title: 'Splitting a multiplication',
                 prompt: 'Compute 48 × 312 in your head.',
@@ -26,6 +28,7 @@ const stage = {
             resources: [
                 { key: 'khan', section: 'Algebra 1 and Algebra 2 (percent and exponential growth topics) if you need a refresher.' },
                 { key: 'openintro', section: 'Chapter 2, supplemental topic "Weighted mean: how and when to use weighting".', alt: true },
+                { key: 'mathOgenius', section: 'Mental Maths #15, "Percentage Tricks", for working out percentages in your head.', alt: true },
             ],
             worked: {
                 title: 'Percentages and compounding',
@@ -101,6 +104,7 @@ const stage = {
         target: 'These targets are our own benchmarks. They are not employer score cutoffs.',
     },
     mistakes: [
+        { mistake: 'Believing fast mental arithmetic is a gift you either have or do not.', fix: 'It is a handful of patterns practised until they are automatic. Learn one trick at a time and let your practice log show the progress.' },
         { mistake: 'Averaging two prices without weighting by size.', fix: 'Always ask how many were traded at each price, then weight.' },
         { mistake: 'Mixing up percent, percentage points, and basis points.', fix: 'Say the unit aloud every time. Write 0.50 points = 50 bp, then compute any relative change separately.' },
         { mistake: 'Skipping the log or calculus bridges because they feel abstract.', fix: 'Do one tiny calculation per idea (ln(1.10), the slope of x squared at 3). Fluency, not proof, is the goal.' },
