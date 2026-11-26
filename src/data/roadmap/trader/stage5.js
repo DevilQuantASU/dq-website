@@ -84,6 +84,15 @@ const stage = {
                 { key: 'pyFinance', section: 'Optional and paid. The club passed this book along as recommended by a firm, but we could not verify that, and a newer edition may exist.', alt: true },
             ],
         },
+        {
+            id: 'l9', label: 'Optional', title: 'Project: paper-trade a strategy matched to your target firm', hours: 10,
+            outcomes: ['Pick a strategy style that matches the kind of firm you want, and explain the match.', 'Run it with simulated money, a written plan, risk limits, and a trade log.', 'Report the results with uncertainty and compare them with your plan.'],
+            resources: [
+                { key: 'acRoadmapVideo', section: 'The trader section from 10:18. The project idea comes near the end of it, around 13:16.' },
+                { key: 'fpp3', section: 'Chapter 5, sections 5.8 and 5.10, for evaluating the strategy honestly.', alt: true },
+            ],
+            note: 'Paper trading only: a broker\'s practice account or your own simulator, never real money. If you want an options or market-making firm, extend your capstone, using real quote data if you can get it. If you want a statistical arbitrage firm, test a pairs or mean-reversion idea on public daily data with a chronological split, rules written before you start, and costs included. Write the plan before the first simulated trade, and log every trade with the reason for it.',
+        },
     ],
     capstone: {
         title: 'Market-Making Simulator',

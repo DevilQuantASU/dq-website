@@ -26,6 +26,7 @@ const stage = {
             outcomes: ['Solve and explain the early Jane Street Probability Playing Cards in clubs and diamonds.', 'Recognise which tool applies: complement, linearity, conditioning, or symmetry.'],
             resources: [
                 { key: 'jsCards', section: 'Clubs (expectation and linearity) and Diamonds (classical and conditional probability), first five or six questions in each. The site says most of the questions are far harder than you need.' },
+                { key: 'acRoadmapVideo', section: 'The trader section from 10:18, on why brain teasers and quick reasoning matter in trading interviews.', alt: true },
                 { key: 'jsGuide', section: 'The Jane Street Probability and Markets Guide covers probability, expected value, and making markets. Only the landing page was checked; the guide itself is a PDF we could not open, so we cannot point to specific sections. The page says it is not required reading.', alt: true },
             ],
             worked: {
@@ -45,13 +46,14 @@ const stage = {
         },
         {
             id: 'l4', label: 'Core', title: 'Recruiting: materials, timelines, and firm research', hours: 4,
-            outcomes: ['Have a one-page resume that leads with your capstone and other projects.', 'Keep a tracker with each firm, role, stated process, and stated timing, taken from the firm\'s own pages.', 'Know what to do when you receive an offer with a deadline.'],
+            outcomes: ['Have a one-page resume that leads with your capstone and other projects.', 'Keep a tracker with each firm, role, stated process, and stated timing, taken from the firm\'s own pages.', 'Know what to do when you receive an offer with a deadline.', 'Build a network early through firm events, club meetings, professors, and research groups.'],
             resources: [
                 { key: 'dqInternship', section: 'The DevilQuant guide on landing a quant internship.' },
                 { key: 'imc', section: 'The US recruitment process page. It says the process has an application, an assessment for some roles, and interviews, and that the process varies by role. It also says to research the roles, apply to the one that fits, and share any existing offer deadlines with your recruiter. Check the page again for current details, since processes change.' },
                 { key: 'optiver', section: 'The trading page, to read how the firm describes the work before you apply.', alt: true },
+                { key: 'acRoadmapVideo', section: 'The "General Advice (All Roles)" chapter from 3:24 and the trader section from 10:18, on networking and starting internships early.', alt: true },
             ],
-            note: 'Different firms run different timelines, and some limit internships to certain years of study. We deliberately do not list dates or deadlines here because they change. Read each firm\'s own page, and put what you find in your tracker with the date you checked.',
+            note: 'Different firms run different timelines, and some limit internships to certain years of study. We deliberately do not list dates or deadlines here because they change. Read each firm\'s own page, and put what you find in your tracker with the date you checked. One practitioner\'s advice (the video linked above) is to start networking and applying from your first year and to apply every summer, because internships work like long hiring processes. DevilQuant meetings and the Discord are an easy place to start.',
         },
         {
             id: 'l5', label: 'Core', title: 'Communicating results', hours: 4,

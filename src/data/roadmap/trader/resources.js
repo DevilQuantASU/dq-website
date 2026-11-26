@@ -152,6 +152,12 @@ const resources = {
         skills: ['Python', 'Data analysis'], verified: 'unverified', checked: CHECKED,
         note: 'Added at the club\'s suggestion, which says Citadel recommended it; that recommendation has not been verified. Optional. A later edition may exist.',
     },
+    acRoadmapVideo: {
+        title: '2026 Quant Roadmap | Projects Skills and Tips to become a Developer Trader or Researcher', provider: 'Algebraic Continuation (YouTube)', url: 'https://www.youtube.com/watch?v=xPxmMFPbfFU',
+        format: 'Video, about 20 minutes', access: 'Free', difficulty: 'Intro',
+        skills: ['Career planning', 'Recruiting', 'Project ideas'], verified: 'verified', checked: '2026-11-26',
+        note: 'One creator\'s opinions, which he says he checked with a few people in the industry. Treat it as advice, not a rule.',
+    },
     dqInternship: {
         title: 'Landing a quant internship', provider: 'DevilQuant', url: '/resources?guide=landing-a-quant-internship',
         format: 'DevilQuant guide', access: 'Free', difficulty: 'Intro',

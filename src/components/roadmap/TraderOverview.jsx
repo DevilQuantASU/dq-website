@@ -11,6 +11,7 @@ import {
     schedule,
     checkpointNote,
     finalRubric,
+    practitioner,
     stageHours,
     lessonId,
 } from '../../data/roadmap/trader/index.js';
@@ -218,6 +219,18 @@ const TraderOverview = ({ progress }) => {
                         <ul className="mt-[8px] space-y-[8px]">
                             {roles.firmNotes.map((f) => <li key={f.firm} className={bodyText}><span className="font-medium">{f.firm}.</span> {f.text}</li>)}
                         </ul>
+                        <h4 className="mt-[24px] text-[16px] leading-[24px] font-bold text-chalk">{practitioner.title}</h4>
+                        <p className={`mt-[8px] max-w-[60ch] ${bodyText}`}>{practitioner.intro}</p>
+                        <p className="mt-[8px]">
+                            <a href={registry[practitioner.source].url} target="_blank" rel="noopener noreferrer" className="ink-link text-[16px] leading-[24px] font-medium text-chalk underline decoration-[1.5px] decoration-chalk/60 underline-offset-[6px]">
+                                Watch the video<span className="sr-only"> (opens in a new tab)</span>
+                            </a>
+                        </p>
+                        <ul className="mt-[12px] list-disc space-y-[6px] pl-[24px]">
+                            {practitioner.points.map((p) => <li key={p} className={bodyText}>{p}</li>)}
+                        </ul>
+                        <p className={`mt-[12px] max-w-[60ch] ${bodyText}`}>{practitioner.project}</p>
+                        <p className={`mt-[12px] max-w-[60ch] ${smallText}`}>{practitioner.caveat}</p>
                     </Section>
 
                     <Section title="Two specializations after the common foundation">

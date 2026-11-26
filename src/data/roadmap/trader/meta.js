@@ -21,6 +21,22 @@ export const roles = {
     ],
 };
 
+export const practitioner = {
+    title: 'One practitioner\'s view',
+    source: 'acRoadmapVideo',
+    intro: 'The video "2026 Quant Roadmap" from the YouTube channel Algebraic Continuation (January 2025) gives one creator\'s advice for each quant role. He says he checked his views with two quant researchers, a quant trader, and someone in investment banking. The trader section starts at 10:18. These are opinions, not rules, but most of them line up with this path.',
+    points: [
+        'Finance knowledge matters most for traders. You need to understand the instruments you trade, including multi-leg option positions if you go into options market making, and on some desks you need to follow the news.',
+        'Math and applied statistics come next. Trading job descriptions often include brain teasers and quick-reasoning tests, so speed and accuracy matter.',
+        'Coding matters least of the three in his view: mostly Python, querying databases, and working with algorithms that advise your trades. IMC, by contrast, says its traders spend a lot of time in Python, so check what each firm says.',
+        'Start networking and applying for internships early, even in your first year, and apply every summer. Go to firm dinners, discovery days, and talks when firms visit campus. He describes internships as long hiring processes.',
+        'Do things that lead directly to the role. A degree in an unrelated field will not get you a trading job on its own.',
+        'Traders are often hired out of a bachelor\'s degree, and the job usually means being at the desk through trading hours, which can be stressful.',
+    ],
+    project: 'His project idea is to build and paper-trade a real strategy that shows applied statistics, matched to the kind of firm you want. For an options market-making firm, that points to a market-making or high-frequency style project. For a statistical arbitrage firm, a stat-arb project, which is easier to run on your own. Stage 5 includes this as an optional project.',
+    caveat: 'He also says traders at top firms mostly come from very selective schools and have strong internships. That is his reading of LinkedIn profiles, not published data. Treat it as a reason to start networking early, not a reason to give up.',
+};
+
 export const specializations = {
     intro: 'Stages 1 to 3 and the core lessons in Stages 4 to 6 are the common foundation for everyone. After that you can pick a specialization. Lessons marked Desk-specific belong to one of these. You can do both, but pick one first.',
     items: [
@@ -102,6 +118,7 @@ export const schedule = {
     note: 'The total comes from the hours assigned to each lesson, deliverable, and checkpoint. Pace changes only how many weeks it takes. Interview practice and recruiting preparation are built into the same hours rather than added on top, and they start in Stage 1.',
     alongside: [
         { from: 1, text: 'Ten minutes of mental arithmetic on most days, starting in Stage 1.' },
+        { from: 1, text: 'Start networking now: club meetings, firm talks, and campus recruiting events. Apply for internships every year, including your first.' },
         { from: 2, text: 'One probability puzzle a week, written up out loud as if explaining to an interviewer.' },
         { from: 3, text: 'Keep your decision journal going from Stage 3 onward.' },
         { from: 4, text: 'Read one firm\'s recruiting page and write down its stated process and timing.' },
