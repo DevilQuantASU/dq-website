@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useRef } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
+import PenCircle from '../components/PenCircle';
+import { DISCORD_URL } from '../data/links';
 
 const paths = [
     {
         id: 'developer',
-        icon: '</>',
         title: 'Quant Developer',
         summary: 'Building the fast, reliable software behind trading and research.',
-        accent: 'indigo',
         stages: [
             {
                 title: 'How quant development splits',
@@ -42,13 +42,13 @@ const paths = [
                     { code: 'CSE 340', name: 'Principles of Programming Languages', note: 'How programming languages are designed and implemented.' },
                 ],
                 resources: [
-                    { label: 'Fluent Python', href: 'https://www.oreilly.com/library/view/fluent-python-2nd/9781492056348/', kind: 'Book · Python' },
-                    { label: 'NumPy user guide', href: 'https://numpy.org/doc/stable/user/index.html', kind: 'Docs · Python' },
-                    { label: 'Python for Finance', href: 'https://www.amazon.com/dp/1491945281', kind: 'Book · Python · Recommended by Citadel' },
-                    { label: 'learncpp.com', href: 'https://www.learncpp.com/', kind: 'Tutorial · C++' },
-                    { label: 'A Tour of C++', href: 'https://www.stroustrup.com/tour2.html', kind: 'Book · C++' },
-                    { label: 'Effective C++', href: 'https://www.oreilly.com/library/view/effective-c-3rd/0321334876/', kind: 'Book · C++' },
-                    { label: 'Daily C++ Interview', href: 'https://www.amazon.com/Daily-Interview-yourself-interview-question-ebook/dp/B0C31ZD7XP/', kind: 'Book · C++' },
+                    { label: 'Fluent Python', href: 'https://www.oreilly.com/library/view/fluent-python-2nd/9781492056348/', kind: 'Python book' },
+                    { label: 'NumPy user guide', href: 'https://numpy.org/doc/stable/user/index.html', kind: 'Python docs' },
+                    { label: 'Python for Finance', href: 'https://www.amazon.com/dp/1491945281', kind: 'Python book, recommended by Citadel' },
+                    { label: 'learncpp.com', href: 'https://www.learncpp.com/', kind: 'C++ tutorial' },
+                    { label: 'A Tour of C++', href: 'https://www.stroustrup.com/tour2.html', kind: 'C++ book' },
+                    { label: 'Effective C++', href: 'https://www.oreilly.com/library/view/effective-c-3rd/0321334876/', kind: 'C++ book' },
+                    { label: 'Daily C++ Interview', href: 'https://www.amazon.com/Daily-Interview-yourself-interview-question-ebook/dp/B0C31ZD7XP/', kind: 'C++ book' },
                 ],
             },
             {
@@ -142,7 +142,7 @@ const paths = [
                 resources: [
                     { label: 'LeetCode problem set', href: 'https://leetcode.com/problemset/', kind: 'Practice' },
                     { label: 'Codeforces', href: 'https://codeforces.com/', kind: 'Practice' },
-                    { label: 'MyntBit: Quant Developer track', href: 'https://myntbit.com/tracks/developer', kind: 'Interview practice · free tier' },
+                    { label: 'MyntBit: Quant Developer track', href: 'https://myntbit.com/tracks/developer', kind: 'Interview practice, free tier' },
                     { label: 'System Design Interview, Volume 1', href: 'https://www.amazon.com/dp/B08B3FWYBX', kind: 'Book' },
                     { label: 'System Design Interview, Volume 2', href: 'https://www.amazon.com/dp/B0CR977BQH', kind: 'Book' },
                     { label: 'Landing a quant internship', href: '/resources?guide=landing-a-quant-internship', kind: 'DevilQuant guide' },
@@ -153,10 +153,8 @@ const paths = [
     },
     {
         id: 'trader',
-        icon: '↗',
         title: 'Quant Trader',
         summary: 'Making decisions under uncertainty.',
-        accent: 'amber',
         stages: [
             {
                 title: 'Probability foundations',
@@ -204,10 +202,8 @@ const paths = [
     },
     {
         id: 'researcher',
-        icon: 'Σ',
         title: 'Quant Researcher',
         summary: 'Turning data into evidence-backed models.',
-        accent: 'emerald',
         stages: [
             {
                 title: 'Statistics foundations',
@@ -255,27 +251,6 @@ const paths = [
     },
 ];
 
-const accentClasses = {
-    indigo: {
-        active: 'border-indigo-400 bg-indigo-500/15',
-        text: 'text-indigo-300',
-        fill: 'bg-indigo-400',
-        icon: 'text-indigo-300',
-    },
-    amber: {
-        active: 'border-amber-400 bg-amber-500/15',
-        text: 'text-amber-300',
-        fill: 'bg-amber-400',
-        icon: 'text-amber-300',
-    },
-    emerald: {
-        active: 'border-emerald-400 bg-emerald-500/15',
-        text: 'text-emerald-300',
-        fill: 'bg-emerald-400',
-        icon: 'text-emerald-300',
-    },
-};
-
 const resourceLinks = {
     'Work through probability exercises': 'https://seeing-theory.brown.edu/basic-probability/index.html',
     'Simulate a simple strategy': '/resources?guide=monte-carlo-simulator',
@@ -309,59 +284,82 @@ const isExternalLink = (href) => href.startsWith('http');
 const toResource = (resource) =>
     typeof resource === 'string' ? { label: resource, href: resourceLinks[resource] || '/resources' } : resource;
 
-const ResourceLink = ({ resource, accentClass }) => {
-    const { label, href, kind } = toResource(resource);
-    const className = 'group flex items-center justify-between gap-3 border border-neutral-800/90 bg-[#0b0d0f] px-4 py-4 text-left text-sm font-medium text-neutral-200 transition-colors hover:border-neutral-500 hover:bg-neutral-900/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70';
-    const content = (
-        <>
-            <span>
-                {label}
-                {kind && <span className="mt-1 block text-xs font-normal text-neutral-500">{kind}</span>}
-            </span>
-            <span className={`${accentClass} transition-transform group-hover:translate-x-0.5`}>↗</span>
-        </>
-    );
+const resourceKey = (resource) => toResource(resource).label;
 
-    return isExternalLink(href) ? (
-        <a href={href} target="_blank" rel="noopener noreferrer" className={className}>
-            {content}
-        </a>
-    ) : (
-        <Link to={href} className={className}>
-            {content}
-        </Link>
+const sectionHeading = 'text-[32px] leading-[48px] font-bold tracking-[-0.03em] text-chalk';
+const subHeading = 'text-[20px] leading-[24px] font-bold tracking-[-0.02em] text-chalk';
+const outlinedTag = 'text-[13px] leading-[24px] px-[12px] text-chalk shadow-[inset_0_0_0_1px_var(--color-rule-major)] bg-pad';
+
+// The hand-drawn red-pen tick used for list markers on the About page.
+const Tick = () => (
+    <svg className="mt-[6px] w-[20px] h-[12px] shrink-0 text-redpen" viewBox="0 0 20 12" fill="none" aria-hidden="true">
+        <path d="M1 7C4 6 7 10 9 10C12 10 15 3 19 1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    </svg>
+);
+
+const TickList = ({ items, className = '' }) => (
+    <ul className={`grid gap-x-[48px] gap-y-[12px] sm:grid-cols-2 ${className}`}>
+        {items.map((item) => (
+            <li key={item} className="flex gap-[12px] text-[16px] leading-[24px] text-chalk">
+                <Tick />
+                <span>{item}</span>
+            </li>
+        ))}
+    </ul>
+);
+
+const ResourceLink = ({ resource }) => {
+    const { label, href, kind } = toResource(resource);
+    const external = isExternalLink(href);
+    const linkClass = 'ink-link text-[16px] leading-[24px] font-medium text-chalk underline decoration-[1.5px] decoration-chalk/60 underline-offset-[6px]';
+    return (
+        <li className="border-t border-rule py-[12px]">
+            {external ? (
+                <a href={href} target="_blank" rel="noopener noreferrer" className={linkClass}>
+                    {label}
+                    <span className="sr-only"> (opens in a new tab)</span>
+                </a>
+            ) : (
+                <Link to={href} className={linkClass}>{label}</Link>
+            )}
+            {kind && <p className="mt-[4px] text-[14px] leading-[24px] text-pencil">{kind}</p>}
+        </li>
     );
 };
 
-const resourceKey = (resource) => toResource(resource).label;
-
-const Outcome = ({ text, accent }) => (
-    <div className={`mt-6 border-l-2 border-current pl-4 ${accent.text}`}>
-        <p className="text-xs font-semibold uppercase tracking-[0.16em]">You are done when</p>
-        <p className="mt-2 text-sm leading-relaxed text-neutral-300">{text}</p>
+// A margin note: what "done" looks like for this stage.
+const Outcome = ({ text }) => (
+    <div className="mt-[24px] max-w-[60ch] border-l-[1.5px] border-redpen pl-[24px]">
+        <p className="font-hand text-[20px] leading-[24px] text-redpen">you are done when</p>
+        <p className="mt-[4px] text-[16px] leading-[26px] text-chalk">{text}</p>
     </div>
 );
 
 const Lanes = ({ lanes }) => (
-    <div className="mt-6 grid gap-px border border-neutral-800 bg-neutral-800 sm:grid-cols-3">
+    <ul className="mt-[48px] grid gap-[24px] md:grid-cols-3 md:gap-[48px]">
         {lanes.map((lane) => (
-            <div key={lane.name} className="bg-[#0b0d0f] p-4">
-                <h4 className="text-sm font-semibold text-white">{lane.name}</h4>
-                <p className="mt-2 text-sm leading-relaxed text-neutral-400">{lane.text}</p>
-            </div>
+            <li key={lane.name} className="border-t border-rule-major pt-[24px]">
+                <h3 className={subHeading}>{lane.name}</h3>
+                <p className="mt-[12px] text-[15px] leading-[24px] text-pencil">{lane.text}</p>
+            </li>
         ))}
-    </div>
+    </ul>
 );
 
-const ProjectIdeas = ({ ideas, accentClass }) => (
-    <div className="mt-8">
-        <h4 className="text-sm font-semibold text-white">Project ideas by lane</h4>
-        <div className="mt-4 grid gap-4 sm:grid-cols-3">
+const ProjectIdeas = ({ ideas }) => (
+    <div className="mt-[48px]">
+        <h3 className={subHeading}>Project ideas by lane</h3>
+        <div className="mt-[24px] grid gap-[24px] md:grid-cols-3 md:gap-[48px]">
             {ideas.map((group) => (
-                <div key={group.lane} className="border border-neutral-800 bg-[#0b0d0f] p-4">
-                    <p className={`text-xs font-semibold ${accentClass}`}>{group.lane}</p>
-                    <ul className="mt-3 space-y-2 text-sm text-neutral-300">
-                        {group.items.map((item) => <li key={item} className="flex gap-2"><span className={accentClass}>•</span>{item}</li>)}
+                <div key={group.lane} className="border-t border-rule-major pt-[12px]">
+                    <p className="text-[16px] leading-[24px] font-semibold text-chalk">{group.lane}</p>
+                    <ul className="mt-[12px] space-y-[12px]">
+                        {group.items.map((item) => (
+                            <li key={item} className="flex gap-[12px] text-[15px] leading-[24px] text-pencil">
+                                <Tick />
+                                <span>{item}</span>
+                            </li>
+                        ))}
                     </ul>
                 </div>
             ))}
@@ -369,209 +367,265 @@ const ProjectIdeas = ({ ideas, accentClass }) => (
     </div>
 );
 
-const Courses = ({ courses, accentClass }) => (
-    <div>
-        <h3 className="flex items-center gap-3 text-base font-semibold text-white"><span className={accentClass}>◆</span>Where this shows up at ASU</h3>
-        <ul className="mt-5 space-y-3">
+const Courses = ({ courses }) => (
+    <section className="mt-[48px] border-t border-rule-major pt-[24px]">
+        <h3 className={subHeading}>Where this shows up at ASU</h3>
+        <ul className="mt-[12px]">
             {courses.map((course) => (
-                <li key={course.code} className="border border-neutral-800/90 bg-[#0b0d0f] px-4 py-3 text-sm">
-                    <span className="font-semibold text-neutral-200">{course.code}: {course.name}</span>
-                    <span className="mt-1 block text-neutral-500">{course.note}</span>
+                <li key={course.code} className="border-t border-rule py-[12px]">
+                    <p className="text-[16px] leading-[24px] text-chalk">
+                        <span className="font-semibold">{course.code}</span> {course.name}
+                    </p>
+                    <p className="text-[14px] leading-[24px] text-pencil">{course.note}</p>
                 </li>
             ))}
         </ul>
-        <p className="mt-3 text-xs text-neutral-500">Course numbers come from the ASU catalog. Which courses are required depends on your major, so check your degree map.</p>
-    </div>
+        <p className="mt-[12px] text-[14px] leading-[24px] text-pencil">
+            Course numbers come from the ASU catalog. Which courses are required depends on your major, so check your degree map.
+        </p>
+    </section>
 );
 
+// Illustrative only: bar heights are a teaching device, not data.
 const specializationTopics = [
-    { name: 'Databases', level: 42 },
-    { name: 'Networking', level: 34 },
+    { name: 'Databases', level: 52 },
+    { name: 'Networking', level: 48 },
     { name: 'HPC', level: 100, specialty: true },
-    { name: 'Numerical methods', level: 50 },
-    { name: 'ML Ops', level: 38 },
+    { name: 'Numerical methods', level: 55 },
+    { name: 'ML Ops', level: 50 },
 ];
 
-const TShapeGraph = ({ accentClass }) => (
-    <div className="mt-8 border border-neutral-800/90 bg-[#0b0d0f] p-5 sm:p-6" aria-label="T-shaped specialization graph">
-        <div className="flex flex-col gap-2 border-b border-neutral-800 pb-5 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-                <p className={`text-xs font-semibold uppercase tracking-[0.2em] ${accentClass}`}>The T-shaped profile</p>
-                <h3 className="mt-2 text-lg font-semibold text-white">Broad enough to contribute. Deep enough to be undeniable.</h3>
-            </div>
-            <p className="max-w-sm text-sm leading-relaxed text-neutral-500">Choose one or two topics for serious depth while building working knowledge across the rest of the stack.</p>
-        </div>
-        <p className="mt-5 max-w-3xl border-l-2 border-indigo-400 pl-4 text-sm leading-relaxed text-neutral-300">
-            Your goal should be to develop a T-shaped skill profile. Quant Dev rewards people who are proficient in a broad range of skills, and an <span className="font-semibold uppercase text-indigo-300">expert</span> at one or two things.
+const TShapeGraph = () => (
+    <div className="mt-[48px] bg-pad p-[24px] md:p-[48px] shadow-[inset_0_0_0_1.5px_var(--color-rule-major)]">
+        <h3 className="text-[24px] leading-[36px] font-bold tracking-[-0.03em] text-chalk">
+            Broad enough to contribute. Deep enough to be undeniable.
+        </h3>
+        <p className="mt-[12px] max-w-[60ch] text-[16px] leading-[26px] text-pencil">
+            Your goal should be to develop a T-shaped skill profile. Quant development rewards people who are proficient across a broad range of skills and expert at one or two things. Choose one or two topics for serious depth while building working knowledge across the rest of the stack.
         </p>
 
-        <div className="mt-6 overflow-x-auto pb-2">
-            <div className="relative min-w-[38rem] pl-12 pr-2 pt-8">
-                <div className="pointer-events-none absolute inset-x-2 top-[25%] border-t border-amber-400/70">
-                    <span className="absolute -top-6 right-0 text-[10px] font-semibold uppercase tracking-[0.16em] text-amber-300">Expert</span>
-                </div>
-                <div className="pointer-events-none absolute inset-x-2 top-[60%] border-t border-emerald-400/70">
-                    <span className="absolute -top-6 right-0 text-[10px] font-semibold uppercase tracking-[0.16em] text-emerald-300">Proficient</span>
-                </div>
-                <div className="absolute bottom-0 -left-16 top-0 flex items-center">
-                    <span className="-rotate-90 whitespace-nowrap text-[10px] font-semibold uppercase tracking-[0.18em] text-neutral-500">Depth of knowledge</span>
-                </div>
-                <div className="grid h-72 grid-cols-5 items-end gap-2 border-b border-l border-neutral-700 px-3 sm:gap-4">
-                    {specializationTopics.map((topic) => (
-                        <div key={topic.name} className="flex h-full flex-col items-center justify-end gap-3">
+        <div className="mt-[24px] overflow-x-auto pb-[12px]">
+            <div
+                role="img"
+                aria-label="Illustrative bar chart: one deep specialty, high-performance computing, at expert level, and working proficiency in databases, networking, numerical methods, and ML Ops."
+                className="relative min-w-[32rem] pt-[36px]"
+            >
+                <span className="absolute left-[12px] top-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-90 whitespace-nowrap font-hand text-[18px] leading-[24px] text-pencil">
+                    Depth of knowledge
+                </span>
+                <div className="relative ml-[48px] h-[288px] border-b-[1.5px] border-l-[1.5px] border-pencil">
+                    <div className="pointer-events-none absolute inset-x-0 bottom-[85%] border-t border-dashed border-pencil/70">
+                        <span className="absolute -top-[28px] right-0 font-hand text-[18px] leading-[24px] text-chalk">Expert</span>
+                    </div>
+                    <div className="pointer-events-none absolute inset-x-0 bottom-[45%] border-t border-dashed border-pencil/70">
+                        <span className="absolute -top-[28px] right-0 font-hand text-[18px] leading-[24px] text-chalk">Proficient</span>
+                    </div>
+                    <div className="absolute inset-0 grid grid-cols-5 items-end gap-[12px] px-[12px] sm:gap-[24px]">
+                        {specializationTopics.map((topic) => (
                             <div
-                                className={`w-full max-w-24 border ${topic.specialty ? 'border-indigo-300/80 bg-indigo-400/30' : 'border-neutral-600 bg-neutral-700/50'} ${topic.specialty ? 'shadow-[0_0_24px_rgba(129,140,248,0.15)]' : ''}`}
+                                key={topic.name}
+                                className={`mx-auto w-full max-w-[96px] bg-pad ${topic.specialty ? 'shadow-[inset_0_0_0_1.5px_var(--color-chalk)]' : 'shadow-[inset_0_0_0_1.5px_var(--color-pencil)]'}`}
                                 style={{ height: `${topic.level}%` }}
-                                title={`${topic.name}: ${topic.specialty ? 'deep specialization' : 'working proficiency'}`}
                             />
-                            <span className={`min-h-8 text-center text-[11px] leading-4 ${topic.specialty ? `font-semibold ${accentClass}` : 'text-neutral-400'}`}>{topic.name}</span>
-                        </div>
+                        ))}
+                    </div>
+                </div>
+                <div className="ml-[48px] mt-[12px] grid grid-cols-5 gap-[12px] px-[12px] sm:gap-[24px]">
+                    {specializationTopics.map((topic) => (
+                        <span key={topic.name} className={`text-center text-[13px] leading-[16px] ${topic.specialty ? 'font-semibold text-chalk' : 'text-pencil'}`}>
+                            {topic.name}
+                        </span>
                     ))}
                 </div>
             </div>
         </div>
-        <div className="mt-5 border border-neutral-800 bg-neutral-900/40 p-5 sm:p-6">
-            <h4 className="text-base font-semibold text-white">Try to make the skillset <span className="text-indigo-300">coherent</span>.</h4>
-            <p className="mt-2 text-sm text-neutral-400">Different proficiencies should lend well to one another.</p>
-            <div className="mt-5 border-l-2 border-indigo-400/70 bg-black/40 p-4">
-                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-indigo-300">For example</p>
-                <p className="mt-3 text-sm leading-relaxed text-neutral-300">
-                    Expert at <span className="font-semibold text-white">high-performance computing</span>.<br />
-                    Proficient with <span className="font-semibold text-white">numerical optimization</span> and <span className="font-semibold text-white">data pipelines</span>.
+        <p className="text-[14px] leading-[24px] text-pencil">An illustration of the shape, not measured data. Your deep area could be HPC, numerical methods, databases, networking, or ML Ops.</p>
+
+        <div className="mt-[24px] border-t border-rule pt-[24px]">
+            <h4 className={subHeading}>Try to make the skillset coherent.</h4>
+            <p className="mt-[12px] text-[16px] leading-[26px] text-pencil">Different proficiencies should lend well to one another.</p>
+            <div className="mt-[24px] max-w-[60ch] border-l-[1.5px] border-redpen pl-[24px]">
+                <p className="font-hand text-[20px] leading-[24px] text-redpen">for example</p>
+                <p className="mt-[4px] text-[16px] leading-[26px] text-chalk">
+                    Expert at <span className="font-semibold">high-performance computing</span>. Proficient with <span className="font-semibold">numerical optimization</span> and <span className="font-semibold">data pipelines</span>.
                 </p>
-                <p className="mt-3 text-sm leading-relaxed text-neutral-400">This kind of skillset may make you highly desirable for a team looking to scale the scope of its derivatives pricing engine.</p>
+                <p className="mt-[12px] text-[16px] leading-[26px] text-pencil">
+                    This kind of skillset may make you highly desirable for a team looking to scale the scope of its derivatives pricing engine.
+                </p>
             </div>
-            <div className="mt-5 border border-neutral-800 p-4">
-                <p className="text-sm font-semibold text-white">How is this a coherent skillset?</p>
-                <p className="mt-2 text-sm text-neutral-400">Because it shows you can:</p>
-                <ul className="mt-3 space-y-2 text-sm text-neutral-300">
-                    <li className="flex gap-2"><span className={accentClass}>•</span>Handle end-to-end projects</li>
-                    <li className="flex gap-2"><span className={accentClass}>•</span>Pipeline clean, enriched market data in a scalable manner</li>
-                    <li className="flex gap-2"><span className={accentClass}>•</span>Implement pricing algorithms that scale to distributed compute</li>
-                    <li className="flex gap-2"><span className={accentClass}>•</span>Generate analytics from the output</li>
-                </ul>
-            </div>
+            <p className="mt-[24px] text-[16px] leading-[24px] font-semibold text-chalk">How is this a coherent skillset? Because it shows you can:</p>
+            <TickList
+                className="mt-[12px]"
+                items={[
+                    'Handle end-to-end projects',
+                    'Pipeline clean, enriched market data in a scalable manner',
+                    'Implement pricing algorithms that scale to distributed compute',
+                    'Generate analytics from the output',
+                ]}
+            />
         </div>
-        <div className="mt-5 border border-indigo-400/30 bg-indigo-500/5 p-4 sm:p-5">
-            <p className={`text-xs font-semibold uppercase tracking-[0.2em] ${accentClass}`}>Other possible topics</p>
-            <ul className="mt-3 grid gap-2 text-sm text-neutral-300 sm:grid-cols-3">
-                <li className="flex items-center gap-2"><span className={accentClass}>•</span>Parallel/GPU Programming</li>
-                <li className="flex items-center gap-2"><span className={accentClass}>•</span>Data Science</li>
-                <li className="flex items-center gap-2"><span className={accentClass}>•</span>Low-Level Systems</li>
+
+        <div className="mt-[24px] border-t border-rule pt-[24px]">
+            <h4 className={subHeading}>Other possible topics</h4>
+            <ul className="mt-[12px] flex flex-wrap gap-[12px]">
+                {['Parallel/GPU programming', 'Data science', 'Low-level systems'].map((topic) => (
+                    <li key={topic} className={outlinedTag}>{topic}</li>
+                ))}
             </ul>
         </div>
-        <p className="mt-4 text-xs text-neutral-500">Example specialization: high-performance computing. Your deep area can be HPC, numerical methods, databases, networking, or ML Ops.</p>
     </div>
 );
 
-const Roadmap = () => {
-    const [activePathId, setActivePathId] = useState(paths[0].id);
-    const [activeStage, setActiveStage] = useState(0);
-    const activePath = paths.find((path) => path.id === activePathId) || paths[0];
-    const accent = accentClasses[activePath.accent];
-    const stage = activePath.stages[activeStage];
+const StageSelect = ({ stages, value, onChange }) => (
+    <label className="relative mt-[12px] inline-flex w-full items-center lg:hidden">
+        <span className="sr-only">Stage</span>
+        <select
+            value={value}
+            onChange={(e) => onChange(Number(e.target.value))}
+            className="appearance-none w-full bg-pad text-chalk text-[15px] font-medium min-h-[48px] pl-[16px] pr-[40px] shadow-[inset_0_0_0_1.5px_var(--color-chalk)] cursor-pointer"
+        >
+            {stages.map((item, index) => (
+                <option key={item.title} value={index}>{index + 1}. {item.title}</option>
+            ))}
+        </select>
+        <svg className="pointer-events-none absolute right-[14px] w-[12px] h-[12px] text-chalk" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+        </svg>
+    </label>
+);
 
-    const selectPath = (pathId) => {
-        setActivePathId(pathId);
-        setActiveStage(0);
+const Roadmap = () => {
+    const [searchParams, setSearchParams] = useSearchParams();
+    const articleRef = useRef(null);
+
+    // The path and stage live in the URL (?path=trader&stage=3) so a stage can be shared.
+    const activePath = paths.find((path) => path.id === searchParams.get('path')) || paths[0];
+    const stageNumber = Number.parseInt(searchParams.get('stage'), 10);
+    const activeStage = stageNumber >= 1 && stageNumber <= activePath.stages.length ? stageNumber - 1 : 0;
+    const stage = activePath.stages[activeStage];
+    const lastStage = activePath.stages.length - 1;
+
+    const go = (pathId, stageIndex, scroll = false) => {
+        setSearchParams(stageIndex > 0 ? { path: pathId, stage: String(stageIndex + 1) } : { path: pathId });
+        if (scroll) articleRef.current?.scrollIntoView({ behavior: 'auto' });
     };
 
     return (
-        <main className="relative flex-1 overflow-hidden bg-[#090a0b] pt-16">
-            <div className="relative mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-16">
-                <section className="grid gap-px border border-neutral-800 bg-neutral-800 lg:grid-cols-3" aria-label="Quant paths">
+        <div className="sheet py-[72px]">
+            <header>
+                <h1 className="text-[clamp(48px,10vw,96px)] leading-[1] font-extrabold tracking-[-0.04em] text-chalk">
+                    Roadmap
+                </h1>
+                <p className="mt-[24px] max-w-[60ch] text-[17px] leading-[28px] text-pencil">
+                    Pick a path and work through it one stage at a time, from foundations to interviews.
+                </p>
+            </header>
+
+            <section className="mt-[72px] border-t border-rule-major pt-[48px]" aria-label="Choose a path">
+                <ul className="grid gap-[24px] md:grid-cols-3 md:gap-[48px]">
                     {paths.map((path) => {
-                        const isActive = path.id === activePathId;
-                        const pathAccent = accentClasses[path.accent];
+                        const isActive = path.id === activePath.id;
                         return (
-                            <button
-                                key={path.id}
-                                type="button"
-                                onClick={() => selectPath(path.id)}
-                                className={`group min-h-40 bg-[#0d0f11] p-5 text-left transition-colors hover:bg-neutral-900 ${isActive ? `${pathAccent.active} bg-[#15181c]` : ''}`}
-                                aria-pressed={isActive}
-                            >
-                                <div className="flex items-start justify-between gap-4">
-                                    <span className={`font-mono text-lg ${isActive ? pathAccent.icon : 'text-neutral-500'}`}>{path.icon}</span>
-                                    <span aria-hidden="true" className={`h-px w-8 ${isActive ? pathAccent.fill : 'bg-neutral-700'}`} />
-                                </div>
-                                <h2 className="mt-5 text-xl font-semibold text-white">{path.title}</h2>
-                                <p className="mt-1 text-sm text-neutral-400">{path.summary}</p>
-                            </button>
+                            <li key={path.id}>
+                                <button
+                                    type="button"
+                                    onClick={() => go(path.id, 0)}
+                                    aria-pressed={isActive}
+                                    className="group w-full cursor-pointer text-left"
+                                >
+                                    <span className={`relative inline-block text-[28px] leading-[36px] font-bold tracking-[-0.03em] ${isActive ? 'text-chalk' : 'text-pencil group-hover:text-chalk'}`}>
+                                        {path.title}
+                                        {isActive && <PenCircle />}
+                                    </span>
+                                    <span className="mt-[12px] block text-[16px] leading-[26px] text-pencil">{path.summary}</span>
+                                </button>
+                            </li>
                         );
                     })}
-                </section>
+                </ul>
+            </section>
 
-                <section className="mt-14 grid gap-10 lg:grid-cols-[17rem_1fr] lg:gap-16">
-                    <aside className="lg:sticky lg:top-24 lg:self-start">
-                        <div className="flex items-end justify-between border-b border-neutral-800 pb-3">
-                            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-neutral-500">Your roadmap</p>
-                            <span className="text-xs text-neutral-500">{activeStage + 1} of {activePath.stages.length} complete</span>
-                        </div>
-                        <div className="mt-3 h-1 bg-neutral-800">
-                            <div className={`h-full ${accent.fill}`} style={{ width: `${((activeStage + 1) / activePath.stages.length) * 100}%` }} />
-                        </div>
-                        <nav className="mt-6" aria-label={`${activePath.title} stages`}>
+            <section className="mt-[72px] grid gap-[48px] border-t border-rule-major pt-[48px] lg:grid-cols-[264px_1fr]">
+                <aside className="lg:sticky lg:top-[96px] lg:self-start">
+                    <p className="font-hand text-[20px] leading-[24px] text-chalk">{activePath.title}</p>
+                    <StageSelect stages={activePath.stages} value={activeStage} onChange={(index) => go(activePath.id, index, true)} />
+                    <nav className="mt-[12px] hidden lg:block" aria-label={`${activePath.title} stages`}>
+                        <ol className="border-l-[1.5px] border-rule-major pl-[24px]">
                             {activePath.stages.map((item, index) => {
                                 const isCurrent = index === activeStage;
                                 return (
-                                    <button
-                                        key={item.title}
-                                        type="button"
-                                        onClick={() => setActiveStage(index)}
-                                        className={`relative flex w-full gap-3 border-l px-2 pb-6 text-left transition-colors ${isCurrent ? `${accent.text} border-current` : 'border-neutral-800 text-neutral-500 hover:border-neutral-600 hover:text-neutral-300'}`}
-                                        aria-current={isCurrent ? 'step' : undefined}
-                                    >
-                                        <span className={`-ml-[1.05rem] flex h-7 w-7 shrink-0 items-center justify-center border bg-black text-xs ${isCurrent ? `border-current ${accent.text}` : 'border-neutral-700 text-neutral-500'}`}>
-                                            {index < activeStage ? '✓' : String(index + 1).padStart(2, '0')}
-                                        </span>
-                                        <span className="pt-1">
-                                            <span className={`block text-sm font-semibold ${isCurrent ? 'text-white' : ''}`}>{item.title}</span>
-                                            <span className="mt-1 block text-xs text-neutral-500">{item.type}</span>
-                                        </span>
-                                    </button>
+                                    <li key={item.title}>
+                                        <button
+                                            type="button"
+                                            onClick={() => go(activePath.id, index, true)}
+                                            aria-current={isCurrent ? 'step' : undefined}
+                                            className={`group w-full cursor-pointer py-[12px] text-left text-[15px] leading-[24px] font-medium ${isCurrent ? 'text-chalk' : 'text-pencil hover:text-chalk'}`}
+                                        >
+                                            <span className={`relative inline-block ${isCurrent ? '' : 'ink-link'}`}>
+                                                {index + 1}. {item.title}
+                                                {isCurrent && <PenCircle />}
+                                            </span>
+                                        </button>
+                                    </li>
                                 );
                             })}
-                        </nav>
-                    </aside>
+                        </ol>
+                    </nav>
+                </aside>
 
-                    <article className="border border-neutral-800 bg-[#101214] shadow-[0_20px_80px_rgba(0,0,0,0.2)]">
-                        <div className="border-b border-neutral-800 p-6 sm:p-8">
-                            <div className="flex flex-wrap items-center gap-3 text-xs text-neutral-500">
-                                <span className={`border border-current px-2 py-1 font-semibold ${accent.text}`}>{stage.type}</span>
-                                <span>Stage {String(activeStage + 1).padStart(2, '0')} / {String(activePath.stages.length).padStart(2, '0')}</span>
-                                <span aria-hidden="true">·</span>
-                                <span>{activePath.title}</span>
-                            </div>
-                            <h2 className="mt-5 text-3xl font-bold tracking-tight text-white sm:text-4xl">{stage.title}</h2>
-                            <p className="mt-4 max-w-3xl text-base leading-relaxed text-neutral-400">{stage.description}</p>
-                            {stage.outcome && <Outcome text={stage.outcome} accent={accent} />}
-                            {stage.lanes && <Lanes lanes={stage.lanes} />}
-                        </div>
+                <article ref={articleRef} className="min-w-0 scroll-mt-[96px]">
+                    <p className="text-[15px] leading-[24px] text-pencil">Stage {activeStage + 1} of {activePath.stages.length}</p>
+                    <h2 className={`mt-[4px] ${sectionHeading}`}>{stage.title}</h2>
+                    <p className="font-hand text-[18px] leading-[24px] text-redpen">{stage.type}</p>
+                    <p className="mt-[24px] max-w-[60ch] text-[16px] leading-[26px] text-pencil">{stage.description}</p>
+                    {stage.outcome && <Outcome text={stage.outcome} />}
+                    {stage.lanes && <Lanes lanes={stage.lanes} />}
 
-                        <div className="space-y-10 p-6 sm:p-8">
-                            <div>
-                                <h3 className="flex items-center gap-3 text-base font-semibold text-white"><span className={accent.text}>◇</span>What you&apos;ll learn</h3>
-                                <ul className="mt-5 grid gap-3 text-sm text-neutral-300 sm:grid-cols-2">
-                                    {stage.learn.map((item) => <li key={item} className="flex gap-3"><span className={accent.text}>•</span>{item}</li>)}
-                                </ul>
-                                {stage.ideas && <ProjectIdeas ideas={stage.ideas} accentClass={accent.text} />}
-                                {stage.showTShape && <TShapeGraph accentClass={accent.text} />}
-                            </div>
-                            {stage.courses && <Courses courses={stage.courses} accentClass={accent.text} />}
-                            <div>
-                                <h3 className="flex items-center gap-3 text-base font-semibold text-white"><span className={accent.text}>↗</span>Start with these resources</h3>
-                                <div className="mt-5 grid gap-3 sm:grid-cols-2">
-                                    {stage.resources.map((resource) => (
-                                        <ResourceLink key={resourceKey(resource)} resource={resource} accentClass={accent.text} />
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-                </section>
-            </div>
-        </main>
+                    <section className="mt-[48px] border-t border-rule-major pt-[24px]">
+                        <h3 className={subHeading}>What you&apos;ll learn</h3>
+                        <TickList className="mt-[24px]" items={stage.learn} />
+                        {stage.ideas && <ProjectIdeas ideas={stage.ideas} />}
+                        {stage.showTShape && <TShapeGraph />}
+                    </section>
+
+                    {stage.courses && <Courses courses={stage.courses} />}
+
+                    <section className="mt-[48px] border-t border-rule-major pt-[24px]">
+                        <h3 className={subHeading}>Start with these resources</h3>
+                        <ul className="mt-[12px] grid gap-x-[48px] sm:grid-cols-2">
+                            {stage.resources.map((resource) => (
+                                <ResourceLink key={resourceKey(resource)} resource={resource} />
+                            ))}
+                        </ul>
+                    </section>
+
+                    <div className="mt-[48px] flex flex-wrap items-center justify-between gap-[24px] border-t border-rule-major pt-[24px]">
+                        {activeStage > 0 ? (
+                            <button type="button" onClick={() => go(activePath.id, activeStage - 1, true)} className="btn-pen cursor-pointer py-[12px] text-left text-[16px]">
+                                Previous: {activePath.stages[activeStage - 1].title}
+                            </button>
+                        ) : <span />}
+                        {activeStage < lastStage && (
+                            <button type="button" onClick={() => go(activePath.id, activeStage + 1, true)} className="btn-pen cursor-pointer py-[12px] text-left text-[16px]">
+                                Next: {activePath.stages[activeStage + 1].title}
+                            </button>
+                        )}
+                    </div>
+                </article>
+            </section>
+
+            <section className="mt-[96px] border-t border-rule-major pt-[48px]">
+                <h2 className="text-[clamp(40px,8vw,72px)] leading-[1] font-extrabold tracking-[-0.04em] text-chalk">
+                    Build it together.
+                </h2>
+                <p className="mt-[24px] max-w-[52ch] text-[17px] leading-[28px] text-pencil">
+                    Join the Discord to find people to build with.
+                </p>
+                <a href={DISCORD_URL} target="_blank" rel="noopener noreferrer" className="btn-highlight mt-[24px] text-[17px]">
+                    Join the Discord
+                </a>
+            </section>
+        </div>
     );
 };
 
