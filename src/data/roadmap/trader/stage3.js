@@ -63,11 +63,6 @@ const stage = {
             ],
         },
     ],
-    deliverable: {
-        title: 'A decision journal and a simulated risk experiment',
-        text: 'A decision journal with at least ten entries, plus a notebook that simulates a repeated bet with a known edge. Compare at least three sizing rules (including a small fixed fraction and Kelly), and report how often each one hits a drawdown limit you set before running anything.',
-        doneWhen: ['Ten dated journal entries, each with the decision, your probability estimate, and what would change your mind.', 'You wrote down the drawdown limit before running the simulation.', 'The notebook uses a fixed seed and shows what share of simulated runs hit the limit for each rule.', 'There\'s a version where your real edge is smaller than you thought.'],
-    },
     checkpoint: {
         intro: 'Only check a box once you\'ve actually done it.',
         items: [

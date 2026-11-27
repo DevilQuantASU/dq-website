@@ -13,7 +13,7 @@ const stage = {
             resources: [
                 { key: 'harris', section: 'Optional, and it costs money (or check your library). We didn\'t check the chapter titles, so use the index to find order types and market structure.', alt: true },
             ],
-            note: 'We couldn\'t find a free source we trust that explains order books well, so this lesson is built around the example below and a notebook you put together yourself. The Stage 5 capstone gives you a fake market to play with too.',
+            note: 'We couldn\'t find a free source we trust that explains order books well, so this lesson is built around the example below. Make up a few order books of your own and walk through them the same way. The Stage 5 capstone gives you a fake market to play with too.',
             worked: {
                 title: 'Walking the book',
                 prompt: 'The book has bids for 300 shares at 100.00 and 200 at 99.99, and asks of 200 at 100.02 and 300 at 100.03. You send a market order to buy 500. What\'s your average price, and how much worse is that than the mid price?',
@@ -86,16 +86,11 @@ const stage = {
             note: 'You don\'t need this to finish the path. Come back after the capstone if it sounds interesting.',
         },
     ],
-    deliverable: {
-        title: 'A market mechanics notebook',
-        text: 'A notebook with: a walk through an order book with your average price and slippage, a simulation of a market maker trading against informed and uninformed traders with its quotes and P&L, payoff diagrams for a call, a put, and a spread, a put-call parity check, and a delta hedge on a small option position.',
-        doneWhen: ['All five pieces are there and run from a fresh start.', 'Every formula has a comment with its units.', 'You\'ve checked at least one result against a hand calculation.'],
-    },
     checkpoint: {
         intro: 'Only check a box once you\'ve actually done it.',
         items: [
             { id: 'c1', text: 'Five mixed order book, futures, parity, and hedging problems in 45 minutes: at least 4 right.' },
-            { id: 'c2', text: 'Your notebook checks every box in its "done when" list.' },
+            { id: 'c2', text: 'You can sketch the payoff of a call, a put, and a call spread from memory.' },
             { id: 'c3', text: 'In under two minutes, out loud, you can explain why a market maker quotes wider when more of the people trading with it know something it doesn\'t.' },
             { id: 'c4', text: 'You\'ve done the CME modules on mark to market, margin, and calculating profit or loss, and you can do each calculation by hand.' },
         ],
@@ -107,7 +102,7 @@ const stage = {
         { mistake: 'Assuming everyone trading with you knows the same amount.', fix: 'Split your example into informed and uninformed traders and watch how the break-even spread moves.' },
     ],
     skip: 'If you can pass the whole checkpoint cold, skip to Stage 5. The OIC Greeks pages are still worth a quick read.',
-    next: 'Open CME\'s "Introduction to Futures" course and start with the module that defines a futures contract. Then start your notebook with the order book walk.',
+    next: 'Open CME\'s "Introduction to Futures" course and start with the module that defines a futures contract. Then try walking through an order book on paper like the example in lesson 1.',
 };
 
 export default stage;

@@ -158,11 +158,6 @@ const stage = {
             'Options: add an option on the real price and delta-hedge it every turn.',
         ],
     },
-    deliverable: {
-        title: 'The Market-Making Simulator',
-        text: 'The capstone repo, README, and report from the brief. This is the main thing you\'ll build on the whole path.',
-        doneWhen: ['Every acceptance test in the brief passes.', 'The README lists your locked-in parameters, your tuning log, and what the simulator can\'t do.', 'The report compares both strategies across every scenario, with error bars.', 'Someone who\'s never seen your code can clone it and rebuild your charts.'],
-    },
     checkpoint: {
         intro: 'Only check a box once you\'ve actually done it.',
         items: [

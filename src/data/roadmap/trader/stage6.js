@@ -84,11 +84,6 @@ const stage = {
             ],
         },
     ],
-    deliverable: {
-        title: 'Your recruiting packet and mock interview notes',
-        text: 'A one-page resume that includes your capstone, a firm tracker that says how each firm describes its process and when you checked, a five-minute talk on your capstone, and notes from at least three scored mock interviews.',
-        doneWhen: ['Your resume is one page and links to your capstone repo.', 'Your tracker has at least five firms, each with the official page you read and the date you checked it.', 'You gave your five-minute talk to someone who hadn\'t seen the capstone, and wrote down their questions.', 'You scored three mock interviews with the final rubric.'],
-    },
     showRubric: true,
     checkpoint: {
         intro: 'This is the last checkpoint. Only check a box once you\'ve actually done it.',

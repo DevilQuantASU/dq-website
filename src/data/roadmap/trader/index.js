@@ -14,7 +14,6 @@ export const stages = [stage1, stage2, stage3, stage4, stage5, stage6];
 // so renaming a lesson title does not reset anyone's progress.
 export const lessonId = (stage, lesson) => `trader.${stage.id}.${lesson.id}`;
 export const checkpointId = (stage, item) => `trader.${stage.id}.${item.id}`;
-export const deliverableId = (stage) => `trader.${stage.id}.deliverable`;
 export const resourceOpenId = (stage, lesson, key) => `trader.${stage.id}.${lesson.id}.r.${key}`;
 
 export const lessonHours = (lesson) => lesson.hours;

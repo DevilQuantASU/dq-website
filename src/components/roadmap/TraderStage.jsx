@@ -3,7 +3,6 @@ import {
     resources as registry,
     lessonId,
     checkpointId,
-    deliverableId,
     resourceOpenId,
     stageHours,
     specializations,
@@ -166,7 +165,7 @@ const Capstone = ({ capstone }) => {
             <List title="Scenarios and seeds" items={capstone.scenarios} />
             <List title="Reproducibility and uncertainty" items={capstone.reproducibility} />
             <List title="Leakage checks" items={capstone.leakage} />
-            <List title="What to hand in" items={capstone.deliverables} />
+            <List title="What you’ll end up with" items={capstone.deliverables} />
             <List title="Acceptance tests" items={capstone.acceptance} />
             <div className="mt-[24px]">
                 <h4 className="text-[16px] leading-[24px] font-bold text-chalk">How it’s graded</h4>
@@ -184,7 +183,6 @@ const Capstone = ({ capstone }) => {
 
 const TraderStage = ({ stage, progress, desk }) => {
     const cpIds = stage.checkpoint.items.map((i) => checkpointId(stage, i));
-    const delId = deliverableId(stage);
     const coreLessons = stage.lessons.filter((l) => l.label === 'Core');
     const coreShown = progress.count(coreLessons.map((l) => lessonId(stage, l)));
     const cpDone = progress.count(cpIds);
@@ -229,20 +227,6 @@ const TraderStage = ({ stage, progress, desk }) => {
 
             {stage.capstone && <Capstone capstone={stage.capstone} />}
 
-            {stage.deliverable && (
-                <section className="mt-[48px] border-t border-rule-major pt-[24px]" aria-labelledby={`${stage.id}-deliverable`}>
-                    <h3 id={`${stage.id}-deliverable`} className={subHeading}>Deliverable: {stage.deliverable.title}</h3>
-                    <p className={`mt-[8px] max-w-[60ch] ${bodyText}`}>{stage.deliverable.text}</p>
-                    <ul className="mt-[12px] list-disc space-y-[4px] pl-[24px]">
-                        {stage.deliverable.doneWhen.map((d) => <li key={d} className={bodyText}>{d}</li>)}
-                    </ul>
-                    <div className="mt-[12px]">
-                        <Check id={delId} checked={Boolean(progress.get(delId))} onChange={(v) => progress.set(delId, v)}>
-                            I finished this and it checks every box above.
-                        </Check>
-                    </div>
-                </section>
-            )}
 
             <section className="mt-[48px] border-t border-rule-major pt-[24px]" aria-labelledby={`${stage.id}-checkpoint`}>
                 <h3 id={`${stage.id}-checkpoint`} className={subHeading}>Checkpoint</h3>

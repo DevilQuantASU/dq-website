@@ -3,7 +3,7 @@ const stage = {
     title: 'Probability and expected value',
     type: 'Foundation',
     description: 'Count outcomes, update your beliefs when new information comes in, work out expected value, and then check yourself with a simulation.',
-    purpose: 'Probability is the language traders think in. This stage goes from basic counting up to the central limit theorem, and you finish with a notebook where you solve every problem twice: once with math, once with a simulation.',
+    purpose: 'Probability is the language traders think in. This stage goes from basic counting up to the central limit theorem. Get in the habit of solving problems twice: once with math, once with a simulation, and checking that they agree.',
     prerequisites: ['Stage 1, or you\'re already comfortable with percentages, averages, and simple Python functions.', 'Stat 110 lists calculus (mostly single variable) and some comfort with matrices as prerequisites. If you don\'t have those yet, use OpenIntro Statistics and the MIT 18.05 notes as your main sources, and come back to Stat 110 later if you want.'],
     alongside: 'Do one probability puzzle a week and talk through it out loud. The Jane Street Probability Playing Cards are a good place to start: clubs and diamonds first.',
     lessons: [
@@ -83,16 +83,11 @@ const stage = {
             ],
         },
     ],
-    deliverable: {
-        title: 'An expected value and Monte Carlo notebook',
-        text: 'A notebook with five probability or expected value problems you pick yourself. For each one, solve it with math, then estimate it with a seeded simulation that has a margin of error, and write a sentence on whether the two agree.',
-        doneWhen: ['Five problems, each with a written-out math solution.', 'Each simulation uses a fixed seed and reports a standard error.', 'Every math answer lands within three standard errors of its simulation, or you explain why it doesn\'t.'],
-    },
     checkpoint: {
         intro: 'Time yourself and don\'t look at solutions. Only check a box once you\'ve actually done it.',
         items: [
             { id: 'c1', text: 'Ten mixed counting, conditional probability, and expected value problems in 60 minutes: at least 8 right, with a one-line explanation for each.' },
-            { id: 'c2', text: 'Your notebook checks every box in its "done when" list.' },
+            { id: 'c2', text: 'For a problem you\'ve solved with math, you can write a seeded simulation that lands within three standard errors of your answer.' },
             { id: 'c3', text: 'You\'ve tried the first five or six clubs and diamonds questions in the Jane Street Probability Playing Cards, and you can explain the ones you solved.' },
             { id: 'c4', text: 'You can name, in your own words, one thing the central limit theorem doesn\'t guarantee.' },
         ],
@@ -104,7 +99,7 @@ const stage = {
         { mistake: 'Skipping the solution when you got the answer right.', fix: 'Read it anyway. There\'s often a shorter way to get there, and it\'s worth knowing.' },
     ],
     skip: 'If you can pass the whole checkpoint cold, skip ahead to Stage 3. Keep doing the weekly puzzle.',
-    next: 'Open Stat 110 Strategic Practice Set 2 and try the Inclusion-Exclusion problems before you look at any solutions. Then start your notebook with the first problem.',
+    next: 'Open Stat 110 Strategic Practice Set 2 and try the Inclusion-Exclusion problems before you look at any solutions. Then pick one of them and check your answer with a quick simulation.',
 };
 
 export default stage;
