@@ -15,14 +15,14 @@ const paths = [
             {
                 title: 'How quant development splits',
                 type: 'Orientation',
-                description: 'Quant development is not one job. Firms and teams weight three kinds of work differently, and many roles blend them. Treat the lanes below as a way to read job postings, not as official titles. Read a handful of postings at firms you would want to work at, notice which emphasis dominates, and use that to decide where your early effort goes.',
+                description: 'There\'s no single quant developer job. Some teams want low-latency C++ people, some want people building research tools, and some want people keeping the data flowing. Most roles mix all three. Use the three lanes below to make sense of job postings (they aren\'t official titles). Read a few postings from firms you\'d actually want to work at, see which lane keeps showing up, and spend your early time there.',
                 lanes: [
-                    { name: 'Low-latency & systems', text: 'Performance-critical software: execution, exchange connectivity, pricing libraries. Usually C++, with heavy emphasis on concurrency, memory, and networking.' },
-                    { name: 'Research platforms & tooling', text: 'The software researchers rely on: backtesting frameworks, simulation, research environments, data access. Often Python, sometimes with C++ underneath.' },
-                    { name: 'Data & infrastructure', text: 'Pipelines, storage, market data, distributed compute, and reliability. The language varies; the problems are about scale and correctness.' },
+                    { name: 'Low-latency & systems', text: 'The software where speed matters most: order execution, exchange connections, pricing libraries. Mostly C++, and a lot of time spent on concurrency, memory, and networking.' },
+                    { name: 'Research platforms & tooling', text: 'The tools researchers use every day: backtesters, simulators, research environments, and ways to get at data. Usually Python, sometimes with C++ underneath.' },
+                    { name: 'Data & infrastructure', text: 'Pipelines, storage, market data, distributed compute, and keeping it all running. The language changes from team to team. The hard part is scale and getting the numbers right.' },
                 ],
-                learn: ['Read 5 to 10 quant developer postings and note the recurring languages and responsibilities', 'Notice how titles and scope differ between firms', 'Choose a lane to lead with, and expect to borrow skills from the others'],
-                outcome: 'You can say which lane a given posting leans toward, which one you want to lead with, and why.',
+                learn: ['Read 5 to 10 quant developer postings and write down the languages and duties that keep coming up', 'Compare how different firms title and scope the same kind of work', 'Pick a lane to start with. You\'ll still borrow skills from the other two'],
+                outcome: 'You can look at a posting and tell which lane it leans toward, and you know which lane you want to start with and why.',
                 resources: [
                     { label: 'What quant finance covers', href: '/resources?guide=getting-started-with-quant', kind: 'DevilQuant guide' },
                     { label: 'Landing a quant internship', href: '/resources?guide=landing-a-quant-internship', kind: 'DevilQuant guide' },
@@ -31,18 +31,18 @@ const paths = [
             {
                 title: 'Language depth',
                 type: 'Foundation',
-                description: 'You do not need to master Python and C++ at the same time. Pick the language that matches your lane and build deep, production-ready knowledge instead of collecting surface-level syntax. Plan to add the other one later; most strong quant developers end up comfortable in both.',
+                description: 'Don\'t try to learn Python and C++ at the same time. Pick the one that fits your lane and get really good at it, past the syntax and into how it actually works. You\'ll pick up the other one later. Most experienced quant devs end up using both.',
                 learn: [
                     'Python: the data model, iterators and generators, typing, packaging, profiling, and NumPy/pandas fundamentals',
                     'C++: modern C++ (17/20), ownership and RAII, the STL and its complexity guarantees, CMake builds, debugging with sanitizers',
                     'Algorithms, data structures, and complexity in your chosen language',
-                    'Read Effective C++ critically: some advice predates modern C++, but its core lessons remain essential',
+                    'Effective C++: some of it predates modern C++, so read it with that in mind. The core ideas still hold up',
                 ],
-                outcome: 'You can build, test, and ship a small multi-file program in your language, and explain its memory and performance behavior.',
+                outcome: 'You can build, test, and ship a small program with a few files in your language, and explain how it uses memory and where it\'s slow.',
                 courses: [
-                    { code: 'CSE 110', name: 'Principles of Programming', note: 'Programming fundamentals; the starting point for either language.' },
-                    { code: 'CSE 310', name: 'Data Structures and Algorithms', note: 'Algorithms and complexity analysis, the base for coding interviews.' },
-                    { code: 'CSE 340', name: 'Principles of Programming Languages', note: 'How programming languages are designed and implemented.' },
+                    { code: 'CSE 110', name: 'Principles of Programming', note: 'Programming basics. Start here for either language.' },
+                    { code: 'CSE 310', name: 'Data Structures and Algorithms', note: 'Algorithms and complexity. Most coding interviews build on this.' },
+                    { code: 'CSE 340', name: 'Principles of Programming Languages', note: 'How programming languages are designed and built.' },
                 ],
                 resources: [
                     { label: 'Fluent Python', href: 'https://www.oreilly.com/library/view/fluent-python-2nd/9781492056348/', kind: 'Python book' },
@@ -57,14 +57,14 @@ const paths = [
             {
                 title: 'Systems foundations: OS, architecture & networking',
                 type: 'Core',
-                description: 'Build the systems foundation underneath quantitative software. Read Operating Systems: Three Easy Pieces through Part 1 (Virtualization) and Part 2 (Concurrency). Then read Computer Systems: A Programmer\'s Perspective to see how hardware actually runs your code, and work through Computer Networking: A Top-Down Approach, Chapters 1 through 5, paying extra attention to the transport layer and sockets.',
+                description: 'This is the layer under everything you\'ll write. Read Operating Systems: Three Easy Pieces through Part 1 (Virtualization) and Part 2 (Concurrency). Then read Computer Systems: A Programmer\'s Perspective to see what the hardware actually does with your code. Finish with Computer Networking: A Top-Down Approach, chapters 1 to 5, and spend extra time on the transport layer and sockets.',
                 learn: [
                     'Processes, scheduling, and virtual memory',
                     'Threads, locks, and the basics of memory ordering',
                     'Caches and the memory hierarchy, and why data layout changes speed',
                     'Sockets, TCP versus UDP, and how reliable communication is built',
                 ],
-                outcome: 'You can explain what happens, from your code through the OS and hardware, when two threads contend for a lock or a packet arrives on a socket.',
+                outcome: 'You can explain what happens, all the way down through the OS and hardware, when two threads fight over a lock or a packet shows up on a socket.',
                 courses: [
                     { code: 'CSE 230', name: 'Computer Organization and Assembly Language Programming', note: 'Assembly and how programs map onto the machine.' },
                     { code: 'CSE 330', name: 'Operating Systems', note: 'Processes, scheduling, memory, and concurrency.' },
@@ -81,14 +81,14 @@ const paths = [
             {
                 title: 'Data & system design',
                 type: 'Core',
-                description: 'Learn to design systems that move, store, and process large amounts of data, then apply it to quant-shaped problems: ingesting market data, storing time series, running an event-driven backtester, and tracking the life of an order. Start with Designing Data-Intensive Applications, 2nd Edition, and sketch the quant designs on paper as you go.',
+                description: 'Learn how to design systems that move, store, and process a lot of data. Then use it on problems quant teams actually have: pulling in market data, storing time series, running an event-driven backtester, and tracking an order from start to finish. Start with Designing Data-Intensive Applications (2nd edition), and sketch the quant versions on paper as you read.',
                 learn: [
                     'Data models, storage engines, and indexing',
                     'Replication, partitioning, and consistency',
                     'Batch and stream processing',
-                    'Sketch a market data pipeline and an event-driven backtester, and defend your tradeoffs',
+                    'Sketch a market data pipeline and an event-driven backtester, and be ready to explain your tradeoffs',
                 ],
-                outcome: 'You can design and defend a market data pipeline or a backtesting system, naming the tradeoffs you chose.',
+                outcome: 'You can design a market data pipeline or a backtester and explain the tradeoffs you made.',
                 courses: [
                     { code: 'CSE 412', name: 'Database Management', note: 'Storage, queries, and transactions. CS majors choose one of CSE 412, 434, or 445.' },
                     { code: 'CSE 445', name: 'Distributed Software Development', note: 'Building software across services and machines.' },
@@ -101,12 +101,12 @@ const paths = [
             {
                 title: 'Build projects & find your specialty',
                 type: 'Applied',
-                description: 'Projects are where you discover what you want to go deep on. Build coherent, end-to-end systems, contribute to existing open-source code, and show that you can work inside a real codebase instead of only starting from scratch. As the work accumulates, develop undeniable depth in one or two areas while keeping a broad base. Your specialty should be demonstrated by production-level work.',
+                description: 'Projects are how you figure out what you want to go deep on. Build complete systems from start to finish, contribute to code someone else wrote, and show you can work in a real codebase, not just a blank folder. Over time, go really deep on one or two areas and keep a broad base around them. Let your projects show what your specialty is.',
                 learn: [
-                    'Choose projects that make you reuse what you learned in stages 2 to 4',
-                    'Ship a complete, documented system with tests and a README',
+                    'Pick projects that make you use what you learned in stages 2 to 4',
+                    'Finish a full system with tests, docs, and a README',
                     'Read, review, and improve an existing codebase',
-                    'Use issues, tests, pull requests, and code review',
+                    'Work the way teams do: issues, tests, pull requests, and code review',
                 ],
                 ideas: [
                     { lane: 'Low-latency & systems', items: ['A limit order book and matching engine, with benchmarks', 'A lock-free queue and a write-up of its memory ordering', 'A market data feed handler that parses and replays captured data'] },
@@ -114,7 +114,7 @@ const paths = [
                     { lane: 'Data & infrastructure', items: ['A market data ingestion pipeline with storage and replay', 'A scheduled scraper feeding a queryable store with monitoring'] },
                 ],
                 showTShape: true,
-                outcome: 'You have at least one complete, documented project and one contribution to someone else\'s codebase, and you can say what your specialty is and why.',
+                outcome: 'You\'ve finished at least one documented project and contributed to someone else\'s codebase, and you can say what your specialty is and why.',
                 courses: [
                     { code: 'CSE 360', name: 'Introduction to Software Engineering', note: 'Teams, testing, and process on a shared codebase.' },
                 ],
@@ -129,15 +129,15 @@ const paths = [
             {
                 title: 'Interviews & entry strategy',
                 type: 'Career preparation',
-                description: 'Turn your skills into evidence and show how you think with other engineers. Interviews combine general algorithm problems with topics from your lane: concurrency and memory, operating systems and networking, or data and system design. If the direct quant path is crowded, a strong adjacent engineering role can be the right next step.',
+                description: 'Now turn your skills into something an interviewer can see. Interviews usually mix standard algorithm problems with topics from your lane: concurrency and memory, operating systems and networking, or data and system design. And if the direct route into quant is crowded, a strong engineering job next to it is a perfectly good next step.',
                 learn: [
                     'Algorithm patterns through LeetCode and Codeforces',
                     'Lane-specific topics: C++ and concurrency, OS and networking, or data and system design',
-                    'Explain your reasoning aloud and ask good clarifying questions',
-                    'Walk through a project end to end: decisions, tradeoffs, and what went wrong',
-                    'A GitHub profile and resume bullets that show production-level work',
+                    'Explain your thinking out loud and ask good clarifying questions',
+                    'Walk through a project end to end: what you decided, the tradeoffs, and what went wrong',
+                    'A GitHub profile and resume bullets that show real, finished work',
                 ],
-                outcome: 'You can walk through any project on your resume in depth for 20 minutes, and solve a medium algorithm problem while narrating your reasoning.',
+                outcome: 'You can talk through any project on your resume for 20 minutes, and solve a medium algorithm problem while explaining your thinking out loud.',
                 courses: [
                     { code: 'CSE 310', name: 'Data Structures and Algorithms', note: 'The foundation for coding interviews.' },
                     { code: 'CSE 494', name: 'Competitive Programming and Problem Solving', note: 'Prepares you for ICPC; offered in spring.' },
@@ -295,7 +295,7 @@ const ResourceLink = ({ resource }) => {
 // A callout: what "done" looks like for this stage.
 const Outcome = ({ text }) => (
     <div className="mt-[24px] max-w-[60ch] border-[1.5px] border-chalk/60 bg-chalk/[0.06] p-[24px]">
-        <p className="font-hand text-[20px] leading-[24px] text-redpen">you are done when</p>
+        <p className="font-hand text-[20px] leading-[24px] text-redpen">you're done when</p>
         <p className="mt-[4px] text-[16px] leading-[26px] text-chalk">{text}</p>
     </div>
 );
@@ -363,16 +363,16 @@ const specializationTopics = [
 const TShapeGraph = () => (
     <div className="mt-[48px] border-t border-rule pt-[24px]">
         <h3 className="text-[24px] leading-[36px] font-bold tracking-[-0.03em] text-chalk">
-            Broad enough to contribute. Deep enough to be undeniable.
+            Broad enough to help anywhere. Deep enough to stand out.
         </h3>
         <p className="mt-[12px] max-w-[60ch] text-[16px] leading-[26px] text-chalk">
-            Your goal should be to develop a T-shaped skill profile. Quant development rewards people who are proficient across a broad range of skills and expert at one or two things. Choose one or two topics for serious depth while building working knowledge across the rest of the stack.
+            Aim for a T-shaped skill set: decent at a lot of things, really good at one or two. Pick one or two topics to go deep on, and build working knowledge across the rest of the stack.
         </p>
 
         <div className="mt-[24px] max-w-[60ch] border-[1.5px] border-pencil/50 bg-pencil/[0.08] p-[24px]">
             <p className="font-hand text-[20px] leading-[24px] text-redpen">just an example</p>
             <p className="mt-[4px] text-[16px] leading-[26px] text-chalk">
-                These are not the skills everyone needs. The graph only shows the shape: one deep area with working knowledge around it. Your own deep area and supporting skills depend on your lane and interests.
+                Not everyone needs these skills. The graph just shows the shape: one deep area with working knowledge around it. Your deep area and the skills around it depend on your lane and what you’re into.
             </p>
         </div>
 
@@ -411,28 +411,28 @@ const TShapeGraph = () => (
                 </div>
             </div>
         </div>
-        <p className="text-[14px] leading-[24px] text-pencil">Example only. Bar heights are illustrative, not measured data. Your deep area could be HPC, numerical methods, databases, networking, or ML Ops.</p>
+        <p className="text-[14px] leading-[24px] text-pencil">Example only. The bar heights are made up to show the shape. Your deep area could be HPC, numerical methods, databases, networking, or ML Ops.</p>
 
         <div className="mt-[24px] border-t border-rule pt-[24px]">
-            <h4 className={subHeading}>Try to make the skillset coherent.</h4>
-            <p className="mt-[12px] text-[16px] leading-[26px] text-chalk">Different proficiencies should lend well to one another.</p>
+            <h4 className={subHeading}>Make your skills fit together.</h4>
+            <p className="mt-[12px] text-[16px] leading-[26px] text-chalk">Each skill should make the others more useful.</p>
             <div className="mt-[24px] max-w-[60ch] border-l-[1.5px] border-redpen pl-[24px]">
                 <p className="font-hand text-[20px] leading-[24px] text-redpen">for example</p>
                 <p className="mt-[4px] text-[16px] leading-[26px] text-chalk">
                     Expert at <span className="font-semibold">high-performance computing</span>. Proficient with <span className="font-semibold">numerical optimization</span> and <span className="font-semibold">data pipelines</span>.
                 </p>
                 <p className="mt-[12px] text-[16px] leading-[26px] text-chalk">
-                    This kind of skillset may make you highly desirable for a team looking to scale the scope of its derivatives pricing engine.
+                    A team trying to grow its derivatives pricing engine would be very interested in someone like this.
                 </p>
             </div>
-            <p className="mt-[24px] text-[16px] leading-[24px] font-semibold text-chalk">How is this a coherent skillset? Because it shows you can:</p>
+            <p className="mt-[24px] text-[16px] leading-[24px] font-semibold text-chalk">Why does this mix work? It shows you can:</p>
             <TickList
                 className="mt-[12px]"
                 items={[
-                    'Handle end-to-end projects',
-                    'Pipeline clean, enriched market data in a scalable manner',
-                    'Implement pricing algorithms that scale to distributed compute',
-                    'Generate analytics from the output',
+                    'Take a project from start to finish',
+                    'Build a pipeline that delivers clean market data at scale',
+                    'Write pricing code that runs across many machines',
+                    'Turn the output into useful analytics',
                 ]}
             />
         </div>

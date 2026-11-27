@@ -1,7 +1,6 @@
 import React from 'react';
 import {
     resources as registry,
-    checkpointNote,
     lessonId,
     checkpointId,
     deliverableId,
@@ -43,7 +42,7 @@ const Check = ({ id, checked, onChange, children }) => (
 const statusText = (res) => {
     if (res.verified === 'verified') return `Link checked ${res.checked}`;
     if (res.verified === 'partial') return `Partly checked ${res.checked}`;
-    return 'Not checked, so confirm the link before relying on it';
+    return 'We haven\'t checked this link, so double-check it first';
 };
 
 const ResourceItem = ({ res, section, alt, opened, onOpen }) => {
@@ -105,7 +104,7 @@ const Lesson = ({ stage, lesson, progress, index }) => {
                             <p className={`mt-[4px] ${bodyText}`}>{lesson.lead}</p>
                         </div>
                     )}
-                    <p className="font-hand text-[18px] leading-[24px] text-redpen">you will be able to</p>
+                    <p className="font-hand text-[18px] leading-[24px] text-redpen">by the end you can</p>
                     <ul className="mt-[4px] list-disc space-y-[4px] pl-[24px]">
                         {lesson.outcomes.map((o) => <li key={o} className={bodyText}>{o}</li>)}
                     </ul>
@@ -131,9 +130,9 @@ const Lesson = ({ stage, lesson, progress, index }) => {
 
                     <div className="mt-[24px]">
                         <Check id={`${id}-shown`} checked={shown} onChange={(v) => progress.set(id, v)}>
-                            I have shown this skill: I did the exercise or explained it aloud without looking.
+                            I can do this: I worked through it or explained it out loud without looking.
                         </Check>
-                        <p className={`ml-[30px] ${smallText}`}>Opening a resource is saved separately and does not count as showing the skill.</p>
+                        <p className={`ml-[30px] ${smallText}`}>Opening a link doesn’t count. Only check this once you can actually do it.</p>
                     </div>
                 </div>
             </details>
@@ -153,7 +152,7 @@ const List = ({ title, items }) => (
 const Capstone = ({ capstone }) => {
     return (
         <section className={`mt-[48px] ${panel}`} aria-labelledby="capstone-heading">
-            <p className="font-hand text-[20px] leading-[24px] text-redpen">required project</p>
+            <p className="font-hand text-[20px] leading-[24px] text-redpen">the main project</p>
             <h3 id="capstone-heading" className={subHeading}>Capstone brief: {capstone.title}</h3>
             <p className={`mt-[12px] max-w-[60ch] ${bodyText}`}>{capstone.summary}</p>
             <div className="mt-[24px]">
@@ -162,7 +161,7 @@ const Capstone = ({ capstone }) => {
                     {capstone.time.map((t) => <li key={t.part} className={bodyText}>{t.part}: about {t.hours} hours</li>)}
                 </ul>
             </div>
-            <List title="The synthetic market" items={capstone.market} />
+            <List title="How the fake market works" items={capstone.market} />
             <List title="Strategies to compare" items={capstone.strategies} />
             <List title="Scenarios and seeds" items={capstone.scenarios} />
             <List title="Reproducibility and uncertainty" items={capstone.reproducibility} />
@@ -170,7 +169,7 @@ const Capstone = ({ capstone }) => {
             <List title="What to hand in" items={capstone.deliverables} />
             <List title="Acceptance tests" items={capstone.acceptance} />
             <div className="mt-[24px]">
-                <h4 className="text-[16px] leading-[24px] font-bold text-chalk">How it is graded</h4>
+                <h4 className="text-[16px] leading-[24px] font-bold text-chalk">How it’s graded</h4>
                 <ul className="mt-[8px] space-y-[8px]">
                     {capstone.grading.map((g) => (
                         <li key={g.name} className={bodyText}><span className="font-medium">{g.name}, {g.weight} points.</span> {g.text}</li>
@@ -206,26 +205,26 @@ const TraderStage = ({ stage, progress, desk }) => {
                 <div>
                     <h3 className={subHeading}>How long it takes</h3>
                     <p className={`mt-[8px] ${bodyText}`}>
-                        About {hours} hours of study and practice for the core lessons{desk ? ' plus your chosen specialization' : ''}. Lessons labeled Desk-specific or Optional are extra.
+                        About {hours} hours for the core lessons{desk ? ' plus your specialization' : ''}. Desk-specific and Optional lessons are extra.
                     </p>
                     <p className={`mt-[8px] ${smallText}`}>
-                        Skills shown: {coreShown} of {coreLessons.length} core lessons. Checkpoint: {cpDone} of {cpIds.length}.
+                        Done so far: {coreShown} of {coreLessons.length} core lessons, {cpDone} of {cpIds.length} checkpoint items.
                     </p>
                 </div>
             </div>
             <Callout title="alongside this stage">{stage.alongside}</Callout>
 
             <section className="mt-[48px] border-t border-rule-major pt-[24px]" aria-labelledby={`${stage.id}-lessons`}>
-                <h3 id={`${stage.id}-lessons`} className={subHeading}>Lessons, in order</h3>
+                <h3 id={`${stage.id}-lessons`} className={subHeading}>Lessons</h3>
                 <p className={`mt-[8px] max-w-[60ch] ${smallText}`}>
-                    Core lessons are for everyone. Desk-specific lessons belong to one specialization. Optional lessons add depth. Open a lesson to see what to do and where.
+                    Go in order. Core lessons are for everyone, Desk-specific ones are for one specialization, and Optional ones are extra depth if you want it. Click a lesson to open it.
                 </p>
                 <ol className="mt-[12px] border-b border-rule-major">
                     {stage.lessons.map((lesson, index) => (
                         <Lesson key={lesson.id} stage={stage} lesson={lesson} progress={progress} index={index} />
                     ))}
                 </ol>
-                <p className={`mt-[8px] ${smallText}`}>Hours shown are for study and practice together.</p>
+                <p className={`mt-[8px] ${smallText}`}>Hours include reading and practice.</p>
             </section>
 
             {stage.capstone && <Capstone capstone={stage.capstone} />}
@@ -238,7 +237,7 @@ const TraderStage = ({ stage, progress, desk }) => {
                 </ul>
                 <div className="mt-[12px]">
                     <Check id={delId} checked={Boolean(progress.get(delId))} onChange={(v) => progress.set(delId, v)}>
-                        I have produced this deliverable and it meets every item above.
+                        I finished this and it checks every box above.
                     </Check>
                 </div>
             </section>
@@ -253,8 +252,8 @@ const TraderStage = ({ stage, progress, desk }) => {
                         </Check>
                     ))}
                 </div>
-                <p className={`mt-[8px] max-w-[60ch] ${smallText}`}>{stage.checkpoint.target} {checkpointNote.text}</p>
-                {checkpointMet && <p className="mt-[12px] font-hand text-[20px] leading-[24px] text-redpen">checkpoint met, you can move on</p>}
+                <p className={`mt-[8px] max-w-[60ch] ${smallText}`}>These are our own targets to help you find gaps. Firms don’t publish cutoffs, so passing one doesn’t mean you’d pass a real interview screen.</p>
+                {checkpointMet && <p className="mt-[12px] font-hand text-[20px] leading-[24px] text-redpen">nice, you’re ready for the next stage</p>}
                 {stage.showRubric && (
                     <div className="mt-[24px]">
                         <h4 className="text-[16px] leading-[24px] font-bold text-chalk">{finalRubric.title}</h4>
@@ -280,11 +279,11 @@ const TraderStage = ({ stage, progress, desk }) => {
                         </div>
                     </div>
                 )}
-                <Callout title="can you skip this stage?">{stage.skip}</Callout>
+                <Callout title="already know this?">{stage.skip}</Callout>
             </section>
 
             <section className="mt-[48px] border-t border-rule-major pt-[24px]" aria-labelledby={`${stage.id}-mistakes`}>
-                <h3 id={`${stage.id}-mistakes`} className={subHeading}>Common mistakes and how to fix them</h3>
+                <h3 id={`${stage.id}-mistakes`} className={subHeading}>Common mistakes</h3>
                 <ul className="mt-[12px] grid gap-[12px]">
                     {stage.mistakes.map((m) => (
                         <li key={m.mistake} className={bodyText}>
@@ -294,7 +293,7 @@ const TraderStage = ({ stage, progress, desk }) => {
                 </ul>
             </section>
 
-            <Callout title="your next action">{stage.next}</Callout>
+            <Callout title="what to do next">{stage.next}</Callout>
         </div>
     );
 };

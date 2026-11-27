@@ -134,14 +134,14 @@ export const checkpointNote = {
 
 export const finalRubric = {
     title: 'Final rubric',
-    intro: 'Score yourself, or ask a peer or mentor to score you, on each row after Stage 6. Aim for Solid on every row before you treat the path as complete. Be honest: a Developing score on a row tells you where to spend your next week.',
+    intro: 'Score yourself on each row, or better, have a friend or mentor do it. Aim for Solid across the board before you call the path done. Be honest with yourself: a Developing score just tells you what to work on next week.',
     levels: ['Developing', 'Solid', 'Strong'],
     rows: [
-        { name: 'Numerical reasoning', cells: ['Needs a calculator or paper for most mental arithmetic and makes frequent slips.', 'Handles percentages, basis points, and estimates in your head and checks answers for sanity.', 'Fast and accurate, and spots a wrong magnitude immediately.'] },
-        { name: 'Probability and expected value', cells: ['Solves standard problems but cannot explain why a method works.', 'Solves new problems by choosing a method and explaining each step out loud.', 'Finds a clean argument (for example by linearity) and checks it against a simulation.'] },
-        { name: 'Risk and decisions', cells: ['States a decision without a limit or a reason for the size.', 'Sizes a decision with a stated edge, a stated worst case, and a stopping rule.', 'Also says how wrong the edge estimate could be and how that changes the size.'] },
-        { name: 'Market and derivatives knowledge', cells: ['Knows the vocabulary but cannot compute a payoff or a hedge.', 'Computes payoffs, parity relationships, and a delta hedge correctly.', 'Explains how quotes should move with inventory and information, and tests it.'] },
-        { name: 'Python and experimental design', cells: ['Code runs once on your machine and results change between runs.', 'Reproducible runs with fixed seeds, tests, and separate development and evaluation data.', 'Also includes leakage checks and reports uncertainty across many seeds.'] },
-        { name: 'Communication', cells: ['Gives answers without reasoning or a clear structure.', 'States the question, the approach, the answer, and the main caveat clearly.', 'Corrects mistakes calmly, asks clarifying questions, and adjusts to the listener.'] },
+        { name: 'Numerical reasoning', cells: ['Needs paper or a calculator for most mental math, and slips up often.', 'Does percentages, basis points, and estimates in their head, and sanity-checks the answers.', 'Fast and accurate, and notices right away when an answer is off by a factor of ten.'] },
+        { name: 'Probability and expected value', cells: ['Can solve textbook problems but can\'t explain why the method works.', 'Can solve new problems, picking a method and explaining each step out loud.', 'Finds the clean way to do it (linearity, say) and checks it with a simulation.'] },
+        { name: 'Risk and decisions', cells: ['Makes a call without a limit or a reason for the size.', 'Sizes a bet based on a stated edge, a worst case, and a point where they\'d stop.', 'Also says how wrong the edge might be, and sizes down to match.'] },
+        { name: 'Market and derivatives knowledge', cells: ['Knows the words but can\'t work out a payoff or a hedge.', 'Gets payoffs, put-call parity, and delta hedges right.', 'Can explain how quotes should move with inventory and new information, and has tested it.'] },
+        { name: 'Python and experimental design', cells: ['Code runs on their laptop once, and results change every run.', 'Results are repeatable, with fixed seeds, tests, and separate data for tuning and testing.', 'Also has leakage checks and puts error bars on results across many seeds.'] },
+        { name: 'Communication', cells: ['Gives answers with no reasoning or structure.', 'Clearly lays out the question, the approach, the answer, and the main catch.', 'Fixes mistakes calmly, asks good clarifying questions, and adjusts to who they\'re talking to.'] },
     ],
 };

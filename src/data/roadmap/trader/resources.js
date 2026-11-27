@@ -36,7 +36,7 @@ const resources = {
         title: 'pandas comparison with SQL', provider: 'pandas project', url: 'https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_sql.html',
         format: 'Documentation', access: 'Free', difficulty: 'Intro',
         skills: ['Data analysis'], verified: 'partial', checked: CHECKED,
-        note: 'Listed in the pandas documentation navigation; the page itself was not opened.',
+        note: 'It\'s in the pandas docs menu, but we haven\'t opened the page itself.',
     },
     stat110: {
         title: 'Stat 110: Probability', provider: 'Harvard University', url: 'https://stat110.hsites.harvard.edu/',
@@ -66,7 +66,7 @@ const resources = {
         title: 'Jane Street Probability & Markets Guide', provider: 'Jane Street', url: 'https://www.janestreet.com/probability-markets/',
         format: 'PDF guide', access: 'Free', difficulty: 'Intro',
         skills: ['Probability', 'Markets'], verified: 'partial', checked: CHECKED,
-        note: 'The landing page was checked; it says the guide covers probability, expected value, and making markets. The PDF blocked automated access, so its internal sections were not checked.',
+        note: 'We checked the landing page, which says the guide covers probability, expected value, and making markets. We couldn\'t open the PDF, so we haven\'t seen what\'s inside.',
     },
     jsCards: {
         title: 'Jane Street Probability Playing Cards', provider: 'Jane Street', url: 'https://www.janestreet.com/probability-playing-cards/',
@@ -96,13 +96,13 @@ const resources = {
         title: 'Trading and Exchanges: Market Microstructure for Practitioners', provider: 'Larry Harris, Oxford University Press', url: 'https://academic.oup.com/book/52292',
         format: 'Book', access: 'Paid or institutional access', difficulty: 'Intermediate',
         skills: ['Markets'], verified: 'partial', checked: CHECKED,
-        note: 'Book page checked; chapter titles were not. Optional. The free CME and OIC resources cover the core material.',
+        note: 'We checked the book\'s page but not its chapters. You don\'t need it: the free CME and OIC material covers the basics.',
     },
     natenberg: {
         title: 'Option Volatility and Pricing, 2nd Edition', provider: 'Sheldon Natenberg, McGraw Hill', url: 'https://www.mheducation.com/highered/mhp/product/option-volatility-pricing-advanced-trading-strategies-techniques-2nd-edition.html',
         format: 'Book', access: 'Paid (publisher listing: eBook from $101, print from $112 on the check date)', difficulty: 'Intermediate to advanced',
         skills: ['Derivatives'], verified: 'partial', checked: CHECKED,
-        note: 'Publisher page checked; chapter titles were not. Optional. Topics listed include option theory, dynamic hedging, volatility strategies, and risk analysis.',
+        note: 'We checked the publisher\'s page but not the chapters. You don\'t need it. The publisher says it covers option theory, dynamic hedging, volatility strategies, and risk.',
     },
     islp: {
         title: 'An Introduction to Statistical Learning with Python', provider: 'James, Witten, Hastie, Tibshirani, Taylor', url: 'https://www.statlearning.com/',
@@ -138,19 +138,19 @@ const resources = {
         title: '18.06 Linear Algebra (Spring 2010)', provider: 'MIT OpenCourseWare', url: 'https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/',
         format: 'Video lectures and notes', access: 'Free', difficulty: 'Intermediate',
         skills: ['Mathematics'], verified: 'unverified', checked: CHECKED,
-        note: 'Linked from the existing DevilQuant Getting Started guide. The page was not re-opened in this check.',
+        note: 'This link comes from the DevilQuant Getting Started guide. We haven\'t re-checked it.',
     },
     myntbit: {
         title: 'MyntBit', provider: 'MyntBit', url: 'https://myntbit.com/',
         format: 'Interview practice platform', access: 'Free tier; paid plans', difficulty: 'Intro to advanced',
         skills: ['Interview practice'], verified: 'partial', checked: CHECKED,
-        note: 'Homepage checked. The site has track pages, but the Trader track page was not individually opened.',
+        note: 'We checked the homepage. There\'s a trader track too, but we haven\'t opened that page.',
     },
     pyFinance: {
         title: 'Python for Finance (1st edition)', provider: 'Yves Hilpisch, O\'Reilly', url: 'https://www.amazon.com/dp/1491945281',
         format: 'Book', access: 'Paid', difficulty: 'Intermediate',
         skills: ['Python', 'Data analysis'], verified: 'unverified', checked: CHECKED,
-        note: 'Added at the club\'s suggestion, which says Citadel recommended it; that recommendation has not been verified. Optional. A later edition may exist.',
+        note: 'Club members say Citadel recommends this book, but we haven\'t been able to confirm that. You don\'t need it, and there may be a newer edition.',
     },
     mathOgenius: {
         title: 'Learn lightning Fast Mental Maths', provider: 'mathOgenius (YouTube)', url: 'https://www.youtube.com/playlist?list=PLQCYtYck4nKzDCdcKCNyZa_TV_5lhoyEk',
