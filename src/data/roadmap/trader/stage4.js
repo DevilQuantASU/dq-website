@@ -86,22 +86,13 @@ const stage = {
             note: 'You don\'t need this to finish the path. Come back after the capstone if it sounds interesting.',
         },
     ],
-    checkpoint: {
-        intro: 'Only check a box once you\'ve actually done it.',
-        items: [
-            { id: 'c1', text: 'Five mixed order book, futures, parity, and hedging problems in 45 minutes: at least 4 right.' },
-            { id: 'c2', text: 'You can sketch the payoff of a call, a put, and a call spread from memory.' },
-            { id: 'c3', text: 'In under two minutes, out loud, you can explain why a market maker quotes wider when more of the people trading with it know something it doesn\'t.' },
-            { id: 'c4', text: 'You\'ve done the CME modules on mark to market, margin, and calculating profit or loss, and you can do each calculation by hand.' },
-        ],
-    },
     mistakes: [
         { mistake: 'Forgetting contract multipliers and share counts.', fix: 'Write the unit next to every number: points, dollars per point, contracts, shares.' },
         { mistake: 'Leaving out the discounting in put-call parity.', fix: 'Write C − P = S − K e^(−rT) at the top of the page before you plug anything in.' },
         { mistake: 'Setting a hedge once and forgetting about it.', fix: 'Delta changes as the stock moves, so redo the hedge each time and keep track of what rebalancing costs you.' },
         { mistake: 'Assuming everyone trading with you knows the same amount.', fix: 'Split your example into informed and uninformed traders and watch how the break-even spread moves.' },
     ],
-    skip: 'If you can pass the whole checkpoint cold, skip to Stage 5. The OIC Greeks pages are still worth a quick read.',
+    skip: 'If you can already walk through an order book, price a put from a call, and work out a delta hedge, skip to Stage 5. The OIC Greeks pages are still worth a quick read.',
     next: 'Open CME\'s "Introduction to Futures" course and start with the module that defines a futures contract. Then try walking through an order book on paper like the example in lesson 1.',
 };
 

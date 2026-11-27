@@ -83,22 +83,13 @@ const stage = {
             ],
         },
     ],
-    checkpoint: {
-        intro: 'Time yourself and don\'t look at solutions. Only check a box once you\'ve actually done it.',
-        items: [
-            { id: 'c1', text: 'Ten mixed counting, conditional probability, and expected value problems in 60 minutes: at least 8 right, with a one-line explanation for each.' },
-            { id: 'c2', text: 'For a problem you\'ve solved with math, you can write a seeded simulation that lands within three standard errors of your answer.' },
-            { id: 'c3', text: 'You\'ve tried the first five or six clubs and diamonds questions in the Jane Street Probability Playing Cards, and you can explain the ones you solved.' },
-            { id: 'c4', text: 'You can name, in your own words, one thing the central limit theorem doesn\'t guarantee.' },
-        ],
-    },
     mistakes: [
         { mistake: 'Mixing up P(A | B) and P(B | A).', fix: 'Write both out as a table of counts for a real example, like the signal and the profitable days.' },
         { mistake: 'Assuming two events are independent without checking.', fix: 'Say why they\'re independent, or just work out the joint probability directly.' },
         { mistake: 'Trusting a simulation that ran too few trials.', fix: 'Always report the standard error, and add trials until the margin is small enough to actually answer the question.' },
         { mistake: 'Skipping the solution when you got the answer right.', fix: 'Read it anyway. There\'s often a shorter way to get there, and it\'s worth knowing.' },
     ],
-    skip: 'If you can pass the whole checkpoint cold, skip ahead to Stage 3. Keep doing the weekly puzzle.',
+    skip: 'If you can already handle counting, conditional probability, and expected value problems without looking anything up, skip to Stage 3. Keep doing the weekly puzzle.',
     next: 'Open Stat 110 Strategic Practice Set 2 and try the Inclusion-Exclusion problems before you look at any solutions. Then pick one of them and check your answer with a quick simulation.',
 };
 

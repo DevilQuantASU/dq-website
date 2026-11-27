@@ -158,15 +158,6 @@ const stage = {
             'Options: add an option on the real price and delta-hedge it every turn.',
         ],
     },
-    checkpoint: {
-        intro: 'Only check a box once you\'ve actually done it.',
-        items: [
-            { id: 'c1', text: 'Your capstone passes every acceptance test in the brief.' },
-            { id: 'c2', text: 'Without notes, you can explain how you kept your development and evaluation seeds apart, and what you\'d do if the final run disappointed you.' },
-            { id: 'c3', text: 'You can work out a t statistic for a correlation, a Bonferroni cutoff, and an annualized volatility by hand.' },
-            { id: 'c4', text: 'A friend cloned your repo and rebuilt one of your charts using only the README.' },
-        ],
-    },
     mistakes: [
         { mistake: 'Peeking at the evaluation seeds "just to check."', fix: 'Lock your parameters in the README before you touch the evaluation seeds, and only run them once.' },
         { mistake: 'Letting the bot see the current real price.', fix: 'Only pass the public reference price and the bot\'s own state into your quote function, and keep the leakage test.' },
@@ -174,7 +165,7 @@ const stage = {
         { mistake: 'Hiding a result that lost money.', fix: 'Show it and explain it. Figuring out why a quote loses is the whole point.' },
         { mistake: 'Assuming a better forecast means a profitable strategy.', fix: 'Test the actual strategy, with costs and risk limits, not just how accurate the forecast was.' },
     ],
-    skip: 'If you\'ve already built your own tested simulation project that someone else can rerun and that passes the acceptance tests, you can use it instead of the capstone. Walk a friend or mentor through the checkpoint first.',
+    skip: 'If you\'ve already built your own simulation project that someone else can rerun and that passes the acceptance tests in the brief, you can use it instead of the capstone.',
     next: 'Start the repo, write the function that moves the market forward one turn, and add the accounting test before you write any strategy.',
 };
 

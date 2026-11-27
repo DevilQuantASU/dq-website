@@ -2,7 +2,6 @@ import React from 'react';
 import {
     resources as registry,
     lessonId,
-    checkpointId,
     resourceOpenId,
     stageHours,
     specializations,
@@ -182,12 +181,9 @@ const Capstone = ({ capstone }) => {
 };
 
 const TraderStage = ({ stage, progress, desk }) => {
-    const cpIds = stage.checkpoint.items.map((i) => checkpointId(stage, i));
     const coreLessons = stage.lessons.filter((l) => l.label === 'Core');
     const coreShown = progress.count(coreLessons.map((l) => lessonId(stage, l)));
-    const cpDone = progress.count(cpIds);
     const hours = stageHours(stage, desk);
-    const checkpointMet = cpDone === cpIds.length;
 
     return (
         <div>
@@ -206,11 +202,12 @@ const TraderStage = ({ stage, progress, desk }) => {
                         About {hours} hours for the core lessons{desk ? ' plus your specialization' : ''}. Desk-specific and Optional lessons are extra.
                     </p>
                     <p className={`mt-[8px] ${smallText}`}>
-                        Done so far: {coreShown} of {coreLessons.length} core lessons, {cpDone} of {cpIds.length} checkpoint items.
+                        Done so far: {coreShown} of {coreLessons.length} core lessons.
                     </p>
                 </div>
             </div>
             <Callout title="alongside this stage">{stage.alongside}</Callout>
+            <Callout title="already know this?">{stage.skip}</Callout>
 
             <section className="mt-[48px] border-t border-rule-major pt-[24px]" aria-labelledby={`${stage.id}-lessons`}>
                 <h3 id={`${stage.id}-lessons`} className={subHeading}>Lessons</h3>
@@ -227,46 +224,31 @@ const TraderStage = ({ stage, progress, desk }) => {
 
             {stage.capstone && <Capstone capstone={stage.capstone} />}
 
-
-            <section className="mt-[48px] border-t border-rule-major pt-[24px]" aria-labelledby={`${stage.id}-checkpoint`}>
-                <h3 id={`${stage.id}-checkpoint`} className={subHeading}>Checkpoint</h3>
-                <p className={`mt-[8px] ${bodyText}`}>{stage.checkpoint.intro}</p>
-                <div className="mt-[12px]">
-                    {stage.checkpoint.items.map((item) => (
-                        <Check key={item.id} id={checkpointId(stage, item)} checked={Boolean(progress.get(checkpointId(stage, item)))} onChange={(v) => progress.set(checkpointId(stage, item), v)}>
-                            {item.text}
-                        </Check>
-                    ))}
-                </div>
-                <p className={`mt-[8px] max-w-[60ch] ${smallText}`}>These are our own targets to help you find gaps. Firms don’t publish cutoffs, so passing one doesn’t mean you’d pass a real interview screen.</p>
-                {checkpointMet && <p className="mt-[12px] font-hand text-[20px] leading-[24px] text-redpen">nice, you’re ready for the next stage</p>}
-                {stage.showRubric && (
-                    <div className="mt-[24px]">
-                        <h4 className="text-[16px] leading-[24px] font-bold text-chalk">{finalRubric.title}</h4>
-                        <p className={`mt-[8px] max-w-[60ch] ${bodyText}`}>{finalRubric.intro}</p>
-                        <div className="mt-[12px] overflow-x-auto" tabIndex={0} role="region" aria-label="Final rubric">
-                            <table className="w-full min-w-[720px] border-collapse">
-                                <caption className="sr-only">Final rubric with three levels for each skill</caption>
-                                <thead>
-                                    <tr>
-                                        <th scope="col" className="px-[12px] py-[8px] text-left text-[14px] leading-[24px] font-medium text-pencil">Skill</th>
-                                        {finalRubric.levels.map((l) => <th key={l} scope="col" className="px-[12px] py-[8px] text-left text-[14px] leading-[24px] font-medium text-pencil">{l}</th>)}
+            {stage.showRubric && (
+                <section className="mt-[48px] border-t border-rule-major pt-[24px]" aria-labelledby={`${stage.id}-rubric`}>
+                    <h3 id={`${stage.id}-rubric`} className={subHeading}>{finalRubric.title}</h3>
+                    <p className={`mt-[8px] max-w-[60ch] ${bodyText}`}>{finalRubric.intro}</p>
+                    <div className="mt-[12px] overflow-x-auto" tabIndex={0} role="region" aria-label="Final rubric">
+                        <table className="w-full min-w-[720px] border-collapse">
+                            <caption className="sr-only">Final rubric with three levels for each skill</caption>
+                            <thead>
+                                <tr>
+                                    <th scope="col" className="px-[12px] py-[8px] text-left text-[14px] leading-[24px] font-medium text-pencil">Skill</th>
+                                    {finalRubric.levels.map((l) => <th key={l} scope="col" className="px-[12px] py-[8px] text-left text-[14px] leading-[24px] font-medium text-pencil">{l}</th>)}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {finalRubric.rows.map((row) => (
+                                    <tr key={row.name}>
+                                        <th scope="row" className="border-t border-rule px-[12px] py-[12px] text-left align-top text-[15px] leading-[24px] font-medium text-chalk">{row.name}</th>
+                                        {row.cells.map((c) => <td key={c} className="border-t border-rule px-[12px] py-[12px] align-top text-[15px] leading-[24px] text-chalk">{c}</td>)}
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    {finalRubric.rows.map((row) => (
-                                        <tr key={row.name}>
-                                            <th scope="row" className="border-t border-rule px-[12px] py-[12px] text-left align-top text-[15px] leading-[24px] font-medium text-chalk">{row.name}</th>
-                                            {row.cells.map((c) => <td key={c} className="border-t border-rule px-[12px] py-[12px] align-top text-[15px] leading-[24px] text-chalk">{c}</td>)}
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
+                                ))}
+                            </tbody>
+                        </table>
                     </div>
-                )}
-                <Callout title="already know this?">{stage.skip}</Callout>
-            </section>
+                </section>
+            )}
 
             <section className="mt-[48px] border-t border-rule-major pt-[24px]" aria-labelledby={`${stage.id}-mistakes`}>
                 <h3 id={`${stage.id}-mistakes`} className={subHeading}>Common mistakes</h3>

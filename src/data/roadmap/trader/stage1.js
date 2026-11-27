@@ -88,15 +88,6 @@ const stage = {
             ],
         },
     ],
-    checkpoint: {
-        intro: 'No notes. Only check a box once you\'ve actually done it.',
-        items: [
-            { id: 'c1', text: 'Zetamac on default settings, 120 seconds: a score of 35 or more, best of three tries.' },
-            { id: 'c2', text: 'Ten mixed percentage, basis point, and averaging problems in 15 minutes, no calculator: at least 8 right.' },
-            { id: 'c3', text: 'You can write a small Python function for one of these calculations (say, average fill price) and a test that checks it.' },
-            { id: 'c4', text: 'You can explain out loud why it takes +25% to undo a 20% drop.' },
-        ],
-    },
     mistakes: [
         { mistake: 'Thinking fast mental math is something you\'re either born with or not.', fix: 'It\'s a handful of patterns you practice until they\'re automatic. Learn one trick at a time and let your log show you\'re improving.' },
         { mistake: 'Averaging two prices without accounting for size.', fix: 'Always ask how many shares traded at each price, then weight by that.' },
@@ -104,7 +95,7 @@ const stage = {
         { mistake: 'Skipping the log and calculus refreshers because they feel abstract.', fix: 'Do one tiny calculation for each idea (ln(1.10), the slope of x squared at 3). You just need to be able to use them.' },
         { mistake: 'Doing mental math in long sessions once in a while.', fix: 'Ten minutes most days beats one long session a week. Keep the same settings so your log means something.' },
     ],
-    skip: 'If you can pass the whole checkpoint cold, skip the lessons and jump to Stage 2. Keep doing the daily mental math either way.',
+    skip: 'If you\'re already quick at mental math and comfortable with percentages, basis points, and averages, skip to Stage 2. Keep doing the daily mental math either way.',
     next: 'Open Zetamac, do one 120-second round, and write your score down. Then start with whichever lesson below feels least familiar.',
 };
 

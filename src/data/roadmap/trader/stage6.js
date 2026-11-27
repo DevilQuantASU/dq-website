@@ -44,7 +44,7 @@ const stage = {
             resources: [
                 { key: 'jsInterviews', section: 'The page on how their interviews work, with tips (be methodical, communicate clearly, fix your mistakes, ask why), plus the roughly 23-minute mock interview video in three parts.' },
             ],
-            note: 'Do at least three mock interviews with a friend or mentor. Score yourself afterward with the six-row rubric in this stage\'s checkpoint section. Record one and watch it back. It\'s painful, but it helps a lot.',
+            note: 'Do at least three mock interviews with a friend or mentor. Score yourself afterward with the six-row rubric at the bottom of this stage. Record one and watch it back. It\'s painful, but it helps a lot.',
         },
         {
             id: 'l4', label: 'Core', title: 'Recruiting: your resume, timelines, and researching firms', hours: 4,
@@ -85,22 +85,13 @@ const stage = {
         },
     ],
     showRubric: true,
-    checkpoint: {
-        intro: 'This is the last checkpoint. Only check a box once you\'ve actually done it.',
-        items: [
-            { id: 'c1', text: 'You scored Solid or Strong on every row of the final rubric, either on your own or from a friend or mentor.' },
-            { id: 'c2', text: 'You\'ve done three mock interviews and recorded and rewatched at least one.' },
-            { id: 'c3', text: 'You can solve the first five or six clubs and diamonds questions in the Jane Street Probability Playing Cards and explain them out loud.' },
-            { id: 'c4', text: 'Everything in your firm tracker came from official pages, with dates.' },
-        ],
-    },
     mistakes: [
         { mistake: 'Going quiet while you think.', fix: 'Say what you\'re trying, even if it\'s just "Not sure yet, let me start with a simple case."' },
         { mistake: 'Rushing to an answer and not checking it.', fix: 'Take ten seconds to sanity-check the size and the sign before you say your final number.' },
         { mistake: 'Memorizing interview questions other people posted online.', fix: 'Practice the methods, not specific questions. Firms change their questions and their process.' },
         { mistake: 'Putting off recruiting until the end.', fix: 'Look up timelines early, put them in your tracker, and plan your learning around them.' },
     ],
-    skip: 'If you\'ve already done real mock interviews and have a resume, you can skip lessons 3 and 4. You still need to pass every checkpoint item.',
+    skip: 'If you\'ve already done real mock interviews and have a resume, you can skip lessons 3 and 4.',
     next: 'Set up your first mock interview with a friend, and start a tracker with the first firm you want to look into.',
 };
 

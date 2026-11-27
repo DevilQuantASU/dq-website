@@ -63,22 +63,13 @@ const stage = {
             ],
         },
     ],
-    checkpoint: {
-        intro: 'Only check a box once you\'ve actually done it.',
-        items: [
-            { id: 'c1', text: 'You can work out a Kelly fraction and a confidence interval for a win rate by hand, in under ten minutes each.' },
-            { id: 'c2', text: 'Your journal has at least ten entries, and at least two of them say "I got this wrong, here\'s what I\'ll change."' },
-            { id: 'c3', text: 'Your experiment shows at least one rule that grows faster but hits the drawdown limit more often, and you explain the tradeoff in a paragraph.' },
-            { id: 'c4', text: 'You can give three reasons, out loud, to bet less than full Kelly.' },
-        ],
-    },
     mistakes: [
         { mistake: 'Judging a decision only by how it turned out.', fix: 'Write your reasoning in the journal before you see the result, then review the reasoning and the result separately.' },
         { mistake: 'Treating your estimated edge like a known fact.', fix: 'Always put a range on it, and redo your sizing using the low end.' },
         { mistake: 'Picking your loss limit after you\'ve seen the results.', fix: 'Write the limit down before you run anything, and don\'t change it.' },
         { mistake: 'Assuming a higher expected value means a better bet.', fix: 'Ask what a realistic worst case looks like, and whether you\'d survive it.' },
     ],
-    skip: 'If you can pass the whole checkpoint cold, skip to Stage 4. Keep your journal going either way.',
+    skip: 'If you can already size a bet with Kelly, build a confidence interval, and explain why people bet less than full Kelly, skip to Stage 4. Keep your journal going either way.',
     next: 'Write your first journal entry about a real decision you made this week, then work out the Kelly fraction for p = 0.6 on paper.',
 };
 
