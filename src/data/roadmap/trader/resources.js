@@ -152,6 +152,11 @@ const resources = {
         skills: ['Python', 'Data analysis'], verified: 'unverified', checked: CHECKED,
         note: 'Club members say Citadel recommends this book, but we haven\'t been able to confirm that. You don\'t need it, and there may be a newer edition.',
     },
+    greenBook: {
+        title: 'A Practical Guide to Quantitative Finance Interviews (the "Little Green Book")', provider: 'Xinfeng Zhou. Linked through our Getting Started with Quant guide', url: '/resources?guide=getting-started-with-quant',
+        format: 'Book', access: 'Paid book', difficulty: 'Intermediate',
+        skills: ['Probability', 'Brain teasers', 'Interview prep'], verified: 'verified', checked: '2026-11-26',
+    },
     mathOgenius: {
         title: 'Learn lightning Fast Mental Maths', provider: 'mathOgenius (YouTube)', url: 'https://www.youtube.com/playlist?list=PLQCYtYck4nKzDCdcKCNyZa_TV_5lhoyEk',
         format: 'Video playlist, 31 short videos', access: 'Free', difficulty: 'Intro',

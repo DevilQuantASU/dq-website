@@ -27,6 +27,7 @@ const stage = {
             outcomes: ['Solve and explain the early clubs and diamonds questions in the Jane Street Probability Playing Cards.', 'Spot which tool a problem needs: the complement, linearity, conditioning, or symmetry.'],
             resources: [
                 { key: 'jsCards', section: 'Clubs (expectation and linearity) and diamonds (classical and conditional probability), the first five or six in each. The site itself says most of the questions are way harder than you need.' },
+                { key: 'greenBook', section: 'Open the guide and scroll to "The Little Green Book." We call it the one must-have book for quant interviews. Work through its probability and brain teaser questions out loud, as if someone were interviewing you.' },
                 { key: 'acRoadmapVideo', section: 'The trader section starting at 10:18, on why brain teasers and quick thinking matter in trading interviews.', alt: true },
                 { key: 'jsGuide', section: 'Jane Street\'s Probability and Markets Guide covers probability, expected value, and making markets. We could only check the landing page (the guide is a PDF we couldn\'t open), so we can\'t point you to specific sections. The page says it\'s not required reading.', alt: true },
             ],

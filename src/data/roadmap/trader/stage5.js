@@ -4,7 +4,7 @@ const stage = {
     type: 'Applied',
     description: 'Get comfortable with Python\'s data tools, learn how to test ideas without fooling yourself, and build the Market-Making Simulator capstone.',
     purpose: 'This is where everything from the earlier stages turns into code. The habits matter more than any single model: fixed seeds, keeping your test data separate, putting error bars on every result, and writing a README someone else can actually follow.',
-    prerequisites: ['Stages 1 to 4, or equivalent experience. That includes a tested Python file like the one from Stage 1, and a seeded simulation like the ones from Stages 2 and 3.', 'You don\'t need to know pandas or Git yet. Lessons 1 and 2 cover them.'],
+    prerequisites: ['Stages 1 to 4, or equivalent experience. You should be able to write small Python functions with tests, and run a seeded simulation like the ones in Stages 2 and 3.', 'You don\'t need to know pandas or Git yet. Lessons 1 and 2 cover them.'],
     alongside: 'Keep your capstone repo tidy as you go: small commits, and a README you update every time you work on it.',
     lessons: [
         {

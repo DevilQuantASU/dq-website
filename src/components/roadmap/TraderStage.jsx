@@ -229,18 +229,20 @@ const TraderStage = ({ stage, progress, desk }) => {
 
             {stage.capstone && <Capstone capstone={stage.capstone} />}
 
-            <section className="mt-[48px] border-t border-rule-major pt-[24px]" aria-labelledby={`${stage.id}-deliverable`}>
-                <h3 id={`${stage.id}-deliverable`} className={subHeading}>Deliverable: {stage.deliverable.title}</h3>
-                <p className={`mt-[8px] max-w-[60ch] ${bodyText}`}>{stage.deliverable.text}</p>
-                <ul className="mt-[12px] list-disc space-y-[4px] pl-[24px]">
-                    {stage.deliverable.doneWhen.map((d) => <li key={d} className={bodyText}>{d}</li>)}
-                </ul>
-                <div className="mt-[12px]">
-                    <Check id={delId} checked={Boolean(progress.get(delId))} onChange={(v) => progress.set(delId, v)}>
-                        I finished this and it checks every box above.
-                    </Check>
-                </div>
-            </section>
+            {stage.deliverable && (
+                <section className="mt-[48px] border-t border-rule-major pt-[24px]" aria-labelledby={`${stage.id}-deliverable`}>
+                    <h3 id={`${stage.id}-deliverable`} className={subHeading}>Deliverable: {stage.deliverable.title}</h3>
+                    <p className={`mt-[8px] max-w-[60ch] ${bodyText}`}>{stage.deliverable.text}</p>
+                    <ul className="mt-[12px] list-disc space-y-[4px] pl-[24px]">
+                        {stage.deliverable.doneWhen.map((d) => <li key={d} className={bodyText}>{d}</li>)}
+                    </ul>
+                    <div className="mt-[12px]">
+                        <Check id={delId} checked={Boolean(progress.get(delId))} onChange={(v) => progress.set(delId, v)}>
+                            I finished this and it checks every box above.
+                        </Check>
+                    </div>
+                </section>
+            )}
 
             <section className="mt-[48px] border-t border-rule-major pt-[24px]" aria-labelledby={`${stage.id}-checkpoint`}>
                 <h3 id={`${stage.id}-checkpoint`} className={subHeading}>Checkpoint</h3>

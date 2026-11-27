@@ -14,6 +14,7 @@ const stage = {
                 { key: 'stat110', section: 'The Basics unit (sample spaces, the naive definition of probability, counting).' },
                 { key: 'stat110sp', section: 'Set 2, the "Inclusion-Exclusion" section (problems and solutions).' },
                 { key: 'openintro', section: 'Chapter 3, section 3.1 "Defining probability".', alt: true },
+                { key: 'greenBook', section: 'The "Little Green Book" section of our guide. Once the basics click, its probability questions show you how this material comes up in interviews.', alt: true },
             ],
             worked: {
                 title: 'Complements and counting',

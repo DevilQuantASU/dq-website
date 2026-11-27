@@ -88,17 +88,12 @@ const stage = {
             ],
         },
     ],
-    deliverable: {
-        title: 'A practice log and a small tested Python file',
-        text: 'A practice log with at least ten dated mental math sessions, plus a Python file with at least six functions (for example: percent change, basis points to decimal, weighted average, compounding, average fill price, and profit on a short) and tests that pass.',
-        doneWhen: ['Your log has at least ten sessions, with a score for each.', 'Your Python file has at least six functions, and each one has at least one test.', 'All the tests pass when you run them fresh.'],
-    },
     checkpoint: {
         intro: 'No notes. Only check a box once you\'ve actually done it.',
         items: [
             { id: 'c1', text: 'Zetamac on default settings, 120 seconds: a score of 35 or more, best of three tries.' },
             { id: 'c2', text: 'Ten mixed percentage, basis point, and averaging problems in 15 minutes, no calculator: at least 8 right.' },
-            { id: 'c3', text: 'Your Python file passes its own tests, and each function has a one-line docstring.' },
+            { id: 'c3', text: 'You can write a small Python function for one of these calculations (say, average fill price) and a test that checks it.' },
             { id: 'c4', text: 'You can explain out loud why it takes +25% to undo a 20% drop.' },
         ],
     },
